@@ -570,4 +570,17 @@
     <string name="menu_export_database" msgid="2659719297530170820">"Datenbankdateien exportieren"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Mehr Optionen"</string>
     <string name="expand_collapse_name_fields_description" msgid="8682630859539604311">"Namensfelder maximieren oder minimieren"</string>
+    <string name="t9_loading">Lade Kontakte\u2026</string>
+    <string name="t9_sort_title">T9-Sortierung</string>
+    <string name="t9_sort_summary">Reihenfolge der T9-Resultate auswählen</string>
+    <string name="t9_sort_name">Namenstreffer bevorzugen</string>
+    <string name="t9_sort_number">Nummerntreffer bevorzugen</string>
+    <string name="t9_state_title">T9-Wahl aktivieren</string>
+    <string name="t9_state_summary">Aktiviert T9-artiges Suchen mit der Telefontastatur</string>
+    <string name="t9_dial_click_title">Gewählten Kontakt anrufen</string>
+    <string name="t9_dial_click_summary">Ausgewählten Kontakt bei T9-Suche anrufen</string>
+    <string name="t9_add_to_contacts">Zu Kontakten hinzufügen</string>
+    <string name="dialer_ui_title">Anrufeinstellungen</string>
+    <string name="dialer_ui_orientation_title">Autorotation verwenden</string>
+    <string name="dialer_ui_orientation_summary">Wenn eingeschaltet, werden Systemeinstellungen verwendet</string>
 </resources>
