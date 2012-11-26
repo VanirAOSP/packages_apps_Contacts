@@ -136,13 +136,23 @@ public class T9SearchCache implements ComponentCallbacks2 {
             }
 
             initNormalizer();
+
+
             for (ContactItem contact : mContacts) {
                 for (NameMatchEntry entry : contact.nameEntries.values()) {
                     if (entry.value != null) {
                         entry.normalValue = mNormalizer.convert(entry.value);
                     }
                 }
+
+                contact.formattedNumber = PhoneNumberUtils.formatNumber(contact.number);
+                contact.normalNumber = removeNonDigits(contact.formattedNumber);
+                if (contact.numberType >= 0) {
+                    final int labelId = Phone.getTypeLabelResource(contact.numberType);
+                    contact.groupType = context.getResources().getString(labelId);
+                }
             }
+
             notifyLoadFinished();
         }
     };
@@ -151,13 +161,13 @@ public class T9SearchCache implements ComponentCallbacks2 {
         @Override
         public void onChange(boolean selfChange) {
             if (mCallbacks.isEmpty()) {
-			/* we have no listeners, just invalidate cache */
-            mLoaded = false;
-            cancelLoad();
-	        } else {
-               /* transparently reload cache */
-               triggerLoad();
-	        }
+                /* we have no listeners, just invalidate cache */
+                mLoaded = false;
+                cancelLoad();
+            } else {
+                /* transparently reload cache */
+                triggerLoad();
+            }
         }
     };
 
@@ -249,16 +259,21 @@ public class T9SearchCache implements ComponentCallbacks2 {
                 while (!data.isAfterLast() && data.getLong(DATA_COLUMN_CONTACT) == contactId) {
                     final String mimeType = data.getString(DATA_COLUMN_MIMETYPE);
                     if (TextUtils.equals(mimeType, Phone.CONTENT_ITEM_TYPE)) {
-                        String num = data.getString(DATA_COLUMN_PHONENUMBER);
                         ContactItem contactInfo = new ContactItem();
+                        String numberTypeLabel = data.getString(DATA_COLUMN_PHONELABEL);
 
                         contactInfo.id = contactId;
-                        contactInfo.number = PhoneNumberUtils.formatNumber(num);
-                        contactInfo.normalNumber = removeNonDigits(num);
+                        contactInfo.number = data.getString(DATA_COLUMN_PHONENUMBER);
+                        contactInfo.formattedNumber = PhoneNumberUtils.formatNumber(contactInfo.number);
+                        contactInfo.normalNumber = removeNonDigits(contactInfo.formattedNumber);
                         contactInfo.timesContacted = contactContactedCount;
                         contactInfo.isSuperPrimary = data.getInt(DATA_COLUMN_PRIMARY) > 0;
+                        contactInfo.numberType = data.getInt(DATA_COLUMN_PHONETYPE);
                         contactInfo.groupType = Phone.getTypeLabel(mContext.getResources(),
-                                data.getInt(DATA_COLUMN_PHONETYPE), data.getString(DATA_COLUMN_PHONELABEL));
+                                contactInfo.numberType, numberTypeLabel);
+                        if (TextUtils.equals(contactInfo.groupType, numberTypeLabel)) {
+                            contactInfo.numberType = -1;
+                        }
                         contactInfo.photo = photo;
                         contactItems.add(contactInfo);
                     } else if (TextUtils.equals(mimeType, Organization.CONTENT_ITEM_TYPE)) {
@@ -359,7 +374,9 @@ public class T9SearchCache implements ComponentCallbacks2 {
     public static class ContactItem {
         Uri photo;
         String number;
+        String formattedNumber;
         String normalNumber;
+        int numberType;
         int numberMatchId;
         Map<Integer, NameMatchEntry> nameEntries;
         int timesContacted;
@@ -607,28 +624,32 @@ public class T9SearchCache implements ComponentCallbacks2 {
                 }
 
                 SpannableStringBuilder numberBuilder = new SpannableStringBuilder();
-                numberBuilder.append(o.number);
+                numberBuilder.append(o.formattedNumber);
                 numberBuilder.append(" (");
                 numberBuilder.append(o.groupType);
                 numberBuilder.append(")");
                 if (o.numberMatchId != -1) {
-                    int numberStart = -1, numberEnd = -1;
-                    int formattedNumberLength = o.number.length();
+                    final int formattedLength = o.formattedNumber.length();
+                    final int normalLength = o.normalNumber.length();
+                    final int inputLength = mPrevInput.length();
+                    int numberStart = -1, numberEnd = formattedLength;
 
-                    for (int i = 0, normalIndex = 0; i < formattedNumberLength; i++) {
-                        if (o.number.charAt(i) != o.normalNumber.charAt(normalIndex)) {
+                    for (int i = 0, normalIndex = 0; i < formattedLength && normalIndex < normalLength; i++) {
+                        if (o.formattedNumber.charAt(i) != o.normalNumber.charAt(normalIndex)) {
                             continue;
                         }
 
                         if (normalIndex == o.numberMatchId) {
                             numberStart = i;
-                        } else if (normalIndex == o.numberMatchId + mPrevInput.length()) {
-                            numberEnd = i;
+                        }
+                        if (normalIndex == o.numberMatchId + inputLength - 1) {
+                            numberEnd = i + 1;
                             break;
                         }
+
                         normalIndex++;
                     }
-                    if (numberStart >= 0 && numberEnd >= 0) {
+                    if (numberStart >= 0) {
                         numberBuilder.setSpan(new ForegroundColorSpan(mHighlightColor),
                                 numberStart, numberEnd, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                     }
