@@ -184,14 +184,12 @@ public class T9SearchCache implements ComponentCallbacks2 {
     }
 
     public void refresh(Callback cb) {
+        mCallbacks.add(cb);
         if (mLoaded) {
             cb.onLoadFinished();
-            return;
+        } else {
+            triggerLoad();
         }
-
-        mCallbacks.add(cb);
-		triggerLoad();
-       
     }
 
     public void cancelRefresh(Callback cb) {
@@ -201,12 +199,12 @@ public class T9SearchCache implements ComponentCallbacks2 {
         }
     }
 
-		private void triggerLoad() {
-	        if (mLoadTask == null || mLoadTask.getStatus() == AsyncTask.Status.FINISHED) {
-	            mLoadTask = new LoadTask();
-	            mLoadTask.execute();
-	        }
-	    }
+    private void triggerLoad() {
+        if (mLoadTask == null || mLoadTask.getStatus() == AsyncTask.Status.FINISHED) {
+            mLoadTask = new LoadTask();
+            mLoadTask.execute();
+        }
+    }
 
     private void cancelLoad() {
         if (mLoadTask != null) {
