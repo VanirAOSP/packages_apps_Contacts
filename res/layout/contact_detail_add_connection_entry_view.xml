@@ -23,6 +23,7 @@
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/detail_item_side_margin"
     android:paddingRight="@dimen/detail_item_side_margin">
+
     <LinearLayout
         android:id="@+id/primary_action_view"
         android:layout_width="match_parent"
@@ -49,6 +50,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 </FrameLayout>

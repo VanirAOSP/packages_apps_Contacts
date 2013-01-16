@@ -22,9 +22,10 @@
 
    <include
         android:id="@+id/account_header"
-        layout="@layout/editor_account_header"/>
+        layout="@layout/editor_account_header" />
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dip"
         android:paddingRight="8dip"
@@ -39,15 +40,15 @@
             android:imeOptions="flagNoExtractUi|flagNoFullscreen"
             android:hint="@string/group_name_hint"
             android:minHeight="48dip"
-            android:paddingLeft="8dip"/>
+            android:paddingLeft="8dip" />
 
         <include
             layout="@layout/group_editor_autocomplete_view"
-            android:id="@+id/add_member_field"/>
+            android:id="@+id/add_member_field" />
 
         <include
             layout="@layout/group_editor_existing_member_list"
-            android:id="@android:id/list"/>
+            android:id="@android:id/list" />
     </LinearLayout>
 
 </LinearLayout>

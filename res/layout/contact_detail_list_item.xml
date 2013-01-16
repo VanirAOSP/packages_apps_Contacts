@@ -79,9 +79,7 @@
                     android:visibility="gone"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/ic_list_default_mime_holo_dark" />
-
             </LinearLayout>
-
         </LinearLayout>
 
         <View
@@ -102,6 +100,7 @@
             android:focusable="true"
             android:background="?android:attr/selectableItemBackground"
             android:nextFocusLeft="@id/actions_view_container">
+
             <ImageView
                 android:id="@+id/secondary_action_button"
                 android:layout_width="32dip"

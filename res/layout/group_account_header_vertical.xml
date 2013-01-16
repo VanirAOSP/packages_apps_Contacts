@@ -35,7 +35,7 @@
         android:textColor="@color/people_app_theme_color"
         android:textStyle="bold"
         android:textAllCaps="true"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <!-- TODO: Should use correct color with a correct name (content should be same).
          can use "?android:attr/textColorTertiary" -->

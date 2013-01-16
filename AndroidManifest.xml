@@ -47,7 +47,7 @@
     <uses-permission android:name="com.android.voicemail.permission.ADD_VOICEMAIL" />
     <uses-permission android:name="com.android.voicemail.permission.READ_WRITE_ALL_VOICEMAIL" />
     <uses-permission android:name="android.permission.ALLOW_ANY_CODEC_FOR_PLAYBACK" />
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <!-- allow broadcasting secret code intents that reboot the phone -->
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -57,8 +57,7 @@
         android:label="@string/contactsList"
         android:icon="@mipmap/ic_launcher_contacts"
         android:taskAffinity="android.task.contacts"
-        android:hardwareAccelerated="true"
-    >
+        android:hardwareAccelerated="true">
 
         <!-- Intercept Dialer Intents for devices without a phone.
         This activity should have the same intent filters as the DialtactsActivity,
@@ -67,8 +66,8 @@
         are set lower, so that the user does not see a disambig dialog -->
         <activity
             android:name=".activities.NonPhoneActivity"
-            android:theme="@style/NonPhoneActivityTheme"
-        >
+            android:theme="@style/NonPhoneActivityTheme">
+
             <intent-filter android:priority="-1">
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -76,21 +75,25 @@
                 <data android:mimeType="vnd.android.cursor.item/phone" />
                 <data android:mimeType="vnd.android.cursor.item/person" />
             </intent-filter>
+
             <intent-filter android:priority="-1">
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="voicemail" />
             </intent-filter>
+
             <intent-filter android:priority="-1">
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
             <intent-filter android:priority="-1">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
+
             <intent-filter android:priority="-1">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.DIAL" />
@@ -98,12 +101,14 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="tel" />
             </intent-filter>
+
             <intent-filter android:priority="-1">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:mimeType="vnd.android.cursor.dir/calls" />
             </intent-filter>
+
             <intent-filter android:priority="-1">
                 <action android:name="android.intent.action.CALL_BUTTON" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -125,6 +130,7 @@
             android:enabled="@*android:bool/config_voice_capable"
             android:taskAffinity="android.task.contacts.phone"
             android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
+
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -132,22 +138,26 @@
                 <data android:mimeType="vnd.android.cursor.item/phone" />
                 <data android:mimeType="vnd.android.cursor.item/person" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="voicemail" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.DIAL" />
@@ -155,17 +165,20 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="tel" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:mimeType="vnd.android.cursor.dir/calls" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.CALL_BUTTON" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
+
             <!-- This was never intended to be public, but is here for backward
                  compatibility.  Use Intent.ACTION_DIAL instead. -->
             <intent-filter>
@@ -173,6 +186,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.TAB" />
             </intent-filter>
+
             <intent-filter android:label="@string/recentCallsIconLabel">
                 <action android:name="com.android.phone.action.RECENT_CALLS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -186,8 +200,8 @@
             android:theme="@style/PeopleTheme"
             android:uiOptions="splitActionBarWhenNarrow"
             android:clearTaskOnLaunch="true"
-            android:launchMode="singleTop"
-        >
+            android:launchMode="singleTop">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -195,6 +209,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.APP_CONTACTS" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="com.android.contacts.action.LIST_DEFAULT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -262,8 +277,7 @@
             </intent-filter>
 
             <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"
-            />
+                android:resource="@xml/searchable" />
         </activity>
 
         <activity android:name=".activities.ContactSelectionActivity"
@@ -272,6 +286,7 @@
             android:launchMode="singleTop"
             android:clearTaskOnLaunch="true"
             android:uiOptions="splitActionBarWhenNarrow">
+
             <intent-filter>
                 <action android:name="android.intent.action.INSERT_OR_EDIT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -306,44 +321,38 @@
 
         <!-- Backwards compatibility: somebody may have hard coded this activity name -->
         <activity-alias android:name="ContactsListActivity"
-            android:targetActivity=".activities.PeopleActivity"
-        />
+            android:targetActivity=".activities.PeopleActivity" />
 
         <!-- Backwards compatibility: "Contacts" from Honeycomb -->
         <activity-alias android:name=".activities.ContactsFrontDoor"
             android:targetActivity=".activities.PeopleActivity"
-            android:exported="true"
-        />
+            android:exported="true" />
 
         <!-- Backwards compatibility: "Contacts" from Gingerbread and earlier -->
         <activity-alias android:name="DialtactsContactsEntryActivity"
             android:targetActivity=".activities.PeopleActivity"
-            android:exported="true"
-        />
+            android:exported="true" />
 
         <!-- Backwards compatibility: "Phone" from Gingerbread and earlier -->
         <activity-alias android:name="DialtactsActivity"
             android:targetActivity=".activities.DialtactsActivity"
-            android:exported="true"
-        />
+            android:exported="true" />
 
         <!-- Backwards compatibility: "Call log" from Gingerbread and earlier -->
         <activity-alias android:name="RecentCallsListActivity"
             android:targetActivity=".activities.DialtactsActivity"
-            android:exported="true"
-        />
+            android:exported="true" />
 
         <!-- Backwards compatibility: "Call log" from ICS -->
         <activity-alias android:name=".activities.CallLogActivity"
             android:targetActivity=".activities.DialtactsActivity"
-            android:exported="true"
-        />
+            android:exported="true" />
 
         <!-- An activity for joining contacts -->
         <activity android:name=".activities.JoinContactActivity"
             android:theme="@style/JoinContactActivityTheme"
-            android:clearTaskOnLaunch="true"
-        >
+            android:clearTaskOnLaunch="true">
+
             <intent-filter>
                 <action android:name="com.android.contacts.action.JOIN_CONTACT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -362,6 +371,7 @@
             android:label="@string/dialer_ui_title"
             android:icon="@mipmap/ic_launcher_phone"
             android:theme="@android:style/Theme.Holo.DialogWhenLarge">
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
@@ -394,17 +404,19 @@
         </activity>
 
         <!-- List of groups -->
-        <activity android:name=".activities.GroupBrowserActivity"
+        <activity
+            android:name=".activities.GroupBrowserActivity"
             android:label="@string/contactsGroupsLabel"
             android:theme="@style/PeopleTheme"
             android:uiOptions="splitActionBarWhenNarrow"
             android:launchMode="singleTop"
-            android:clearTaskOnLaunch="true"/>
+            android:clearTaskOnLaunch="true" />
 
         <!-- Views the details of a single group -->
-        <activity android:name=".activities.GroupDetailActivity"
+        <activity
+            android:name=".activities.GroupDetailActivity"
             android:label=""
-            android:theme="@style/DetailActivityTheme"/>
+            android:theme="@style/DetailActivityTheme" />
 
         <!-- Create a new or edit an existing group -->
         <activity
@@ -444,7 +456,6 @@
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity-alias>
 
         <activity-alias android:name="alias.DialShortcut"
@@ -458,7 +469,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.CAR_MODE" />
             </intent-filter>
-
         </activity-alias>
 
         <activity-alias android:name="alias.MessageShortcut"
@@ -471,7 +481,6 @@
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity-alias>
 
         <activity android:name="CallDetailActivity"
@@ -479,8 +488,8 @@
             android:theme="@style/CallDetailActivityTheme"
             android:screenOrientation="portrait"
             android:icon="@mipmap/ic_launcher_phone"
-            android:taskAffinity="android.task.contacts.phone"
-        >
+            android:taskAffinity="android.task.contacts.phone">
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -509,14 +518,14 @@
             android:label="@string/activity_title_confirm_add_detail"
             android:theme="@style/ConfirmAddDetailDialogTheme"
             android:windowSoftInputMode="adjustResize"
-            android:exported="false"/>
+            android:exported="false" />
 
         <!-- Accounts changed prompt that can appear when creating a new contact. -->
         <activity
             android:name=".activities.ContactEditorAccountsChangedActivity"
             android:theme="@style/ContactEditorAccountsChangedActivityTheme"
             android:windowSoftInputMode="adjustResize"
-            android:exported="false"/>
+            android:exported="false" />
 
         <!-- Create a new or edit an existing contact -->
         <activity
@@ -531,6 +540,7 @@
                 <data android:mimeType="vnd.android.cursor.item/contact" />
                 <data android:mimeType="vnd.android.cursor.item/raw_contact" />
             </intent-filter>
+
             <intent-filter android:label="@string/insertContactDescription">
                 <action android:name="android.intent.action.INSERT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -569,15 +579,14 @@
         </activity>
 
         <!--
-            Internal photo selection activity.  This activity handles all configuration changes by
+            Internal photo selection activity. This activity handles all configuration changes by
             itself.
         -->
         <activity android:name=".activities.PhotoSelectionActivity"
             android:theme="@style/Theme.PhotoSelector"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateUnchanged"
-            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize"
-            >
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize">
         </activity>
 
         <!-- Interstitial activity that shows a phone disambig dialog -->
@@ -638,21 +647,22 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
-                    android:resource="@xml/social_widget_info" />
+                android:resource="@xml/social_widget_info" />
         </receiver>
 
         <receiver android:name=".calllog.CallLogReceiver"
             android:enabled="@*android:bool/config_voice_capable">
+
             <intent-filter>
                 <action android:name="android.intent.action.NEW_VOICEMAIL" />
                 <data
                     android:scheme="content"
                     android:host="com.android.voicemail"
-                    android:mimeType="vnd.android.cursor.item/voicemail"
-                />
+                    android:mimeType="vnd.android.cursor.item/voicemail" />
             </intent-filter>
+
             <intent-filter android:priority="100">
-                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
@@ -666,14 +676,14 @@
 
         <service
             android:name=".calllog.CallLogNotificationsService"
-            android:exported="false"
-        />
+            android:exported="false" />
 
         <!-- Service that is exclusively for the Phone application that sends out a view
              notification. This service might be removed in future versions of the app  -->
         <service android:name=".ViewNotificationService"
             android:permission="android.permission.WRITE_CONTACTS"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="com.android.contacts.VIEW_NOTIFICATION" />
                 <data android:mimeType="vnd.android.cursor.item/contact" />

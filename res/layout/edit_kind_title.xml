@@ -24,6 +24,7 @@
     android:paddingLeft="8dip"
     android:paddingRight="8dip"
     android:focusable="false">
+
     <TextView
         android:id="@+id/kind_title"
         style="@style/ContactListSeparatorTextViewStyle"

@@ -40,7 +40,7 @@
             android:layout_gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/action_bar_button_text_color"
-            style="@android:style/Widget.Holo.ActionBar.TabText"/>
+            style="@android:style/Widget.Holo.ActionBar.TabText" />
 
         <ImageView
             android:id="@android:id/icon"
@@ -48,8 +48,6 @@
             android:layout_height="25dip"
             android:layout_marginLeft="7dip"
             android:layout_marginRight="7dip"
-            android:layout_gravity="center_vertical"/>
-
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
-
 </LinearLayout>

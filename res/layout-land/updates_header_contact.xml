@@ -35,5 +35,4 @@
         android:textAllCaps="true"
         android:singleLine="true"
         android:ellipsize="end" />
-
 </FrameLayout>

@@ -32,11 +32,13 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:layout_gravity="center_vertical">
+
         <TextView
             android:id="@+id/aggregation_suggestion_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
         <TextView
             android:id="@+id/aggregation_suggestion_data"
             android:layout_width="wrap_content"

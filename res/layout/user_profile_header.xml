@@ -22,10 +22,9 @@
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/list_header_extra_top_padding"
     android:paddingLeft="?attr/list_item_padding_left"
-    android:paddingRight="?attr/list_item_padding_right" 
+    android:paddingRight="?attr/list_item_padding_right"
     android:background="@drawable/list_section_divider_holo_custom"
-    android:minHeight="?attr/list_item_header_height"
-    >
+    android:minHeight="?attr/list_item_header_height">
 
     <TextView
         android:id="@+id/profile_title"

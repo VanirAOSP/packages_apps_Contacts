@@ -18,11 +18,11 @@
     android:background="@null"
     android:paddingBottom="1dip"
     android:paddingRight="1dip"
-    class="com.android.contacts.list.ContactTilePhoneStarredView" >
+    class="com.android.contacts.list.ContactTilePhoneStarredView">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <com.android.contacts.widget.LayoutSuppressingImageView
             android:id="@+id/contact_tile_image"
@@ -66,7 +66,5 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:contentDescription="@string/description_view_contact_detail" />
-
     </RelativeLayout>
-
 </view>

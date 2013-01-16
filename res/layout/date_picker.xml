@@ -22,7 +22,8 @@
 <!-- The width of this container is manually set a little bigger than the one of the children
      contained in it. This helps to prevent rounding errors when toggling the "Show year" option -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
     android:layout_width="270dip"
@@ -36,7 +37,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
     <!-- Warning: everything within the parent is removed and re-ordered depending
          on the date format selected by the user. -->
     <LinearLayout
@@ -54,8 +56,7 @@
             android:layout_marginLeft="1dip"
             android:layout_marginRight="1dip"
             android:focusable="true"
-            android:focusableInTouchMode="true"
-            />
+            android:focusableInTouchMode="true" />
 
         <!-- Day -->
         <NumberPicker
@@ -65,8 +66,7 @@
             android:layout_marginLeft="1dip"
             android:layout_marginRight="1dip"
             android:focusable="true"
-            android:focusableInTouchMode="true"
-            />
+            android:focusableInTouchMode="true" />
 
         <!-- Year -->
         <NumberPicker
@@ -76,7 +76,6 @@
             android:layout_marginLeft="1dip"
             android:layout_marginRight="1dip"
             android:focusable="true"
-            android:focusableInTouchMode="true"
-            />
+            android:focusableInTouchMode="true" />
     </LinearLayout>
 </LinearLayout>

@@ -15,6 +15,7 @@
 -->
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
+
     <View
         android:id="@+id/vertical_divider"
         android:layout_width="1dip"
@@ -23,6 +24,7 @@
         android:layout_marginTop="@dimen/detail_vertical_divider_vertical_margin"
         android:layout_marginBottom="@dimen/detail_vertical_divider_vertical_margin"
         android:background="?android:attr/dividerVertical" />
+
     <ImageView
         android:id="@+id/secondary_action_button"
         android:layout_width="wrap_content"
@@ -31,7 +33,8 @@
         android:paddingRight="14dip"
         android:background="?android:attr/selectableItemBackground"
         android:duplicateParentState="false"
-        android:nextFocusLeft="@id/actions_view_container"/>
+        android:nextFocusLeft="@id/actions_view_container" />
+
     <View
         android:layout_width="1dip"
         android:layout_height="match_parent"

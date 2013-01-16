@@ -27,7 +27,7 @@
         android:indeterminate="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progress_spinner"/>
+        android:id="@+id/progress_spinner" />
 
     <TextView
         android:id="@+id/title"
@@ -36,5 +36,4 @@
         android:text="@string/contact_list_loading"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_marginLeft="4dip" />
-
 </LinearLayout>

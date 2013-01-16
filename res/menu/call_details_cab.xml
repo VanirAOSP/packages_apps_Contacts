@@ -17,6 +17,5 @@
     <item
         android:id="@+id/copy_phone_number"
         android:icon="?android:attr/actionModeCopyDrawable"
-        android:title="@string/menu_copy"
-    />
+        android:title="@string/menu_copy" />
 </menu>

@@ -14,16 +14,15 @@
      limitations under the License.
 -->
 
-<searchable xmlns:android="http://schemas.android.com/apk/res/android"
+<searchable
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:label="@string/contactsList"
     android:hint="@string/searchHint"
     android:searchMode="queryRewriteFromText"
-
     android:includeInGlobalSearch="true"
     android:queryAfterZeroResults="true"
     android:searchSuggestAuthority="com.android.contacts"
     android:searchSuggestIntentAction="android.provider.Contacts.SEARCH_SUGGESTION_CLICKED"
     android:searchSuggestIntentData="content://com.android.contacts/contacts/lookup"
-    android:searchSettingsDescription="@string/search_settings_description"
->
+    android:searchSettingsDescription="@string/search_settings_description">
 </searchable>

@@ -22,7 +22,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <com.android.contacts.widget.LayoutSuppressingQuickContactBadge
             android:id="@+id/contact_tile_quick"
@@ -63,7 +63,6 @@
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="3dip"
                 android:ellipsize="marquee" />
-
         </LinearLayout>
 
         <View
@@ -72,7 +71,5 @@
             android:layout_height="1px"
             android:background="?android:attr/listDivider"
             android:layout_below="@id/contact_tile_quick" />
-
     </RelativeLayout>
-
 </view>

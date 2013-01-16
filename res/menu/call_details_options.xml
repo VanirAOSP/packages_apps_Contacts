@@ -19,16 +19,15 @@
         android:icon="@drawable/ic_trash_holo_dark"
         android:showAsAction="ifRoom"
         android:title="@string/recentCalls_trashVoicemail"
-        android:onClick="onMenuTrashVoicemail"
-    />
+        android:onClick="onMenuTrashVoicemail" />
+
     <item
         android:id="@+id/menu_remove_from_call_log"
         android:title="@string/recentCalls_removeFromRecentList"
-        android:onClick="onMenuRemoveFromCallLog"
-    />
+        android:onClick="onMenuRemoveFromCallLog" />
+
     <item
         android:id="@+id/menu_edit_number_before_call"
         android:title="@string/recentCalls_editNumberBeforeCall"
-        android:onClick="onMenuEditNumberBeforeCall"
-    />
+        android:onClick="onMenuEditNumberBeforeCall" />
 </menu>

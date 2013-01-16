@@ -14,27 +14,31 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/contact_detail_about_fragment"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView android:id="@android:id/list"
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="1"
         android:fadingEdge="none"
-        android:divider="@null"/>
+        android:divider="@null" />
 
-    <ScrollView android:id="@android:id/empty"
+    <ScrollView
+        android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="1"
         android:fadingEdge="none"
         android:visibility="gone">
 
-        <TextView android:id="@+id/emptyText"
+        <TextView
+            android:id="@+id/emptyText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/no_contact_details"
@@ -43,8 +47,7 @@
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:paddingTop="10dip"
-            android:lineSpacingMultiplier="0.92"/>
-
+            android:lineSpacingMultiplier="0.92" />
     </ScrollView>
 
     <!-- "QuickFix"- button (Copy to local contact, add to group) -->
@@ -57,4 +60,3 @@
         android:layout_marginTop="20dip"
         android:layout_marginBottom="20dip" />
 </LinearLayout>
-

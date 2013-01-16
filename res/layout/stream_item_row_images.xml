@@ -29,11 +29,12 @@
         android:layout_weight="1"
         ex:ratio="1"
         ex:direction="widthToHeight">
+
         <include
             android:id="@+id/stream_item_first_image"
             layout="@layout/stream_item_photo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </view>
 
     <view
@@ -44,11 +45,12 @@
         android:layout_weight="1"
         ex:ratio="1"
         ex:direction="widthToHeight">
+
         <include
             android:id="@+id/stream_item_second_image"
             layout="@layout/stream_item_photo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </view>
 
 </LinearLayout>

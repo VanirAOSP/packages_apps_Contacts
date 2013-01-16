@@ -339,7 +339,7 @@
 
          This is similar to ?android:attr/listSeparatorTextView but uses different
          background and text color. See also android:style/Widget.Holo.TextView.ListSeparator
-         (which is private, so we cannot specify it as a parent style).  -->
+         (which is private, so we cannot specify it as a parent style). -->
     <style name="ContactListSeparatorTextViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

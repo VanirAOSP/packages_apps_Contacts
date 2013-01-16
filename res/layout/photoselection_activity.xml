@@ -17,11 +17,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <View
         android:id="@+id/backdrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/photo_backdrop" />
+
     <view
         android:id="@+id/photo"
         class="com.android.contacts.detail.TransformableImageView"

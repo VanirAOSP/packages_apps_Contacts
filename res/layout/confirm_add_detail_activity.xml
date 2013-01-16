@@ -16,7 +16,8 @@
 
 <!-- Layout for confirming the addition of a piece of information to an existing contact. -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_view"
     android:orientation="vertical"
     android:visibility="invisible"
@@ -89,7 +90,6 @@
                 android:singleLine="true"
                 android:paddingBottom="4dip"
                 android:visibility="gone" />
-
         </LinearLayout>
 
         <View
@@ -101,13 +101,14 @@
     </RelativeLayout>
 
     <!-- Message that gets displayed if the contact is read-only (instead of showing the editor) -->
-    <TextView android:id="@+id/read_only_warning"
+    <TextView
+        android:id="@+id/read_only_warning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="60dip"
         android:visibility="gone"
         android:padding="15dip"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <!-- Container for a single detail field editor when the contact is not read-only -->
     <FrameLayout
@@ -116,13 +117,13 @@
         android:layout_height="wrap_content"
         android:minHeight="60dip"
         android:layout_marginTop="4dip"
-        android:layout_marginRight="15dip"/>
+        android:layout_marginRight="15dip" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
 
     <!-- Action buttons -->
     <LinearLayout
@@ -146,7 +147,5 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@android:string/ok" />
-
     </LinearLayout>
-
 </LinearLayout>

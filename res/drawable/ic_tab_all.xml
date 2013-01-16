@@ -17,4 +17,3 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/ic_contacts_holo_dark" />
 </selector>
-

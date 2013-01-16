@@ -14,17 +14,18 @@
      limitations under the License.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/contact_detail_updates_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_social_updates">
 
-    <ListView android:id="@android:id/list"
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fadingEdge="none"
         android:divider="@null"
-        android:background="@android:color/transparent"/>
-
+        android:background="@android:color/transparent" />
 </FrameLayout>

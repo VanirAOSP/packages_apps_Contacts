@@ -36,8 +36,7 @@
         <!-- Put a dummy view here because the ProportionalLayout requires one -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent" />
     </view>
 
     <!-- "Recent" header text -->
@@ -58,7 +57,5 @@
             android:textAllCaps="true"
             android:singleLine="true"
             android:ellipsize="end" />
-
     </FrameLayout>
-
 </LinearLayout>

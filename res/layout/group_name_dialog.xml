@@ -22,6 +22,7 @@
     android:paddingRight="25dip"
     android:paddingBottom="25dip"
     android:paddingLeft="25dip">
+
     <EditText
         android:id="@+id/group_label"
         android:layout_width="match_parent"

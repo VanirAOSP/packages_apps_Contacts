@@ -27,7 +27,7 @@
     android:minHeight="48dip"
     android:background="@drawable/gray_action_bar_background"
     android:paddingLeft="16dip"
-    android:paddingRight="16dip" >
+    android:paddingRight="16dip">
 
     <TextView
         android:id="@android:id/title"
@@ -38,7 +38,7 @@
         android:duplicateParentState="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/action_bar_button_text_color"
-        style="@android:style/Widget.Holo.ActionBar.TabText"/>
+        style="@android:style/Widget.Holo.ActionBar.TabText" />
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -49,8 +49,6 @@
             android:layout_width="32dip"
             android:layout_height="32dip"
             android:duplicateParentState="true"
-            android:layout_gravity="center_vertical"/>
-
+            android:layout_gravity="center_vertical" />
     </FrameLayout>
-
 </LinearLayout>
