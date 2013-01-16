@@ -14,27 +14,28 @@
      limitations under the License.
 -->
 
-<LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/footer"
     android:orientation="horizontal"
     android:visibility="gone"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    style="@android:style/ButtonBar">
+    style="@android:style/ButtonBar"
+>
 
-    <Button
-        android:id="@+id/done"
+    <Button android:id="@+id/done"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/menu_done" />
+        android:text="@string/menu_done"
+    />
 
-    <Button
-        android:id="@+id/revert"
+    <Button android:id="@+id/revert"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/menu_doNotSave" />
+        android:text="@string/menu_doNotSave"
+    />
+
 </LinearLayout>

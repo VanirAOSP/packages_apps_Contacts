@@ -49,12 +49,14 @@
                 <include
                     android:id="@+id/edit_phonetic_name"
                     layout="@layout/phonetic_name_editor_view" />
+
             </LinearLayout>
 
             <include
                 android:id="@+id/edit_photo"
                 android:layout_marginRight="8dip"
                 layout="@layout/item_photo_editor" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -62,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="16dip" />
+            android:layout_marginBottom="16dip"/>
 
         <Button
             android:id="@+id/button_add_field"
@@ -70,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="32dip" />
+            android:layout_marginBottom="32dip"/>
+
     </LinearLayout>
 </com.android.contacts.editor.RawContactEditorView>

@@ -143,6 +143,7 @@
          entirely disable SIM import on a per-product basis. -->
     <bool name="config_allow_sim_import">true</bool>
 
+
     <!-- Help URL pointing to main TOC for People. This is intentionally empty because
          the overlay will fill this in during build time. -->
     <string name="help_url_people_main"></string>

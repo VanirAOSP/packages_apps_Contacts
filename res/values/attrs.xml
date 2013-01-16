@@ -17,68 +17,68 @@
     <!-- Maps a contact kind or mime-type to a RemoteViews XML formatter -->
     <declare-styleable name="Mapping">
         <!-- Mime-type handled by this mapping -->
-        <attr name="mimeType" format="string" />
+        <attr name="mimeType" format="string"/>
         <!-- RemoteViews XML that should be used to format this data -->
-        <attr name="remoteViews" format="reference" />
+        <attr name="remoteViews" format="reference"/>
         <!-- Icon that should be used to represent this data -->
-        <attr name="icon" format="reference" />
+        <attr name="icon" format="reference"/>
         <!-- Column in data table to summarize this data -->
-        <attr name="summaryColumn" format="string" />
+        <attr name="summaryColumn" format="string"/>
         <!-- Column in data table to show details of this data -->
-        <attr name="detailColumn" format="string" />
+        <attr name="detailColumn" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="EdgeTriggerView">
-        <attr name="edgeWidth" format="dimension" />
+        <attr name="edgeWidth" format="dimension"/>
         <attr name="listenEdges">
-            <flag name="left" value="0x01" />
-            <flag name="right" value="0x02" />
+            <flag name="left" value="0x01"/>
+            <flag name="right" value="0x02"/>
         </attr>
     </declare-styleable>
 
     <declare-styleable name="InterpolatingLayout_Layout">
-        <attr name="layout_narrowParentWidth" format="dimension" />
-        <attr name="layout_narrowWidth" format="dimension" />
-        <attr name="layout_narrowMarginLeft" format="dimension" />
-        <attr name="layout_narrowMarginRight" format="dimension" />
-        <attr name="layout_narrowPaddingLeft" format="dimension" />
-        <attr name="layout_narrowPaddingRight" format="dimension" />
-        <attr name="layout_wideParentWidth" format="dimension" />
-        <attr name="layout_wideWidth" format="dimension" />
-        <attr name="layout_wideMarginLeft" format="dimension" />
-        <attr name="layout_wideMarginRight" format="dimension" />
-        <attr name="layout_widePaddingLeft" format="dimension" />
-        <attr name="layout_widePaddingRight" format="dimension" />
+        <attr name="layout_narrowParentWidth" format="dimension"/>
+        <attr name="layout_narrowWidth" format="dimension"/>
+        <attr name="layout_narrowMarginLeft" format="dimension"/>
+        <attr name="layout_narrowMarginRight" format="dimension"/>
+        <attr name="layout_narrowPaddingLeft" format="dimension"/>
+        <attr name="layout_narrowPaddingRight" format="dimension"/>
+        <attr name="layout_wideParentWidth" format="dimension"/>
+        <attr name="layout_wideWidth" format="dimension"/>
+        <attr name="layout_wideMarginLeft" format="dimension"/>
+        <attr name="layout_wideMarginRight" format="dimension"/>
+        <attr name="layout_widePaddingLeft" format="dimension"/>
+        <attr name="layout_widePaddingRight" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="ProportionalLayout">
-        <attr name="direction" format="string" />
-        <attr name="ratio" format="float" />
+        <attr name="direction" format="string"/>
+        <attr name="ratio" format="float"/>
     </declare-styleable>
 
     <declare-styleable name="ContactBrowser">
-        <attr name="contact_browser_list_padding_left" format="dimension" />
-        <attr name="contact_browser_list_padding_right" format="dimension" />
-        <attr name="contact_browser_background" format="reference" />
+        <attr name="contact_browser_list_padding_left" format="dimension"/>
+        <attr name="contact_browser_list_padding_right" format="dimension"/>
+        <attr name="contact_browser_background" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="ContactListItemView">
-        <attr name="list_item_height" format="dimension" />
-        <attr name="list_section_header_height" format="dimension" />
-        <attr name="activated_background" format="reference" />
-        <attr name="section_header_background" format="reference" />
-        <attr name="list_item_divider" format="reference" />
-        <attr name="list_item_padding_top" format="dimension" />
-        <attr name="list_item_padding_right" format="dimension" />
-        <attr name="list_item_padding_bottom" format="dimension" />
-        <attr name="list_item_padding_left" format="dimension" />
-        <attr name="list_item_gap_between_image_and_text" format="dimension" />
-        <attr name="list_item_gap_between_label_and_data" format="dimension" />
-        <attr name="list_item_presence_icon_margin" format="dimension" />
-        <attr name="list_item_presence_icon_size" format="dimension" />
-        <attr name="list_item_photo_size" format="dimension" />
-        <attr name="list_item_profile_photo_size" format="dimension" />
-        <attr name="list_item_prefix_highlight_color" format="color" />
+        <attr name="list_item_height" format="dimension"/>
+        <attr name="list_section_header_height" format="dimension"/>
+        <attr name="activated_background" format="reference"/>
+        <attr name="section_header_background" format="reference"/>
+        <attr name="list_item_divider" format="reference"/>
+        <attr name="list_item_padding_top" format="dimension"/>
+        <attr name="list_item_padding_right" format="dimension"/>
+        <attr name="list_item_padding_bottom" format="dimension"/>
+        <attr name="list_item_padding_left" format="dimension"/>
+        <attr name="list_item_gap_between_image_and_text" format="dimension"/>
+        <attr name="list_item_gap_between_label_and_data" format="dimension"/>
+        <attr name="list_item_presence_icon_margin" format="dimension"/>
+        <attr name="list_item_presence_icon_size" format="dimension"/>
+        <attr name="list_item_photo_size" format="dimension"/>
+        <attr name="list_item_profile_photo_size" format="dimension"/>
+        <attr name="list_item_prefix_highlight_color" format="color"/>
         <attr name="list_item_header_text_indent" format="dimension" />
         <attr name="list_item_header_text_color" format="color" />
         <attr name="list_item_header_text_size" format="dimension" />

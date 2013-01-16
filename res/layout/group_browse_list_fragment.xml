@@ -33,7 +33,7 @@
       android:fadingEdge="none"
       android:cacheColorHint="@android:color/transparent"
       android:divider="@null"
-      android:listSelector="@android:color/transparent" />
+      android:listSelector="@android:color/transparent"/>
 
     <TextView
         android:id="@+id/empty"
@@ -69,5 +69,6 @@
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/contacts_unavailable_add_account" />
+
     </LinearLayout>
 </LinearLayout>

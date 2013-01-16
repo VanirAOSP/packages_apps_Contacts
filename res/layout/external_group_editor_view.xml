@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/read_only_warning"
@@ -33,7 +33,7 @@
 
     <include
         android:id="@+id/account_header"
-        layout="@layout/editor_account_header" />
+        layout="@layout/editor_account_header"/>
 
     <TextView
         android:id="@+id/group_name"
@@ -42,10 +42,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="?android:attr/textColorTertiary"
         android:textStyle="bold"
-        android:padding="10dip" />
+        android:padding="10dip"/>
 
     <include
         layout="@layout/group_editor_existing_member_list"
-        android:id="@android:id/list" />
+        android:id="@android:id/list"/>
 
 </LinearLayout>

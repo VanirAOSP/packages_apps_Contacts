@@ -30,7 +30,7 @@
     <FrameLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <ListView
         android:id="@+id/contact_tile_list"
@@ -46,5 +46,6 @@
         android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/empty_message_top_margin"
         android:textColor="?android:attr/textColorSecondary"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
 </LinearLayout>

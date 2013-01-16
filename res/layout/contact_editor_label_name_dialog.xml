@@ -22,7 +22,6 @@
     android:paddingRight="25dip"
     android:paddingBottom="25dip"
     android:paddingLeft="25dip">
-
     <EditText
         android:id="@+id/custom_dialog_content"
         android:layout_width="match_parent"

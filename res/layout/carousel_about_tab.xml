@@ -23,28 +23,25 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
-        <ImageView
-            android:id="@+id/photo"
+        <ImageView android:id="@+id/photo"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"/>
 
-        <View
-            android:id="@+id/photo_overlay"
+        <View android:id="@+id/photo_overlay"
             android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"/>
 
         <!-- Transparent view to overlay on the contact's photo
         (to allow white text to appear over a white photo). -->
-        <View
-            android:id="@+id/label_background"
+        <View android:id="@+id/label_background"
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_tab_carousel_tab_label_height"
             android:layout_alignParentLeft="true"
@@ -57,7 +54,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/detail_tab_carousel_tab_label_height" />
+            android:layout_marginBottom="@dimen/detail_tab_carousel_tab_label_height"/>
 
         <TextView
             android:id="@+id/label"
@@ -71,5 +68,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/detail_tab_carousel_tab_label_color"
             style="@android:style/Widget.Holo.ActionBar.TabView" />
+
     </RelativeLayout>
+
 </view>

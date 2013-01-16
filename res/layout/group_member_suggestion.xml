@@ -39,10 +39,9 @@
             android:layout_height="wrap_content"
             android:paddingLeft="8dip"
             android:singleLine="true"
-            android:ellipsize="end" />
+            android:ellipsize="end"/>
 
-        <TextView
-            android:id="@+id/text2"
+        <TextView android:id="@+id/text2"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorSecondary"
             android:layout_width="wrap_content"
@@ -50,6 +49,7 @@
             android:paddingLeft="8dip"
             android:singleLine="true"
             android:ellipsize="end" />
+
     </LinearLayout>
 
     <ImageView
@@ -58,4 +58,5 @@
         android:layout_height="48dip"
         android:cropToPadding="true"
         android:scaleType="centerCrop" />
+
 </LinearLayout>

@@ -19,7 +19,6 @@
         android:title="@string/recentCalls_addToContact"
         android:showAsAction="withText"
         android:orderInCategory="1" />
-
     <item
         android:id="@+id/menu_2s_pause"
         android:title="@string/add_2sec_pause"

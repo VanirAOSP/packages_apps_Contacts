@@ -18,8 +18,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_section_height">
-
+    android:layout_height="@dimen/list_section_height"
+    >
     <TextView
         android:id="@+id/header_text"
         android:layout_width="56dip"
@@ -29,5 +29,6 @@
         android:textStyle="bold"
         android:textColor="@color/section_header_text_color"
         android:textSize="14sp"
-        android:gravity="center" />
+        android:gravity="center"
+    />
 </RelativeLayout>

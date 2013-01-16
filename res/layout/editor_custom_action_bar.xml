@@ -53,6 +53,9 @@
                 android:textColor="@color/action_bar_button_text_color"
                 android:text="@string/menu_done"
                 style="@android:style/Widget.Holo.ActionBar.TabText" />
+
         </LinearLayout>
+
     </LinearLayout>
+
 </FrameLayout>

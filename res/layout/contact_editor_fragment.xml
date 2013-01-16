@@ -14,17 +14,18 @@
      limitations under the License.
 -->
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:fadingEdge="none"
-    android:background="@color/background_primary">
+    android:background="@color/background_primary"
+>
 
-    <LinearLayout
-        android:id="@+id/editors"
+    <LinearLayout android:id="@+id/editors"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+    />
+
 </ScrollView>

@@ -20,10 +20,10 @@
     based on the source of the request -->
     <dimen name="quick_contact_top_position">48dip</dimen>
 
-    <!-- Top padding of the entire contact editor -->
+    <!-- Top padding of the entire contact editor  -->
     <dimen name="editor_padding_top">0dip</dimen>
 
-    <!-- Padding of the rounded plus/minus/expand/collapse buttons in the editor -->
+    <!-- Padding of the rounded plus/minus/expand/collapse buttons in the editor  -->
     <dimen name="editor_round_button_padding_left">8dip</dimen>
     <dimen name="editor_round_button_padding_right">8dip</dimen>
     <dimen name="editor_round_button_padding_top">8dip</dimen>

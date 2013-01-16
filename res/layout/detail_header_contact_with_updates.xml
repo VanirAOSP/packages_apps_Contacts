@@ -25,7 +25,6 @@
     xmlns:ex="http://schemas.android.com/apk/res/com.android.contacts"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
     <view
         class="com.android.contacts.widget.ProportionalLayout"
         android:layout_width="match_parent"
@@ -33,9 +32,8 @@
         android:layout_marginBottom="@dimen/detail_contact_photo_shadow_height"
         ex:ratio="0.5"
         ex:direction="widthToHeight">
-
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
     </view>
 </FrameLayout>

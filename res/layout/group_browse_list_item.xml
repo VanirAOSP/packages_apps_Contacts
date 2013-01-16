@@ -33,7 +33,7 @@
     android:paddingLeft="?attr/list_item_padding_left"
     android:paddingTop="?attr/list_item_padding_top"
     android:paddingBottom="?attr/list_item_padding_bottom"
-    android:minHeight="@dimen/detail_min_line_item_height">
+    android:minHeight="@dimen/detail_min_line_item_height" >
 
     <View
         android:id="@+id/divider"
@@ -73,5 +73,7 @@
             android:textColor="?android:attr/textColorSecondary"
             android:ellipsize="end"
             android:singleLine="true" />
+
     </LinearLayout>
 </LinearLayout>
+

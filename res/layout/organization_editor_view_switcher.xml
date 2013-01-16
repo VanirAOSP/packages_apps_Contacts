@@ -34,12 +34,13 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="?android:attr/textColorSecondary"
         android:background="?android:attr/selectableItemBackground"
-        android:text="@string/add_organization" />
+        android:text="@string/add_organization"/>
 
     <!-- This is later populated with the actual editable text fields for "organization" -->
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="gone"/>
+
 </FrameLayout>

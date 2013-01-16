@@ -45,5 +45,7 @@
             android:id="@+id/delete_button_container"
             layout="@layout/edit_delete_button"
             android:visibility="gone" />
+
     </LinearLayout>
+
 </com.android.contacts.editor.StructuredNameEditorView>

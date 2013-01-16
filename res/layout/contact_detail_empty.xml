@@ -25,4 +25,4 @@
     android:textColor="?android:attr/textColorSecondary"
     android:layout_marginLeft="15dip"
     android:paddingTop="10dip"
-    android:lineSpacingMultiplier="0.92" />
+    android:lineSpacingMultiplier="0.92"/>

@@ -20,7 +20,6 @@
     android:minHeight="48dip"
     android:paddingLeft="@dimen/editor_add_field_label_left_padding"
     android:background="?android:attr/selectableItemBackground">
-
     <TextView
         android:id="@+id/add_text"
         android:layout_gravity="center_vertical"

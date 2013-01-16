@@ -46,12 +46,13 @@
                 android:id="@+id/tab_divider"
                 android:layout_width="1dip"
                 android:layout_height="match_parent"
-                android:background="@color/call_log_divider" />
+                android:background="@color/call_log_divider"/>
 
             <!-- "Updates" tab -->
             <include
                 android:id="@+id/tab_update"
                 layout="@layout/carousel_updates_tab" />
+
         </LinearLayout>
 
         <!--
@@ -63,6 +64,8 @@
             android:id="@+id/shadow"
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_contact_photo_shadow_height"
-            android:background="?android:attr/windowContentOverlay" />
+            android:background="?android:attr/windowContentOverlay"/>
+
     </LinearLayout>
+
 </view>

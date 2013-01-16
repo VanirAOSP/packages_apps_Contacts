@@ -14,6 +14,7 @@
      limitations under the License.
 -->
 
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -36,7 +37,6 @@
         android:id="@+id/pinned_header_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <view
             class="com.android.contacts.widget.PinnedHeaderListView"
             android:id="@android:id/list"

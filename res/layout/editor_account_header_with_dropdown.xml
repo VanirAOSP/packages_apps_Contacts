@@ -51,6 +51,7 @@
              android:textColor="?android:attr/textColorTertiary"
              android:singleLine="true"
              android:ellipsize="end" />
+
     </LinearLayout>
 
     <FrameLayout
@@ -63,6 +64,7 @@
              android:layout_width="32dip"
              android:layout_height="32dip"
              android:layout_gravity="center_vertical" />
+
     </FrameLayout>
 
 </LinearLayout>

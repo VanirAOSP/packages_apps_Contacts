@@ -18,9 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal">
-
-    <ImageView
-        android:id="@android:id/icon"
+    <ImageView android:id="@android:id/icon"
         android:layout_width="@dimen/detail_network_icon_size"
         android:layout_height="@dimen/detail_network_icon_size"
         android:layout_margin="8dip"
@@ -33,23 +31,21 @@
         android:orientation="vertical"
         android:layout_gravity="center_vertical">
 
-        <TextView
-            android:id="@android:id/text1"
+        <TextView android:id="@android:id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dip"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:singleLine="true"
-            android:ellipsize="end" />
+            android:ellipsize="end"/>
 
-        <TextView
-            android:id="@android:id/text2"
+        <TextView android:id="@android:id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dip"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorSecondary"
             android:singleLine="true"
-            android:ellipsize="end" />
+            android:ellipsize="end"/>
     </LinearLayout>
 </LinearLayout>

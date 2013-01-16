@@ -14,8 +14,7 @@
      limitations under the License.
 -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/group_detail"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -29,7 +28,7 @@
         android:id="@+id/group_source_view_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -42,10 +41,10 @@
             android:layout_height="match_parent"
             android:fadingEdge="none"
             android:scrollbarStyle="outsideOverlay"
-            android:divider="@null" />
+            android:divider="@null"/>
 
         <include
-            layout="@layout/group_detail_fragment_empty_view" />
+            layout="@layout/group_detail_fragment_empty_view"/>
 
         <!--
           Shadow overlay over the list of group members (since we have a fake stacked
@@ -54,6 +53,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="20dip"
-            android:background="?android:attr/windowContentOverlay" />
+            android:background="?android:attr/windowContentOverlay"/>
+
     </FrameLayout>
+
 </LinearLayout>

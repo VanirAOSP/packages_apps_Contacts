@@ -34,12 +34,13 @@
         ex:direction="widthToHeight">
 
         <include layout="@layout/photo_selector_view" />
+
     </view>
 
     <!-- Shadow -->
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/detail_contact_photo_shadow_height"
-        android:background="?android:attr/windowContentOverlay" />
+        android:background="?android:attr/windowContentOverlay"/>
 
 </LinearLayout>

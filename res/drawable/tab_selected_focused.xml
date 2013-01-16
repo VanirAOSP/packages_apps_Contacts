@@ -15,28 +15,25 @@
      limitations under the License.
 -->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item>
-        <shape android:shape="rectangle">
+        <shape android:shape="rectangle" >
             <solid android:color="#ffffffff" />
         </shape>
     </item>
-
     <item android:bottom="6dp">
-        <shape android:shape="rectangle">
+        <shape android:shape="rectangle" >
             <solid android:color="@color/people_app_theme_color" />
         </shape>
     </item>
-
     <item>
-        <shape android:shape="rectangle">
+        <shape android:shape="rectangle" >
             <solid android:color="#27ffffff" />
         </shape>
     </item>
-
     <item>
-        <shape android:shape="rectangle">
+        <shape android:shape="rectangle" >
             <solid android:color="#00000000" />
 
             <stroke

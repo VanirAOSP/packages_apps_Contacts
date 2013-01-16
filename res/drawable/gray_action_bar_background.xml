@@ -17,7 +17,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_pressed="true"
-        android:drawable="@drawable/ab_solid_custom_blue_inverse_holo" />
-    <item
-        android:drawable="@drawable/ab_stacked_solid_inverse_holo" />
+        android:drawable="@drawable/ab_solid_custom_blue_inverse_holo"/>
+    <item android:drawable="@drawable/ab_stacked_solid_inverse_holo" />
 </selector>

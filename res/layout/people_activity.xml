@@ -14,8 +14,7 @@
      limitations under the License.
 -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -30,14 +29,14 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/tab_pager"
         android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        />
 
     <FrameLayout
         android:id="@+id/contacts_unavailable_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
-
         <FrameLayout
             android:id="@+id/contacts_unavailable_container"
             android:layout_height="match_parent"

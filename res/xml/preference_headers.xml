@@ -20,4 +20,5 @@
     <header
         android:fragment="com.android.contacts.preference.DisplayOptionsPreferenceFragment"
         android:title="@string/preference_displayOptions" />
+
 </preference-headers>
