@@ -1903,6 +1903,7 @@ connection to the voicemail server is lost. [CHAR LIMIT=64] -->
          Middle Name, Last Name, Name Suffix).
          [CHAR LIMIT=NONE] -->
     <string name="expand_collapse_name_fields_description">Expand or collapse name fields</string>
+
     <string name="call_stats_nav_all">All</string>
     <string name="call_stats_nav_incoming">Incoming</string>
     <string name="call_stats_nav_outgoing">Outgoing</string>
@@ -1966,5 +1967,8 @@ connection to the voicemail server is lost. [CHAR LIMIT=64] -->
         <item quantity="one">1 call</item>
         <item quantity="other">%d calls</item>
     </plurals>
+
+    <string name="menu_add_to_blacklist">Add to blacklist</string>
+    <string name="toast_added_to_blacklist">%s added to blacklist.</string>
 
 </resources>
