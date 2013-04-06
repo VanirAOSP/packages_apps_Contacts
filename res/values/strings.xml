@@ -668,4 +668,8 @@
     <!-- Hide frequently contacted list summary -->
     <string name="display_options_hide_frequent_summary">Hides frequently contacted list</string>
 
+    <string name="menu_add_to_blacklist">Add to blacklist</string>
+    <string name="toast_added_to_blacklist">%s added to blacklist.</string>
+
+    <!-- CYANOGENMOD ADDITIONS END -->
 </resources>
