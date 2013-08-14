@@ -530,13 +530,20 @@ public class AllIntentsActivity extends ListActivity
 
     /** Returns the URI of one of the items in the call log, or null if the call log is empty. */
     private Uri getCallLogUri() {
-        Cursor cursor = getContentResolver().query(
+        Cursor cursor = null;
+        try {
+            cursor = getContentResolver().query(
                 Calls.CONTENT_URI, new String[]{ Calls._ID }, null, null,
                 Calls.DEFAULT_SORT_ORDER);
-        if (!cursor.moveToNext()) {
-            return null;
+            if (!cursor.moveToNext()) {
+                return null;
+            }
+            return ContentUris.withAppendedId(Calls.CONTENT_URI, cursor.getLong(0));
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
-        return ContentUris.withAppendedId(Calls.CONTENT_URI, cursor.getLong(0));
     }
 
     /** Creates an intent that is bound to a specific activity by name. */

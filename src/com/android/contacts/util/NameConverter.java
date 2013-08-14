@@ -15,7 +15,6 @@
  */
 package com.android.contacts.util;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -88,16 +87,19 @@ public class NameConverter {
      */
     private static String fetchDisplayName(Context context, Uri uri) {
         String displayName = null;
-        Cursor cursor = context.getContentResolver().query(uri, new String[]{
+        Cursor cursor = null;
+        try {
+            cursor = context.getContentResolver().query(uri, new String[]{
                 StructuredName.DISPLAY_NAME,
         }, null, null, null);
 
-        try {
             if (cursor.moveToFirst()) {
                 displayName = cursor.getString(0);
             }
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
         return displayName;
     }
@@ -118,17 +120,20 @@ public class NameConverter {
         Builder builder = ContactsContract.AUTHORITY_URI.buildUpon().appendPath("complete_name");
 
         appendQueryParameter(builder, StructuredName.DISPLAY_NAME, displayName);
-        Cursor cursor = context.getContentResolver().query(builder.build(), STRUCTURED_NAME_FIELDS,
+        Cursor cursor = null;
+        try {
+            cursor = context.getContentResolver().query(builder.build(), STRUCTURED_NAME_FIELDS,
                 null, null, null);
 
-        try {
             if (cursor.moveToFirst()) {
                 for (int i = 0; i < STRUCTURED_NAME_FIELDS.length; i++) {
                     structuredName.put(STRUCTURED_NAME_FIELDS[i], cursor.getString(i));
                 }
             }
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
         return structuredName;
     }

@@ -353,15 +353,15 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
 
     private Contact loadContactEntity(ContentResolver resolver, Uri contactUri) {
         Uri entityUri = Uri.withAppendedPath(contactUri, Contacts.Entity.CONTENT_DIRECTORY);
-        Cursor cursor = resolver.query(entityUri, ContactQuery.COLUMNS, null, null,
-                Contacts.Entity.RAW_CONTACT_ID);
-        if (cursor == null) {
-            Log.e(TAG, "No cursor returned in loadContactEntity");
-            return Contact.forNotFound(mRequestedUri);
-        }
-
+        Cursor cursor = null;
         try {
-            if (!cursor.moveToFirst()) {
+            cursor = resolver.query(entityUri, ContactQuery.COLUMNS, null, null,
+                Contacts.Entity.RAW_CONTACT_ID);
+            if (cursor == null) {
+                Log.e(TAG, "No cursor returned in loadContactEntity");
+                return Contact.forNotFound(mRequestedUri);
+            }
+            if (!cursor.moveToFirst() && (cursor != null)) {
                 cursor.close();
                 return Contact.forNotFound(mRequestedUri);
             }
@@ -404,7 +404,9 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
 
             return contact;
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
     }
 
@@ -618,13 +620,15 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     private void loadDirectoryMetaData(Contact result) {
         long directoryId = result.getDirectoryId();
 
-        Cursor cursor = getContext().getContentResolver().query(
+        Cursor cursor = null;
+        try {
+            cursor = getContext().getContentResolver().query(
                 ContentUris.withAppendedId(Directory.CONTENT_URI, directoryId),
                 DirectoryQuery.COLUMNS, null, null, null);
-        if (cursor == null) {
-            return;
-        }
-        try {
+            if (cursor == null) {
+                return;
+            }
+
             if (cursor.moveToFirst()) {
                 final String displayName = cursor.getString(DirectoryQuery.DISPLAY_NAME);
                 final String packageName = cursor.getString(DirectoryQuery.PACKAGE_NAME);
@@ -648,7 +652,9 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
                         displayName, directoryType, accountType, accountName, exportSupport);
             }
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
     }
 
