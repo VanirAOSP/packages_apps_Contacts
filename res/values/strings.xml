@@ -671,5 +671,7 @@
     <string name="menu_add_to_blacklist">Add to blacklist</string>
     <string name="toast_added_to_blacklist">%s added to blacklist.</string>
 
-    <!-- CYANOGENMOD ADDITIONS END -->
+    <string name="recentCalls_trashVoicemail">Delete voicemail</string>
+    <string name="recentCalls_removeFromRecentList">Remove from call log</string>
+    <string name="recentCalls_editNumberBeforeCall">Edit number before call</string>
 </resources>
