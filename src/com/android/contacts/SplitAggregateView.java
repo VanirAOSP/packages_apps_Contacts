@@ -155,10 +155,9 @@ public class SplitAggregateView extends ListView {
     private List<RawContactInfo> loadData() {
         HashMap<Long, RawContactInfo> rawContactInfos = new HashMap<Long, RawContactInfo>();
         Uri dataUri = Uri.withAppendedPath(mAggregateUri, Data.CONTENT_DIRECTORY);
-        Cursor cursor = null;
-        try {
-                cursor = getContext().getContentResolver().query(dataUri,
+        Cursor cursor = getContext().getContentResolver().query(dataUri,
                 SplitQuery.COLUMNS, null, null, null);
+        try {
             while (cursor.moveToNext()) {
                 long rawContactId = cursor.getLong(SplitQuery.RAW_CONTACT_ID);
                 RawContactInfo info = rawContactInfos.get(rawContactId);
@@ -181,9 +180,7 @@ public class SplitAggregateView extends ListView {
                 }
             }
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+            cursor.close();
         }
 
         List<RawContactInfo> list = new ArrayList<RawContactInfo>(rawContactInfos.values());
@@ -213,7 +210,7 @@ public class SplitAggregateView extends ListView {
         }
     }
 
-    private static class SplitAggregateItemCache {
+    private static class SplitAggregateItemCache  {
         TextView name;
         TextView additionalData;
         ImageView sourceIcon;

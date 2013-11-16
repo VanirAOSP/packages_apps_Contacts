@@ -226,9 +226,8 @@ public class ProviderStatusWatcher extends ContentObserver {
     private class LoaderTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-            Cursor cursor = null;
             try {
-                cursor = mContext.getContentResolver().query(ProviderStatus.CONTENT_URI,
+                Cursor cursor = mContext.getContentResolver().query(ProviderStatus.CONTENT_URI,
                         PROJECTION, null, null, null);
                 if (cursor != null) {
                     try {
@@ -240,9 +239,7 @@ public class ProviderStatusWatcher extends ContentObserver {
                             return true;
                         }
                     } finally {
-                        if (cursor != null) {
-                            cursor.close();
-                        }
+                        cursor.close();
                     }
                 }
                 return false;

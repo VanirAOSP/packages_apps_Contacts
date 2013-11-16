@@ -196,21 +196,20 @@ public class SuggestedMemberListAdapter extends ArrayAdapter<SuggestedMember> {
                 };
             }
 
-            Cursor cursor = null;
-            try {
-                    cursor = mContentResolver.query(
+            Cursor cursor = mContentResolver.query(
                     RawContacts.CONTENT_URI, PROJECTION_FILTERED_MEMBERS,
                     accountClause + " AND (" +
                     RawContacts.DISPLAY_NAME_PRIMARY + " LIKE ? OR " +
                     RawContacts.DISPLAY_NAME_ALTERNATIVE + " LIKE ? )",
                     args, RawContacts.DISPLAY_NAME_PRIMARY + " COLLATE LOCALIZED ASC");
 
-                if (cursor == null) {
-                    return results;
-                }
+            if (cursor == null) {
+                return results;
+            }
 
             // Read back the results from the cursor and filter out existing group members.
             // For valid suggestions, add them to the hash map of suggested members.
+            try {
                 cursor.moveToPosition(-1);
                 while (cursor.moveToNext() && suggestionsMap.keySet().size() < SUGGESTIONS_LIMIT) {
                     long rawContactId = cursor.getLong(RAW_CONTACT_ID_COLUMN_INDEX);
@@ -228,9 +227,7 @@ public class SuggestedMemberListAdapter extends ArrayAdapter<SuggestedMember> {
                     suggestionsMap.put(rawContactId, member);
                 }
             } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
+                cursor.close();
             }
 
             int numSuggestions = suggestionsMap.keySet().size();
@@ -260,14 +257,13 @@ public class SuggestedMemberListAdapter extends ArrayAdapter<SuggestedMember> {
 
             // Perform a second query to retrieve a photo and possibly a phone number or email
             // address for the suggested contact
-            Cursor memberDataCursor = null;
-            try {
-                    memberDataCursor = mContentResolver.query(
+            Cursor memberDataCursor = mContentResolver.query(
                     RawContactsEntity.CONTENT_URI, PROJECTION_MEMBER_DATA,
                     "(" + Data.MIMETYPE + "=? OR " + Data.MIMETYPE + "=? OR " + Data.MIMETYPE +
                     "=?) AND " + rawContactIdSelectionBuilder.toString(),
                     selectionArgs.toArray(new String[0]), null);
 
+            try {
                 memberDataCursor.moveToPosition(-1);
                 while (memberDataCursor.moveToNext()) {
                     long rawContactId = memberDataCursor.getLong(RAW_CONTACT_ID_COLUMN_INDEX);
@@ -291,9 +287,7 @@ public class SuggestedMemberListAdapter extends ArrayAdapter<SuggestedMember> {
                     }
                 }
             } finally {
-                if (memberDataCursor != null) {
-                    memberDataCursor.close();
-                }
+                memberDataCursor.close();
             }
             results.values = suggestionsList;
             return results;

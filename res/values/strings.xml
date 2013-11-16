@@ -661,14 +661,4 @@
 
     <!-- Description when picture in the contact detail view is selected. [CHAR LIMIT=NONE] -->
     <string name="contact_detail_picture_description">Picture. Select to change</string>
-
-    <!-- Hide frequently contacted list -->
-    <string name="display_options_hide_frequent">Hide frequently contacted</string>
-
-    <!-- Hide frequently contacted list summary -->
-    <string name="display_options_hide_frequent_summary">Hides frequently contacted list</string>
-
-    <string name="recentCalls_trashVoicemail">Delete voicemail</string>
-    <string name="recentCalls_removeFromRecentList">Remove from call log</string>
-    <string name="recentCalls_editNumberBeforeCall">Edit number before call</string>
 </resources>

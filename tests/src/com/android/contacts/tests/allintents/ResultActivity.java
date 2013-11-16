@@ -103,13 +103,11 @@ public class ResultActivity extends Activity {
     }
 
     private void addRowsForQuery(Uri dataUri) {
-        Cursor cursor = null;
-        try {
-            cursor = getContentResolver().query(dataUri, null, null, null, null);
-            if (cursor == null) {
-                addRow("", "No data for this URI");
-            } else {
-
+        Cursor cursor = getContentResolver().query(dataUri, null, null, null, null);
+        if (cursor == null) {
+            addRow("", "No data for this URI");
+        } else {
+            try {
                 while (cursor.moveToNext()) {
                     addRow("", "DATA");
                     String[] columnNames = cursor.getColumnNames();
@@ -127,9 +125,8 @@ public class ResultActivity extends Activity {
                     }
                 }
             } finally {
-                if (cursor != null)
-                    cursor.close();
-                }
+                cursor.close();
+            }
         }
     }
 
@@ -145,11 +142,10 @@ public class ResultActivity extends Activity {
 
     private void addRowWithPhoto(long photoId) {
         byte[] data = null;
-        Cursor cursor = null;
-        try {
-            cursor = getContentResolver().query(
+        Cursor cursor = getContentResolver().query(
                 ContentUris.withAppendedId(Data.CONTENT_URI, photoId),
                 new String[]{Photo.PHOTO}, null, null, null);
+        try {
             if (cursor.moveToNext()) {
                 data = cursor.getBlob(0);
             }

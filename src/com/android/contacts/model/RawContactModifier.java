@@ -626,9 +626,7 @@ public class RawContactModifier {
                         .appendPath("complete_name")
                         .appendQueryParameter(StructuredName.DISPLAY_NAME, name)
                         .build();
-                Cursor cursor = null;
-                try {
-                    cursor = context.getContentResolver().query(uri,
+                Cursor cursor = context.getContentResolver().query(uri,
                         new String[]{
                                 StructuredName.PREFIX,
                                 StructuredName.GIVEN_NAME,
@@ -637,6 +635,7 @@ public class RawContactModifier {
                                 StructuredName.SUFFIX,
                         }, null, null, null);
 
+                try {
                     if (cursor.moveToFirst()) {
                         child.put(StructuredName.PREFIX, cursor.getString(0));
                         child.put(StructuredName.GIVEN_NAME, cursor.getString(1));
@@ -645,9 +644,7 @@ public class RawContactModifier {
                         child.put(StructuredName.SUFFIX, cursor.getString(4));
                     }
                 } finally {
-                    if (cursor != null) {
-                        cursor.close();
-                    }
+                    cursor.close();
                 }
             }
         }
