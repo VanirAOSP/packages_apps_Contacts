@@ -20,11 +20,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
+import android.provider.ContactsContract.CommonDataKinds.LocalGroup;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
-import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -41,11 +44,15 @@ import android.widget.TextView;
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.R;
 import com.android.contacts.common.model.account.AccountType;
+import com.android.contacts.common.model.account.PhoneAccountType;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.model.RawContactDelta;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.RawContactModifier;
+import com.android.contacts.common.SimContactsConstants;
 import com.google.common.base.Objects;
 
 import java.util.ArrayList;
@@ -66,6 +73,9 @@ public class RawContactEditorView extends BaseRawContactEditorView {
     private static final String KEY_SUPER_INSTANCE_STATE = "superInstanceState";
 
     private LayoutInflater mInflater;
+    private static Context mContext;
+    // Used to limit length of name to avoid OutOfMemory.
+    private static final int NAME_LENGTH_LIMIT = 512;
 
     private StructuredNameEditorView mName;
     private PhoneticNameEditorView mPhoneticName;
@@ -94,10 +104,12 @@ public class RawContactEditorView extends BaseRawContactEditorView {
 
     public RawContactEditorView(Context context) {
         super(context);
+        mContext = context;
     }
 
     public RawContactEditorView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
     }
 
     @Override
@@ -194,6 +206,8 @@ public class RawContactEditorView extends BaseRawContactEditorView {
         return;
     }
 
+    private static boolean isMyLocalProfile = false;
+
     /**
      * Set the internal state for this view, given a current
      * {@link RawContactDelta} state and the {@link AccountType} that
@@ -204,6 +218,7 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             boolean isProfile) {
 
         mState = state;
+        isMyLocalProfile = isProfile;
 
         // Remove any existing sections
         mFields.removeAllViews();
@@ -233,11 +248,13 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             }
         } else {
             String accountName = state.getAccountName();
-            CharSequence accountType = type.getDisplayLabel(mContext);
+            String account = state.getAccountType();
+            CharSequence accountType = type.getDisplayLabel(mContext, accountName);
             if (TextUtils.isEmpty(accountType)) {
                 accountType = mContext.getString(R.string.account_phone);
             }
-            if (!TextUtils.isEmpty(accountName)) {
+            if (!TextUtils.isEmpty(accountName) && !SimAccountType.ACCOUNT_TYPE.equals(account)
+                    && !PhoneAccountType.ACCOUNT_TYPE.equals(account)) {
                 mAccountNameTextView.setVisibility(View.VISIBLE);
                 mAccountNameTextView.setText(
                         mContext.getString(R.string.from_account_format, accountName));
@@ -271,6 +288,34 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             mGroupMembershipView.setEnabled(isEnabled());
         }
 
+        if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(type.accountType)) {
+            String accountName = state.getAccountName();
+            int sub = SimContactsConstants.SUB_1;
+            if (SimContactsConstants.SIM_NAME_2.equals(accountName)) {
+                sub = SimContactsConstants.SUB_2;
+            }
+            if (!MoreContactUtils.canSaveAnr(sub)) {
+                for (ValuesDelta entry : mState
+                        .getMimeEntries(Phone.CONTENT_ITEM_TYPE)) {
+                    if (Phone.TYPE_HOME == entry.getAsLong(Phone.TYPE)) {
+                        mState.getMimeEntries(Phone.CONTENT_ITEM_TYPE).remove(
+                            entry);
+                        break;
+                    }
+                }
+            }
+
+            if(!MoreContactUtils.canSaveEmail(sub)){
+                ArrayList<ValuesDelta> temp = mState
+                    .getMimeEntries(Email.CONTENT_ITEM_TYPE);
+                if (temp != null) {
+                    mState.getMimeEntries(Email.CONTENT_ITEM_TYPE).clear();
+                }
+            }
+
+            //sim card can't store expand fields,so set it disabled.
+            mName.setExpansionViewContainerDisabled();
+        }
         // Create editor sections for each possible data kind
         for (DataKind kind : type.getSortedDataKinds()) {
             // Skip kind of not editable
@@ -280,12 +325,18 @@ public class RawContactEditorView extends BaseRawContactEditorView {
             if (StructuredName.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 // Handle special case editor for structured name
                 final ValuesDelta primary = state.getPrimaryEntry(mimeType);
-                mName.setValues(
-                        type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_DISPLAY_NAME),
-                        primary, state, false, vig);
-                mPhoneticName.setValues(
+                DataKind dataKind = type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_DISPLAY_NAME);
+                // Limit the length of EditText to avoid OOM.
+                dataKind.maxLength = NAME_LENGTH_LIMIT;
+                mName.setValues(dataKind, primary, state, false, vig);
+                if (!(SimContactsConstants.ACCOUNT_TYPE_SIM).equals(type.accountType)) {
+                    mPhoneticName.setValues(
                         type.getKindForMimetype(DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME),
                         primary, state, false, vig);
+                }
+                else {
+                    mPhoneticName.setVisibility(View.GONE);
+                }
             } else if (Photo.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 // Handle special case editor for photos
                 final ValuesDelta primary = state.getPrimaryEntry(mimeType);
@@ -294,6 +345,55 @@ public class RawContactEditorView extends BaseRawContactEditorView {
                 if (mGroupMembershipView != null) {
                     mGroupMembershipView.setState(state);
                 }
+            } else if (Email.CONTENT_ITEM_TYPE.equals(mimeType) && kind.fieldList != null) {
+                final KindSectionView section = (KindSectionView)mInflater.inflate(
+                    R.layout.item_kind_section, mFields, false);
+                section.setEnabled(isEnabled());
+                section.setState(kind, state, false, vig);
+                mFields.addView(section);
+                if (SimContactsConstants.ACCOUNT_TYPE_SIM.equals(type.accountType) ) {
+                    String accountName = state.getAccountName();
+                    int sub = SimContactsConstants.SUB_1;
+                    if (SimContactsConstants.SIM_NAME_2.equals(accountName)) {
+                        sub = SimContactsConstants.SUB_2;
+                    }
+                    if (!MoreContactUtils.canSaveEmail(sub)) {
+                       mFields.removeView(section);
+                    } else {
+                        kind.typeOverallMax = MoreContactUtils.getOneSimEmailCount(sub);
+                    }
+                }
+            } else if (Phone.CONTENT_ITEM_TYPE.equals(mimeType) && kind.fieldList != null) {
+                final KindSectionView section = (KindSectionView)mInflater.inflate(
+                    R.layout.item_kind_section, mFields, false);
+                if (SimContactsConstants.ACCOUNT_TYPE_SIM
+                        .equals(type.accountType)) {
+                    String accountName = state.getAccountName();
+                    int sub = SimContactsConstants.SUB_1;
+                    if (SimContactsConstants.SIM_NAME_2.equals(accountName)) {
+                        sub = SimContactsConstants.SUB_2;
+                    }
+                    EditType typeHome = new EditType(Phone.TYPE_HOME,
+                        Phone.getTypeLabelResource(Phone.TYPE_HOME));
+                    if (!MoreContactUtils.canSaveAnr(sub)) {
+                        kind.typeOverallMax = 1;
+                        if (null != kind.typeList) {
+                            // When the sim card is not 3g the interface should
+                            // remove the TYPE_HOME number view.
+                            kind.typeList.remove(typeHome);
+                        }
+                    } else {
+                        kind.typeOverallMax = MoreContactUtils.getOneSimAnrCount(sub) +1;
+                        if (null != kind.typeList && !kind.typeList.contains(typeHome)) {
+                            // When the sim card is 3g the interface should
+                            // add the TYPE_HOME number view.
+                            kind.typeList.add(typeHome);
+                        }
+                    }
+                }
+                section.setEnabled(isEnabled());
+                section.setState(kind, state, false, vig);
+                mFields.addView(section);
             } else if (Organization.CONTENT_ITEM_TYPE.equals(mimeType)) {
                 // Create the organization section
                 final KindSectionView section = (KindSectionView) mInflater.inflate(
@@ -339,8 +439,6 @@ public class RawContactEditorView extends BaseRawContactEditorView {
         if (mGroupMembershipView != null) {
             mFields.addView(mGroupMembershipView);
         }
-
-        updatePhoneticNameVisibility();
 
         addToDefaultGroupIfNeeded();
 
@@ -475,6 +573,10 @@ public class RawContactEditorView extends BaseRawContactEditorView {
 
                 if (DataKind.PSEUDO_MIME_TYPE_PHONETIC_NAME.equals(kind.mimeType)
                         && mPhoneticName.getVisibility() == View.VISIBLE) {
+                    continue;
+                }
+
+                if (isMyLocalProfile && LocalGroup.CONTENT_ITEM_TYPE.equals(kind.mimeType)) {
                     continue;
                 }
 

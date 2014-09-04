@@ -51,6 +51,7 @@ public class ContactEditorAccountsChangedActivity extends Activity {
 
     private static final int SUBACTIVITY_ADD_NEW_ACCOUNT = 1;
 
+    private ListView mAccountListView;
     private AccountsListAdapter mAccountListAdapter;
     private ContactEditorUtils mEditorUtils;
 
@@ -96,11 +97,11 @@ public class ContactEditorAccountsChangedActivity extends Activity {
             button.setText(getString(R.string.add_new_account));
             button.setOnClickListener(mAddAccountClickListener);
 
-            final ListView accountListView = (ListView) findViewById(R.id.account_list);
+            mAccountListView = (ListView) findViewById(R.id.account_list);
             mAccountListAdapter = new AccountsListAdapter(this,
                     AccountListFilter.ACCOUNTS_CONTACT_WRITABLE);
-            accountListView.setAdapter(mAccountListAdapter);
-            accountListView.setOnItemClickListener(mAccountListItemClickListener);
+            mAccountListView.setAdapter(mAccountListAdapter);
+            mAccountListView.setOnItemClickListener(mAccountListItemClickListener);
         } else {
             // If the user has 0 writable accounts, we will just show the user a message with 2
             // possible action buttons.
@@ -139,6 +140,12 @@ public class ContactEditorAccountsChangedActivity extends Activity {
             // If the user canceled the account setup process, then keep this activity visible to
             // the user.
             if (resultCode != RESULT_OK) {
+                // refresh the account list when come back
+                if (mAccountListView != null) {
+                    mAccountListAdapter = new AccountsListAdapter(this,
+                            AccountListFilter.ACCOUNTS_CONTACT_WRITABLE);
+                    mAccountListView.setAdapter(mAccountListAdapter);
+                }
                 return;
             }
             // Subactivity was successful, so pass the result back and finish the activity.

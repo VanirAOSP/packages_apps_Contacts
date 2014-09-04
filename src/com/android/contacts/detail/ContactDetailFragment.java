@@ -30,14 +30,18 @@ import android.os.Parcelable;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
 import android.provider.ContactsContract.CommonDataKinds.Im;
+import android.provider.ContactsContract.CommonDataKinds.LocalGroup;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.StatusUpdates;
+import android.provider.LocalGroups.Group;
+import android.telephony.MSimTelephonyManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -84,6 +88,7 @@ import com.android.contacts.common.model.ValuesDelta;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+import com.android.contacts.common.model.account.SimAccountType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.util.AccountsListAdapter.AccountListFilter;
 import com.android.contacts.common.util.ContactDisplayUtils;
@@ -111,6 +116,8 @@ import com.android.contacts.common.model.dataitem.WebsiteDataItem;
 import com.android.contacts.util.PhoneCapabilityTester;
 import com.android.contacts.util.StructuredPostalUtils;
 import com.android.contacts.util.UiClosables;
+import com.android.internal.telephony.MSimConstants;
+import com.android.internal.telephony.PhoneConstants;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -122,6 +129,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import android.os.SystemProperties;
 
 public class ContactDetailFragment extends Fragment implements FragmentKeyListener,
         SelectAccountDialogFragment.Listener, OnItemClickListener {
@@ -130,14 +138,21 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
 
     private static final int TEXT_DIRECTION_UNDEFINED = -1;
 
+    private static final boolean HIDE_VTCALL_BTN = true;
+
     private interface ContextMenuIds {
         static final int COPY_TEXT = 0;
         static final int CLEAR_DEFAULT = 1;
         static final int SET_DEFAULT = 2;
+        static final int EDIT_BEFORE_CALL = 3;
+        static final int IPCALL1 = 4;
+        static final int IPCALL2 = 5; // add for new feature: ip call prefix
+        static final int VIDEOCALL = 6;  // add for new feature: csvt call prefix
     }
 
     private static final String KEY_CONTACT_URI = "contactUri";
     private static final String KEY_LIST_STATE = "liststate";
+    private static final int MAX_NUM_LENGTH = 3; // add limit length to show IP call item
 
     private Context mContext;
     private View mView;
@@ -193,6 +208,7 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
     private ArrayList<DetailViewEntry> mWebsiteEntries = new ArrayList<DetailViewEntry>();
     private ArrayList<DetailViewEntry> mSipEntries = new ArrayList<DetailViewEntry>();
     private ArrayList<DetailViewEntry> mEventEntries = new ArrayList<DetailViewEntry>();
+    private ArrayList<DetailViewEntry> mLocalGroupEntries = new ArrayList<DetailViewEntry>();
     private final Map<AccountType, List<DetailViewEntry>> mOtherEntriesMap =
             new HashMap<AccountType, List<DetailViewEntry>>();
     private ArrayList<ViewEntry> mAllEntries = new ArrayList<ViewEntry>();
@@ -264,6 +280,9 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
     @Override
     public void onResume() {
         super.onResume();
+        if (mContactData != null) {
+            bindData();
+        }
     }
 
     @Override
@@ -575,15 +594,23 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                         }
                     }
 
+                    //add for csvt
+                    final Intent vtIntent = getVTCallIntent(phone.getNumber());
+
                     // Configure Icons and Intents.
-                    if (hasPhone && hasSms) {
+                    if (hasPhone) {
                         entry.intent = phoneIntent;
-                        entry.secondaryIntent = smsIntent;
-                        entry.secondaryActionIcon = kind.iconAltRes;
-                        entry.secondaryActionDescription =
-                            ContactDisplayUtils.getSmsLabelResourceId(entry.type);
-                    } else if (hasPhone) {
-                        entry.intent = phoneIntent;
+                        //add for csvt
+                        entry.thirdIntent = vtIntent;
+                        entry.thirdActionIcon =
+                            R.drawable.ic_contact_quick_contact_call_video;
+                        entry.thirdActionDescription = R.string.description_videocall;
+                        if(hasSms){
+                            entry.secondaryIntent = smsIntent;
+                            entry.secondaryActionIcon = kind.iconAltRes;
+                            entry.secondaryActionDescription =
+                                ContactDisplayUtils.getSmsLabelResourceId(entry.type);
+                        }
                     } else if (hasSms) {
                         entry.intent = smsIntent;
                     } else {
@@ -712,6 +739,14 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                     entry.intent.putExtra(SearchManager.QUERY, entry.data);
                     entry.intent.setType(Contacts.CONTENT_TYPE);
                     mRelationEntries.add(entry);
+                } else if (LocalGroup.CONTENT_ITEM_TYPE.equals(dataItem.getMimeType()) && hasData) {
+                    Uri data = ContentUris.withAppendedId(LocalGroup.CONTENT_URI,
+                        +Long.parseLong(entry.data));
+                    Intent intent = new Intent(Intent.ACTION_EDIT, data);
+                    intent.putExtra("data", data);
+                    intent.setType(LocalGroup.CONTENT_ITEM_TYPE);
+                    entry.intent = intent;
+                    mLocalGroupEntries.add(entry);
                 } else {
                     // Handle showing custom rows
                     entry.intent = new Intent(Intent.ACTION_VIEW);
@@ -779,6 +814,7 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         flattenList(mGroupEntries);
         flattenList(mRelationEntries);
         flattenList(mNoteEntries);
+        flattenList(mLocalGroupEntries);
     }
 
     /**
@@ -1214,9 +1250,13 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         public Context context = null;
         public boolean isPrimary = false;
         public int secondaryActionIcon = -1;
+        public int thirdActionIcon = -1;
         public int secondaryActionDescription = -1;
+        public int thirdActionDescription = -1;
         public Intent intent;
         public Intent secondaryIntent = null;
+        public Intent thirdIntent = null;
+
         public ArrayList<Long> ids = new ArrayList<Long>();
         public int collapseCount = 0;
 
@@ -1439,16 +1479,20 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         public final TextView data;
         public final ImageView presenceIcon;
         public final ImageView secondaryActionButton;
+        public final ImageView thirdActionButton;
         public final View actionsViewContainer;
         public final View primaryActionView;
         public final View secondaryActionViewContainer;
+        public final View thirdActionViewContainer;
         public final View secondaryActionDivider;
+        public final View thirdActionDivider;
         public final View primaryIndicator;
         public final View securityIndicator;
 
         public DetailViewCache(View view,
                 OnClickListener primaryActionClickListener,
-                OnClickListener secondaryActionClickListener) {
+                OnClickListener secondaryActionClickListener,
+                OnClickListener thirdActionClickListener) {
             type = (TextView) view.findViewById(R.id.type);
             data = (TextView) view.findViewById(R.id.data);
             primaryIndicator = view.findViewById(R.id.primary_indicator);
@@ -1467,6 +1511,13 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                     R.id.secondary_action_button);
 
             secondaryActionDivider = view.findViewById(R.id.vertical_divider);
+
+            thirdActionViewContainer = view.findViewById(R.id.third_action_view_container);
+            thirdActionViewContainer.setOnClickListener(thirdActionClickListener);
+            thirdActionButton = (ImageView) view.findViewById(R.id.third_action_button);
+
+            thirdActionDivider = view.findViewById(R.id.vertical_divider_1);
+
         }
     }
 
@@ -1533,7 +1584,11 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 final OnClickListener listener = mPhotoSetter.setupContactPhotoForClick(
                         mContext, mContactData, viewCache.photoView, expandOnClick);
 
-                if (expandOnClick || mContactData.isWritableContact(mContext)) {
+                RawContact rawContact = mContactData.getRawContacts().get(0);
+                final String accountType = rawContact.getAccountTypeString();
+
+                if ((expandOnClick || mContactData.isWritableContact(mContext))
+                        && !(SimAccountType.ACCOUNT_TYPE.equals(accountType))) {
                     viewCache.enablePhotoOverlay(listener);
                 }
             }
@@ -1663,8 +1718,14 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 v = mInflater.inflate(R.layout.contact_detail_list_item, parent, false);
 
                 // Cache the children
-                viewCache = new DetailViewCache(v,
-                        mPrimaryActionClickListener, mSecondaryActionClickListener);
+                if (MSimTelephonyManager.getDefault().isMultiSimEnabled()
+                        && Phone.CONTENT_ITEM_TYPE.equals(entry.mimetype)) {
+                    viewCache = new DetailViewCache(v, null, mSecondaryActionClickListener,
+                            mThirdActionClickListener);
+                } else {
+                    viewCache = new DetailViewCache(v, mPrimaryActionClickListener,
+                            mSecondaryActionClickListener, mThirdActionClickListener);
+                }
                 v.setTag(viewCache);
             }
 
@@ -1682,8 +1743,16 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
             } else {
                 views.type.setVisibility(View.GONE);
             }
+            if (LocalGroup.CONTENT_ITEM_TYPE.equals(entry.mimetype)) {
+                Group group = Group.restoreGroupById(view.getContext().getContentResolver(),
+                        Long.parseLong(entry.data));
+                if (group != null) {
+                    views.data.setText(group.getTitle());
+                }
+            } else {
+                views.data.setText(entry.data);
+            }
 
-            views.data.setText(entry.data);
             setMaxLines(views.data, entry.maxLines);
 
             // Gray out the data item if it does not perform an action when clicked
@@ -1752,6 +1821,29 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 views.secondaryActionDivider.setVisibility(View.GONE);
             }
 
+            // Set the third action button
+            final ImageView thirdActionView = views.thirdActionButton;
+            Drawable thirdActionIcon = null;
+            String thirdActionDescription = null;
+            if (entry.thirdActionIcon != -1) {
+                    thirdActionIcon = resources
+                            .getDrawable(entry.thirdActionIcon);
+                thirdActionDescription = resources.getString(entry.thirdActionDescription);
+            }
+
+            final View thirdActionViewContainer = views.thirdActionViewContainer;
+            if (!HIDE_VTCALL_BTN && entry.thirdIntent != null && thirdActionIcon != null
+                    && isVTSupported()) {
+                thirdActionView.setImageDrawable(thirdActionIcon);
+                thirdActionView.setContentDescription(thirdActionDescription);
+                thirdActionViewContainer.setTag(entry);
+                thirdActionViewContainer.setVisibility(View.VISIBLE);
+                views.thirdActionDivider.setVisibility(View.VISIBLE);
+            } else {
+                thirdActionViewContainer.setVisibility(View.GONE);
+                views.thirdActionDivider.setVisibility(View.GONE);
+            }
+
             // Right and left padding should not have "pressed" effect.
             view.setPadding(
                     entry.isInSubSection()
@@ -1770,6 +1862,12 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                     mViewEntryDimensions.getPaddingTop(),
                     secondaryActionViewContainer.getPaddingRight(),
                     mViewEntryDimensions.getPaddingBottom());
+            thirdActionViewContainer.setPadding(
+                    thirdActionViewContainer.getPaddingLeft(),
+                    mViewEntryDimensions.getPaddingTop(),
+                    thirdActionViewContainer.getPaddingRight(),
+                    mViewEntryDimensions.getPaddingBottom());
+
 
             // Set the text direction
             if (entry.textDirection != TEXT_DIRECTION_UNDEFINED) {
@@ -1807,6 +1905,20 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 if (entry == null || !(entry instanceof DetailViewEntry)) return;
                 final DetailViewEntry detailViewEntry = (DetailViewEntry) entry;
                 final Intent intent = detailViewEntry.secondaryIntent;
+                if (intent == null) return;
+                mListener.onItemClicked(intent);
+            }
+        };
+
+        private final OnClickListener mThirdActionClickListener = new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener == null) return;
+                if (view == null) return;
+                final ViewEntry entry = (ViewEntry) view.getTag();
+                if (entry == null || !(entry instanceof DetailViewEntry)) return;
+                final DetailViewEntry detailViewEntry = (DetailViewEntry) entry;
+                final Intent intent = detailViewEntry.thirdIntent;
                 if (intent == null) return;
                 mListener.onItemClicked(intent);
             }
@@ -1890,7 +2002,20 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         AdapterView.AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         DetailViewEntry selectedEntry = (DetailViewEntry) mAllEntries.get(info.position);
 
-        menu.setHeaderTitle(selectedEntry.data);
+        // get the title instead of group id
+        if (LocalGroup.CONTENT_ITEM_TYPE.equals(selectedEntry.mimetype)) {
+            menu.setHeaderTitle(Group.restoreGroupById(this.getActivity().getContentResolver(),
+                Long.parseLong(selectedEntry.data)).getTitle());
+        } else {
+            menu.setHeaderTitle(selectedEntry.data);
+        }
+
+        if (Phone.CONTENT_ITEM_TYPE.equals(selectedEntry.mimetype)) {
+            if (isVTSupported()){
+                menu.add(ContextMenu.NONE, ContextMenuIds.VIDEOCALL,
+                    ContextMenu.NONE, getString(R.string.videocall));
+            }
+        }
         menu.add(ContextMenu.NONE, ContextMenuIds.COPY_TEXT,
                 ContextMenu.NONE, getString(R.string.copy_text));
 
@@ -1918,8 +2043,29 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         } else if (!isUniqueMimeType) {
             menu.add(ContextMenu.NONE, ContextMenuIds.SET_DEFAULT,
                     ContextMenu.NONE, getString(R.string.set_default));
+            }
+        if (Phone.CONTENT_ITEM_TYPE.equals(selectedMimeType)) {
+            // add limit length to show IP call item
+            if (selectedEntry.data.length() > MAX_NUM_LENGTH) {
+                if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB1)) {
+                    String sub1Name = MoreContactUtils.getMultiSimAliasesName(
+                            mContext, MSimConstants.SUB1);
+                    menu.add(ContextMenu.NONE, ContextMenuIds.IPCALL1, ContextMenu.NONE,
+                            mContext.getString(com.android.contacts.common.R.string
+                            .ip_call_by_slot, sub1Name));
+                }
+                if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB2)) {
+                    String sub2Name = MoreContactUtils.getMultiSimAliasesName(
+                            mContext, MSimConstants.SUB2);
+                    menu.add(ContextMenu.NONE, ContextMenuIds.IPCALL2, ContextMenu.NONE,
+                            mContext.getString(com.android.contacts.common.R.string
+                            .ip_call_by_slot, sub2Name));
+                }
+            }
+            menu.add(ContextMenu.NONE, ContextMenuIds.EDIT_BEFORE_CALL,
+                    ContextMenu.NONE, getString(R.string.edit_before_call));
         }
-    }
+     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -1940,6 +2086,18 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
                 return true;
             case ContextMenuIds.CLEAR_DEFAULT:
                 clearDefaultContactMethod(mListView.getItemIdAtPosition(menuInfo.position));
+                return true;
+            case ContextMenuIds.IPCALL1:
+                ipCallBySlot(menuInfo.position, MSimConstants.SUB1);
+                return true;
+            case ContextMenuIds.IPCALL2:
+                ipCallBySlot(menuInfo.position, MSimConstants.SUB2);
+                return true;
+            case ContextMenuIds.EDIT_BEFORE_CALL:
+                callByEdit(menuInfo.position);
+                return true;
+            case ContextMenuIds.VIDEOCALL:
+                videocall(menuInfo.position);
                 return true;
             default:
                 throw new IllegalArgumentException("Unknown menu option " + item.getItemId());
@@ -1964,8 +2122,63 @@ public class ContactDetailFragment extends Fragment implements FragmentKeyListen
         // Checking for empty string
         if (TextUtils.isEmpty(textToCopy)) return;
 
+        // get the title instead of group id
+        if (LocalGroup.CONTENT_ITEM_TYPE.equals(detailViewEntry.mimetype)) {
+            textToCopy = Group.restoreGroupById(this.getActivity().getContentResolver(),
+                Long.parseLong((String) textToCopy)).getTitle();
+        }
+
         ClipboardUtils.copyText(getActivity(), detailViewEntry.typeString, textToCopy, true);
     }
+
+    private void ipCallBySlot(int viewEntryPosition, int subscription) {
+        if (MoreContactUtils.isIPNumberExist(mContext, subscription)) {
+            DetailViewEntry detailViewEntry = (DetailViewEntry) mAllEntries.get(viewEntryPosition);
+            Intent callIntent = new Intent(detailViewEntry.intent);
+            callIntent.putExtra(PhoneConstants.IP_CALL, true);
+            callIntent.putExtra(MSimConstants.SUBSCRIPTION_KEY, subscription);
+            mContext.startActivity(callIntent);
+        } else {
+            MoreContactUtils.showNoIPNumberDialog(mContext, subscription);
+        }
+    }
+
+    private void callByEdit(int viewEntryPosition) {
+        DetailViewEntry detailViewEntry = (DetailViewEntry) mAllEntries.get(viewEntryPosition);
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", detailViewEntry.data,
+                null));
+        mContext.startActivity(intent);
+    }
+
+    //add for csvt
+    private void videocall(int viewEntryPosition) {
+        DetailViewEntry detailViewEntry = (DetailViewEntry) mAllEntries.get(viewEntryPosition);
+        mContext.startActivity(getVTCallIntent(detailViewEntry.data));
+    }
+
+    private boolean isVTSupported(){
+        return SystemProperties.getBoolean("persist.radio.csvt.enabled"
+           /* TelephonyProperties.PROPERTY_CSVT_ENABLED*/, false);
+    }
+
+    private Intent getVTCallIntent(String number) {
+        Intent intent = new Intent("com.borqs.videocall.action.LaunchVideoCallScreen");
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        intent.putExtra("IsCallOrAnswer", true); // true as a
+        // call,
+        // while
+        // false as
+        // answer
+
+        intent.putExtra("LaunchMode", 1); // nLaunchMode: 1 as
+        // telephony, while
+        // 0 as socket
+        intent.putExtra("call_number_key", number);
+        return intent;
+    }
+    //add for csvt end
 
     @Override
     public boolean handleKeyDown(int keyCode) {

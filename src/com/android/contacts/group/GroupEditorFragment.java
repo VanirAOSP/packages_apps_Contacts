@@ -312,7 +312,9 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
 
     private void selectAccountAndCreateGroup() {
         final List<AccountWithDataSet> accounts =
-                AccountTypeManager.getInstance(mContext).getAccounts(true /* writeable */);
+            AccountTypeManager.getInstance(mContext).getAccounts(true,
+                AccountTypeManager.FLAG_ALL_ACCOUNTS_WITHOUT_LOCAL);
+
         // No Accounts available
         if (accounts.isEmpty()) {
             Log.e(TAG, "No accounts were found.");
@@ -708,13 +710,18 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
 
         // Update the autocomplete adapter (if there is one) so these contacts don't get suggested
         if (mAutoCompleteAdapter != null) {
-            mAutoCompleteAdapter.updateExistingMembersList(members);
+            mAutoCompleteAdapter.updateExistingMembersList(mListToDisplay);
         }
     }
 
     private void addMember(Member member) {
-        // Update the display list
-        mListMembersToAdd.add(member);
+        // If the contact was just removed during this session, remove it from
+        // the list of members to remove
+        if (mListMembersToRemove.contains(member)) {
+            mListMembersToRemove.remove(member);
+        } else {
+            mListMembersToAdd.add(member);
+        }
         mListToDisplay.add(member);
         mMemberListAdapter.notifyDataSetChanged();
 

@@ -30,6 +30,7 @@ import com.android.contacts.common.list.ContactListAdapter;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.list.DirectoryListLoader;
+import com.android.contacts.common.list.DirectoryPartition;
 import com.android.contacts.common.list.ShortcutIntentBuilder;
 import com.android.contacts.common.list.ShortcutIntentBuilder.OnShortcutIntentCreatedListener;
 
@@ -43,6 +44,7 @@ public class ContactPickerFragment extends ContactEntryListFragment<ContactEntry
     private static final String KEY_EDIT_MODE = "editMode";
     private static final String KEY_CREATE_CONTACT_ENABLED = "createContactEnabled";
     private static final String KEY_SHORTCUT_REQUESTED = "shortcutRequested";
+    private static final String DIRECTORY_ID_ARG_KEY = "directoryId";
 
     private OnContactPickerActionListener mListener;
     private boolean mCreateContactEnabled;
@@ -153,8 +155,13 @@ public class ContactPickerFragment extends ContactEntryListFragment<ContactEntry
     protected ContactEntryListAdapter createListAdapter() {
         if (!isLegacyCompatibilityMode()) {
             DefaultContactListAdapter adapter = new DefaultContactListAdapter(getActivity());
-            adapter.setFilter(ContactListFilter.createFilterWithType(
-                    ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS));
+            if (!mCreateContactEnabled) {
+                adapter.setFilter(ContactListFilter.createFilterWithType(
+                        ContactListFilter.FILTER_TYPE_ALL_WITHOUT_SIM));
+            } else {
+                adapter.setFilter(ContactListFilter.createFilterWithType(
+                        ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS));
+            }
             adapter.setSectionHeaderDisplayEnabled(true);
             adapter.setDisplayPhotos(true);
             adapter.setQuickContactEnabled(false);
@@ -190,5 +197,17 @@ public class ContactPickerFragment extends ContactEntryListFragment<ContactEntry
     @Override
     public void onPickerResult(Intent data) {
         mListener.onPickContactAction(data.getData());
+    }
+
+    /**
+     * Loads the directory partition.
+     */
+    protected void loadDirectoryPartition(int partitionIndex, DirectoryPartition partition) {
+        Bundle args = new Bundle();
+        args.putLong(DIRECTORY_ID_ARG_KEY, partition.getDirectoryId());
+        if (getLoaderManager().getLoader(partitionIndex) != null) {
+            getLoaderManager().destroyLoader(partitionIndex);
+        }
+        getLoaderManager().restartLoader(partitionIndex, args, this);
     }
 }
