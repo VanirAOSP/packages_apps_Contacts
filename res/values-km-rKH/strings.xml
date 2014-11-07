@@ -16,7 +16,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="people" msgid="1048457247435785074">"មនុស្ស"</string>
+    <string name="applicationLabel" msgid="3906689777043645443">"ទំនាក់ទំនង"</string>
+    <string name="launcherActivityLabel" msgid="6497230399032392417">"ទំនាក់ទំនង"</string>
     <string name="contactsList" msgid="8661624236494819731">"ទំនាក់ទំនង"</string>
     <string name="shortcutContact" msgid="749243779392912958">"ទំនាក់ទំនង"</string>
     <string name="shortcutDialContact" msgid="746622101599186779">"ហៅ​ដោយ​ផ្ទាល់"</string>
@@ -25,11 +26,11 @@
     <string name="callShortcutActivityTitle" msgid="6065749861423648991">"ជ្រើស​លេខ​ដើម្បី​ហៅ"</string>
     <string name="messageShortcutActivityTitle" msgid="3084542316620335911">"ជ្រើស​លេខ​ដើម្បី​ផ្ញើ​សារ"</string>
     <string name="contactPickerActivityTitle" msgid="4301062192337417640">"ជ្រើស​ទំនាក់ទំនង"</string>
+    <string name="header_entry_contact_list_adapter_header_title" msgid="2436981165830115659">"បង្កើត​ទំនាក់ទំនង​ថ្មី"</string>
     <string name="starredList" msgid="4817256136413959463">"បាន​ដាក់​ផ្កាយ"</string>
     <string name="frequentList" msgid="7154768136473953056">"ញឹកញាប់"</string>
     <string name="strequentList" msgid="5640192862059373511">"សំណព្វ"</string>
     <string name="viewContactTitle" msgid="7989394521836644384">"ព័ត៌មាន​លម្អិត​របស់​ទំនាក់ទំនង"</string>
-    <string name="viewContactDesription" msgid="214186610887547860">"មើល​ទំនាក់ទំនង"</string>
     <string name="editContactDescription" msgid="2947202828256214947">"កែ​ទំនាក់ទំនង"</string>
     <string name="insertContactDescription" msgid="4709878105452681987">"បង្កើត​ទំនាក់ទំនង"</string>
     <string name="editGroupDescription" msgid="6321161304201540561">"កែ​ក្រុម"</string>
@@ -40,13 +41,15 @@
     <string name="menu_viewContact" msgid="2795575601596468581">"មើល​ទំនាក់ទំនង"</string>
     <string name="menu_addStar" msgid="2908478235715404876">"បន្ថែម​ទៅ​សំណព្វ"</string>
     <string name="menu_removeStar" msgid="5844227078364227030">"លុប​ចេញពី​សំណព្វ"</string>
-    <string name="menu_editContact" msgid="9042415603857662633">"កែសម្រួល"</string>
+    <string name="description_action_menu_remove_star" msgid="4699640108012265178">"បាន​លុប​ចេញ​​និយម​ប្រើ"</string>
+    <string name="description_action_menu_add_star" msgid="3327186327234177456">"បន្ថែម​ទៅ​និយម​ប្រើ"</string>
+    <string name="menu_editContact" msgid="9042415603857662633">"កែសម្រួល​"</string>
     <string name="menu_deleteContact" msgid="6788644058868189393">"លុប"</string>
     <string name="menu_create_contact_shortcut" msgid="1217971915748509640">"ដាក់​លើ​អេក្រង់​ដើម"</string>
     <string name="menu_call" msgid="3992595586042260618">"ហៅ​ទំនាក់ទំនង"</string>
     <string name="menu_sendSMS" msgid="5535886767547006515">"អត្ថបទ​ទំនាក់ទំនង"</string>
     <string name="menu_splitAggregate" msgid="8368636463748691868">"បំបែក"</string>
-    <string name="menu_editGroup" msgid="5062005185370983720">"កែសម្រួល"</string>
+    <string name="menu_editGroup" msgid="5062005185370983720">"កែសម្រួល​"</string>
     <string name="menu_deleteGroup" msgid="3486380004411482874">"លុប"</string>
     <string name="menu_new_contact_action_bar" msgid="7263362129442119188">"បន្ថែម​ទំនាក់ទំនង"</string>
     <string name="menu_new_group_action_bar" msgid="3520232877587377175">"បន្ថែម​ក្រុម"</string>
@@ -65,7 +68,7 @@
     <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"ទំនាក់ទំនង​នេះ​មាន​ព័ត៌មាន​ពី​គណនី​ច្រើន។ នឹង​លាក់​ព័ត៌មាន​ពី​គណនី​បានតែ​អាន, មិនមែន​លុប​ទេ។"</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"ការ​លុប​ទំនាក់ទំនង​នេះ​នឹង​លុប​ព័ត៌មាន​ពី​គណនី​ច្រើន​ទៀត។"</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"នឹង​លុប​ទំនាក់ទំនង​នេះ។"</string>
-    <string name="menu_discard" msgid="6456087569315685632">"បោះបង់"</string>
+    <string name="menu_discard" msgid="6854657936970228164">"បោះបង់​ការ​ផ្លាស់ប្ដូរ"</string>
     <string name="invalidContactMessage" msgid="8215051456181842274">"មិន​មាន​ទំនាក់ទំនង។"</string>
     <string name="createContactShortcutSuccessful" msgid="7874133287558150877">"បាន​បន្ថែម​ធាតុ​ក្រាហ្វិក​របស់​ទំនាក់ទំនង​ទៅ​អេក្រង់​ដើម។"</string>
     <string name="pickerNewContactHeader" msgid="7750705279843568147">"បង្កើត​ទំនាក់ទំនង​ថ្មី"</string>
@@ -95,10 +98,6 @@
     <item quantity="other" msgid="3299954047880968205">"ទំនាក់ទំនង <xliff:g id="COUNT">%d</xliff:g> ដែល​មាន​លេខ​ទូរស័ព្ទ"</item>
   </plurals>
     <string name="listTotalPhoneContactsZero" msgid="6968813857632984319">"គ្មាន​ទំនាក់ទំនង​ដែល​មាន​លេខ​ទូរស័ព្ទ"</string>
-  <plurals name="listTotalAllContacts">
-    <item quantity="one" msgid="3405747744700823280">"ទំនាក់ទំនង 1"</item>
-    <item quantity="other" msgid="3578469907265375314">"ទំនាក់ទំនង <xliff:g id="COUNT">%d</xliff:g>"</item>
-  </plurals>
   <plurals name="listFoundAllContacts">
     <item quantity="one" msgid="5517063038754171134">"បាន​រក​ឃើញ ១"</item>
     <item quantity="other" msgid="3852668542926965042">"បាន​រក​ឃើញ <xliff:g id="COUNT">%d</xliff:g>"</item>
@@ -108,8 +107,8 @@
     <item quantity="one" msgid="4826918429708286628">"បាន​រក​ឃើញ ១"</item>
     <item quantity="other" msgid="7988132539476575389">"បាន​រក​ឃើញ <xliff:g id="COUNT">%d</xliff:g>"</item>
   </plurals>
-    <string name="contactsAllLabel" msgid="6479708629170672169">"ទំនាក់ទំនង​ទាំងអស់"</string>
-    <string name="contactsGroupsLabel" msgid="2841971472518003524">"ក្រុម"</string>
+    <string name="all_contacts_tab_label" msgid="6250372293594147703">"គ្រប់ទំនាក់ទំនង"</string>
+    <string name="favorites_tab_label" msgid="1524869648904016414">"ពេញចិត្ត"</string>
     <string name="callBack" msgid="5498224409038809224">"ហៅ​ទៅវិញ"</string>
     <string name="callAgain" msgid="3197312117049874778">"ហៅ​ម្ដងទៀត"</string>
     <string name="returnCall" msgid="8171961914203617813">"ហៅ​ទៅវិញ"</string>
@@ -119,8 +118,12 @@
     <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> នៃ​ទំនាក់ទំនង <xliff:g id="TOTAL_NUMBER">%s</xliff:g>"</string>
     <string name="search_settings_description" msgid="2675223022992445813">"ឈ្មោះ​នៃ​ទំនាក់ទំនង​របស់​អ្នក"</string>
     <string name="quickcontact_missing_app" msgid="358168575340921552">"រក​មិន​ឃើញ​កម្មវិធី​សម្រាប់​សកម្មភាព​នេះ​ទេ។"</string>
+    <string name="quickcontact_transparent_view_description" msgid="987959416759562455">"ចុច ដើម្បី​ត្រឡប់ទៅ​អេក្រង់​មុន"</string>
+    <string name="quickcontact_add_phone_number" msgid="731665835910658965">"បន្ថែម​លេខទូរស័ព្ទ"</string>
+    <string name="quickcontact_add_email" msgid="739298028384348482">"បន្ថែម​អ៊ីមែល"</string>
     <string name="missing_app" msgid="1466111003546611387">"រក​មិន​ឃើញ​កម្មវិធី​ដើម្បី​គ្រប់គ្រង​សកម្មភាព​នេះ​ទេ។"</string>
-    <string name="menu_share" msgid="943789700636542260">"ចែករំលែក"</string>
+    <string name="menu_share" msgid="943789700636542260">"ចែករំលែក​"</string>
+    <string name="menu_add_contact" msgid="3198704337220892684">"បន្ថែម​ទៅ​ទំនាក់ទំនង"</string>
     <string name="share_via" msgid="563121028023030093">"ចែករំលែក​ទំនាក់ទំនង​តាម"</string>
     <string name="dialog_new_group_account" msgid="2318032089273496830">"បង្កើត​ក្រុម​នៅ​ក្នុង​គណនី"</string>
     <string name="audio_chat" msgid="2535716629358298691">"ជជែក​ជា​សំឡេង"</string>
@@ -134,18 +137,11 @@
     <skip />
     <string name="use_photo_as_primary" msgid="8807110122951157246">"ប្រើ​រូបថត​នេះ"</string>
     <string name="contact_read_only" msgid="7421346527289472273">"ពី​កម្មវិធី​នេះ មិន​អាច​កែ​បាន​ទេ។"</string>
-    <string name="no_contact_details" msgid="6636856378019344497">"មិន​មាន​ព័ត៌មាន​បន្ថែម​សម្រាប់​ទំនាក់ទំនង​នេះ​ទេ។"</string>
     <string name="group_read_only" msgid="1061762906115697637">"មិន​អាច​កែ​បាន​ទេ​លើ​ឧបករណ៍​នេះ។"</string>
-    <string name="display_options_sort_list_by" msgid="6080091755852211076">"តម្រៀប​បញ្ជី​តាម"</string>
-    <string name="display_options_sort_by_given_name" msgid="184916793466387067">"នាម​ខ្លួន"</string>
-    <string name="display_options_sort_by_family_name" msgid="7857986975275712622">"នាមត្រកូល"</string>
-    <string name="display_options_view_names_as" msgid="4386932036180428374">"មើល​ឈ្មោះ​ទំនាក់ទំនង"</string>
-    <string name="display_options_view_given_name_first" msgid="6968288511197363292">"នាម​ខ្លួន​មុន"</string>
-    <string name="display_options_view_family_name_first" msgid="1447288164951453714">"នាម​ត្រកូល​មុន"</string>
     <string name="take_photo" msgid="7496128293167402354">"ថតរូប"</string>
     <string name="take_new_photo" msgid="7341354729436576304">"ថតរូប​ថ្មី"</string>
-    <string name="pick_photo" msgid="3746334626214970837">"ជ្រើស​រូបថត​ពី​វិចិត្រសាល"</string>
-    <string name="pick_new_photo" msgid="7962368009197147617">"ជ្រើស​រូបថត​ថ្មី​ពី​វិចិត្រសាល"</string>
+    <string name="pick_photo" msgid="2129509985223564942">"ជ្រើស​រូបថត"</string>
+    <string name="pick_new_photo" msgid="9122450996263688237">"ជ្រើស​រូបថត​ថ្មី"</string>
     <string name="locale_change_in_progress" msgid="7583992153091537467">"កំពុង​ធ្វើ​បច្ចុប្បន្នភាព​ទំនាក់ទំនង​ដើម្បី​ឆ្លុះបញ្ចាំង​ការ​ប្ដូរ​ភាសា។"</string>
     <string name="upgrade_in_progress" msgid="474511436863451061">"កំពុង​ធ្វើ​បច្ចុប្បន្នភាព​បញ្ជី​ទំនាក់ទំនង។"</string>
     <string name="upgrade_out_of_memory" msgid="1209994418877625940">"កំពុង​ធ្វើ​បច្ចុប្បន្នភាព​ទំនាក់ទំនង។ \n\nដំណើរការ​នេះ​ទាមទារ​ឧបករណ៍​ផ្ទុក​ខាងក្នុង​ប្រហែល <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> មេកាបៃ។\n\nជ្រើស​ជម្រើស​មួយ​ខាងក្រោម៖"</string>
@@ -172,7 +168,6 @@
     <string name="menu_copyContact" msgid="1573960845106822639">"ចម្លង​ទៅ​ទំនាក់ទំនង​របស់​ខ្ញុំ"</string>
     <string name="add_to_my_contacts" msgid="1068274916793627723">"បន្ថែម​ទៅ​ទំនាក់ទំនង​របស់​ខ្ញុំ"</string>
     <string name="contact_directory_description" msgid="683398073603909119">"ថត <xliff:g id="TYPE">%1$s</xliff:g>"</string>
-    <string name="toast_making_personal_copy" msgid="288549957278065542">"កំពុង​បង្កើត​ច្បាប់​ចម្លង​ផ្ទាល់​ខ្លួន..."</string>
     <string name="list_filter_custom" msgid="8910173055702057002">"ផ្ទាល់ខ្លួន"</string>
     <string name="activity_title_settings" msgid="5464130076132770781">"ការ​កំណត់"</string>
     <string name="menu_settings" msgid="377929915873428211">"ការ​កំណត់"</string>
@@ -182,7 +177,7 @@
     <string name="non_phone_caption" msgid="1541655052330027380">"លេខទូរស័ព្ទ"</string>
     <string name="non_phone_add_to_contacts" msgid="6590985286250471169">"បន្ថែម​ទៅ​ទំនាក់ទំនង"</string>
     <string name="activity_title_confirm_add_detail" msgid="4065089866210730616">"បន្ថែម​ទៅ​ទំនាក់ទំនង"</string>
-    <string name="non_phone_close" msgid="7608506439725515667">"បិទ"</string>
+    <string name="non_phone_close" msgid="7608506439725515667">"បិទ​"</string>
     <string name="widget_name_and_phonetic" msgid="8739586586600099979">"<xliff:g id="DISPLAY_NAME">%1$s</xliff:g> (<xliff:g id="PHONETIC_NAME">%2$s</xliff:g>)"</string>
     <string name="date_year_toggle" msgid="7356532842767854606">"ផ្ដល់​ឆ្នាំ"</string>
     <string name="social_widget_label" msgid="6378905543028924592">"ទំនាក់ទំនង"</string>
@@ -218,15 +213,46 @@
     <string name="local_profile_title" msgid="2021416826991393684">"ប្រវត្តិរូប​មូលដ្ឋាន​របស់​ខ្ញុំ"</string>
     <string name="external_profile_title" msgid="8034998767621359438">"ប្រវត្តិរូប <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g> របស់​ខ្ញុំ"</string>
     <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"បង្ហាញ​ទំនាក់ទំនង​ទាំងអស់"</string>
-    <string name="no_account_prompt" msgid="7061052512446855192">"មនុស្ស​ធ្វើការ​បាន​យ៉ាង​ប្រសើរ​ជាមួយ​គណនី​របស់ Google ។ \n \n •​អាច​ចូល​ដំណើរការ​ពី​កម្មវិធី​អ៊ីនធឺណិត​ណា​ក៏​បាន​។ \n •​បម្រុងទុក​ទំនាក់ទំនង​របស់​អ្នក​យ៉ាង​មាន​សុវត្ថិភាព។"</string>
+    <string name="no_account_prompt" msgid="6424883302325061025">"ទំនាក់ទំនង​ដំណើរការ​កាន់តែ​ល្អ​ជា​មួយ​គណនី Google ។\n\n• ចូល​ដំណើរការ​ពី​កម្មវិធី​រុករក​បណ្ដាញ។\n• បម្រុងទុក​ទំនាក់ទំនង​របស់​អ្នក​ដោយ​សុវត្ថិភាព។"</string>
     <string name="generic_no_account_prompt" msgid="7218827704367325460">"រក្សាទុក​ទំនាក់ទំនង​របស់​អ្នក​យ៉ាង​មាន​សុវត្ថិភាព ទោះបីជា​អ្នក​បាត់​ទូរស័ព្ទ​ក៏ដោយ៖ ធ្វើ​សមកាលកម្ម​ជាមួយ​សេវាកម្ម​លើ​បណ្ដាញ។"</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"បន្ថែម​គណនី"</string>
     <string name="contact_editor_prompt_zero_accounts" msgid="1785345895691886499">"នឹង​មិន​បម្រុងទុក​ទំនាក់ទំនង​ថ្មី​របស់​អ្នក​ទេ។ បន្ថែម​គណនី​ដើម្បី​បម្រុងទុក​ទំនាក់ទំនង​នៅ​លើ​បណ្ដាញ?"</string>
     <string name="contact_editor_prompt_one_account" msgid="8669032699767375976">"នឹង​ធ្វើ​សមកាលកម្ម​ទំនាក់ទំនង​ថ្មី​របស់​អ្នក​ជាមួយ <xliff:g id="ACCOUNT_NAME">%1$s</xliff:g> ។"</string>
     <string name="contact_editor_prompt_multiple_accounts" msgid="611828200100438242">"អ្នក​អាច​ធ្វើ​សមកាលកម្ម​ទំនាក់ទំនង​ថ្មី​របស់​អ្នក​ជា​មួយ​គណនី​មួយ​ខាងក្រោម។ តើ​អ្នក​ចង់​ប្រើ​មួយ​ណា?"</string>
+    <string name="contact_editor_title_new_contact" msgid="7192223018128934940">"បន្ថែមទំនាក់ទំនងថ្មី"</string>
+    <string name="contact_editor_title_existing_contact" msgid="4898475703683187798">"កែ​ទំនាក់ទំនង"</string>
     <string name="keep_local" msgid="1258761699192993322">"រក្សា​ទុក​មូលដ្ឋាន"</string>
     <string name="add_account" msgid="8201790677994503186">"បន្ថែម​គណនី"</string>
     <string name="add_new_account" msgid="5748627740680940264">"បន្ថែម​គណនី​ថ្មី"</string>
     <string name="menu_export_database" msgid="2659719297530170820">"នាំចេញ​ឯកសារ​មូលដ្ឋាន​ទិន្នន័យ"</string>
-    <string name="contact_detail_picture_description" msgid="6083230522651287030">"រូបភាព។ ជ្រើស​ដើម្បី​ប្ដូរ"</string>
+    <string name="action_menu_add_new_contact_button" msgid="3180222523336380017">"បន្ថែម​ទំនាក់ទំនង​ថ្មី"</string>
+    <string name="expanding_entry_card_view_see_more" msgid="3779194067124758079">"​មើល​​ច្រើន​ជាង"</string>
+    <string name="expanding_entry_card_view_see_less" msgid="5344160551629714168">"​មើល​តិច​ជាង"</string>
+    <string name="expanding_entry_card_view_see_all" msgid="3845258737661412627">"​មើល​ទាំង​អស់"</string>
+    <string name="recent_card_title" msgid="8982782042698001695">"ថ្មីៗ"</string>
+    <string name="about_card_title" msgid="2920942314212825637">"អំពី"</string>
+    <string name="send_message" msgid="8938418965550543196">"ផ្ញើ​សារ"</string>
+    <string name="toast_making_personal_copy" msgid="6137651078366797938">"កំពុង​បង្កើត​ច្បាប់​ចម្លង​ផ្ទាល់​ខ្លួន..."</string>
+    <string name="yesterday" msgid="6840858548955018569">"ម្សិលមិញ"</string>
+    <string name="tomorrow" msgid="6241969467795308581">"ស្អែក"</string>
+    <string name="today" msgid="8041090779381781781">"ថ្ងៃនេះ"</string>
+    <string name="today_at_time_fmt" msgid="605665249491030460">"ថ្ងៃនេះ​នៅ <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="tomorrow_at_time_fmt" msgid="4856497969617819421">"ថ្ងៃស្អែក​នៅ <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="date_time_fmt" msgid="5053178726906863812">"<xliff:g id="DATE">%s</xliff:g>, <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="untitled_event" msgid="3484859385405939366">"(ព្រឹត្តិការណ៍​គ្មាន​ចំណងជើង)"</string>
+    <string name="date_time_set" msgid="4761419824439606690">"កំណត់"</string>
+    <string name="header_im_entry" msgid="3581720979640225615">"IM"</string>
+    <string name="header_organization_entry" msgid="8515394955666265406">"ស្ថាប័ន"</string>
+    <string name="header_nickname_entry" msgid="6743561883967451485">"ឈ្មោះ​ហៅ​ក្រៅ"</string>
+    <string name="header_note_entry" msgid="4320190426480612344">"ចំណាំ"</string>
+    <string name="header_website_entry" msgid="1411467850000824745">"វេបសាយ"</string>
+    <string name="header_event_entry" msgid="6738250422744401460">"ព្រឹត្តិការណ៍"</string>
+    <string name="header_relation_entry" msgid="1520292958088146460">"ទំនាក់ទំនង"</string>
+    <string name="content_description_directions" msgid="2686791825798189335">"ទិសដៅ​ទៅ​ទីតាំង"</string>
+    <string name="content_description_recent_sms" msgid="6268563442222149676">"សារ sms ថ្មី <xliff:g id="MESSAGE_DETAILS">%s</xliff:g> ។ ចុច​ដើម្បី​ឆ្លើយតប"</string>
+    <string name="content_description_recent_call_type_incoming" msgid="5210739096863511410">"ចូល"</string>
+    <string name="content_description_recent_call_type_outgoing" msgid="5156553338985232744">"ចេញ"</string>
+    <string name="content_description_recent_call_type_missed" msgid="7371810920196048204">"ខកខាន​ទទួល"</string>
+    <string name="content_description_recent_call" msgid="6204048362763219585">"ការ​ហៅ​ថ្មី។ <xliff:g id="CALL_DETAILS">%s</xliff:g> ។ ចុច​ដើម្បី​ហៅ​ទៅ​វិញ"</string>
+    <string name="message_from_you_prefix" msgid="7180706529908434482">"អ្នក៖ <xliff:g id="SMS_BODY">%s</xliff:g>"</string>
 </resources>

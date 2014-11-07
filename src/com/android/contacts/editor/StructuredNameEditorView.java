@@ -155,6 +155,7 @@ public class StructuredNameEditorView extends TextFieldsEditorView {
 
         mSnapshot.getContentValues().clear();
         mSnapshot.setDisplayName(values.getDisplayName());
+        mSnapshot.setMimeType(StructuredName.CONTENT_ITEM_TYPE);
         for (String field : structuredNameMap.keySet()) {
             mSnapshot.getContentValues().put(field, structuredNameMap.get(field));
         }

@@ -62,6 +62,8 @@ public class TextFieldsEditorView extends LabeledEditorView {
     private boolean mHideOptional = true;
     private boolean mHasShortAndLongForms;
     private int mMinFieldHeight;
+    private int mEditTextTopPadding;
+    private int mEditTextBottomPadding;
     private int mPreviousViewHeight;
 
     public TextFieldsEditorView(Context context) {
@@ -86,6 +88,10 @@ public class TextFieldsEditorView extends LabeledEditorView {
 
         mMinFieldHeight = mContext.getResources().getDimensionPixelSize(
                 R.dimen.editor_min_line_item_height);
+        mEditTextBottomPadding = mContext.getResources().getDimensionPixelSize(
+                R.dimen.editor_text_field_bottom_padding);
+        mEditTextTopPadding = mContext.getResources().getDimensionPixelSize(
+                R.dimen.editor_text_field_top_padding);
         mFields = (ViewGroup) findViewById(R.id.editors);
         mExpansionView = (ImageView) findViewById(R.id.expansion_view);
         mExpansionViewContainer = findViewById(R.id.expansion_view_container);
@@ -231,7 +237,52 @@ public class TextFieldsEditorView extends LabeledEditorView {
                 if (kind.maxLength > 0) {
                     fieldView.setFilters(new InputFilter[] {
                             new InputFilter.LengthFilter(kind.maxLength)});
-                }
+
+				// Set either a minimum line requirement or a minimum height (because {@link TextView}
+				// only takes one or the other at a single time).
+				if (field.minLines != 0) {
+					fieldView.setMinLines(field.minLines);
+				} else {
+					fieldView.setMinHeight(mMinFieldHeight);
+				}
+				fieldView.setTextAppearance(getContext(), android.R.style.TextAppearance_Medium);
+				fieldView.setPadding(fieldView.getPaddingLeft(), mEditTextTopPadding,
+						fieldView.getPaddingRight(), mEditTextBottomPadding);
+				fieldView.setHintTextColor(R.color.secondary_text_color);
+				fieldView.setGravity(Gravity.TOP);
+				mFieldEditTexts[index] = fieldView;
+				fieldView.setId(vig.getId(state, kind, entry, index));
+				if (field.titleRes > 0) {
+					fieldView.setHint(field.titleRes);
+				}
+				int inputType = field.inputType;
+				fieldView.setInputType(inputType);
+				if (inputType == InputType.TYPE_CLASS_PHONE) {
+					PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(mContext, fieldView);
+					fieldView.setTextDirection(View.TEXT_DIRECTION_LTR);
+				}
+
+				// Show the "next" button in IME to navigate between text fields
+				// TODO: Still need to properly navigate to/from sections without text fields,
+				// See Bug: 5713510
+				fieldView.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+
+				// Read current value from state
+				final String column = field.column;
+				final String value = entry.getAsString(column);
+				fieldView.setText(value);
+
+				// Show the delete button if we have a non-null value
+				setDeleteButtonVisible(value != null);
+
+				// Prepare listener for writing changes
+				fieldView.addTextChangedListener(new TextWatcher() {
+					@Override
+					public void afterTextChanged(Editable s) {
+						// Trigger event for newly changed value
+						onFieldChanged(column, s.toString());
+					}
+                });
                 // Set either a minimum line requirement or a minimum height (because
                 // {@link TextView} only takes one or the other at a single time).
                 if (field.minLines != 0) {

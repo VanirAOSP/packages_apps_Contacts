@@ -78,8 +78,8 @@ public class LegacyPostalAddressListAdapter extends ContactEntryListAdapter {
     }
 
     @Override
-    protected View newView(Context context, int partition, Cursor cursor, int position,
-            ViewGroup parent) {
+    protected ContactListItemView newView(
+            Context context, int partition, Cursor cursor, int position, ViewGroup parent) {
         final ContactListItemView view = new ContactListItemView(context, null);
         view.setUnknownNameText(mUnknownNameText);
         return view;
@@ -87,8 +87,10 @@ public class LegacyPostalAddressListAdapter extends ContactEntryListAdapter {
 
     @Override
     protected void bindView(View itemView, int partition, Cursor cursor, int position) {
+        super.bindView(itemView, partition, cursor, position);
         ContactListItemView view = (ContactListItemView)itemView;
         bindName(view, cursor);
+        bindViewId(view, cursor, POSTAL_ID_COLUMN_INDEX);
         bindPostalAddress(view, cursor);
     }
 

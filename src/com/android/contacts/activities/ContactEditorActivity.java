@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.android.contacts.ContactSaveService;
 import com.android.contacts.ContactsActivity;
@@ -39,6 +40,7 @@ import com.android.contacts.editor.ContactEditorFragment.SaveMode;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+import com.android.contacts.interactions.ContactDeletionInteraction;
 import com.android.contacts.util.DialogManager;
 
 import java.util.ArrayList;
@@ -105,6 +107,14 @@ public class ContactEditorActivity extends ContactsActivity
                     mFragment.doSaveAction();
                 }
             });
+            TextView title = (TextView) customActionBarView.findViewById(R.id.title);
+            if (Intent.ACTION_EDIT.equals(action)) {
+                title.setText(getResources().getString(
+                        R.string.contact_editor_title_existing_contact));
+            } else {
+                title.setText(getResources().getString(
+                        R.string.contact_editor_title_new_contact));
+            }
             // Show the custom action bar but hide the home icon and title
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                     ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME |
@@ -157,6 +167,12 @@ public class ContactEditorActivity extends ContactsActivity
 
     private final ContactEditorFragment.Listener mFragmentListener =
             new ContactEditorFragment.Listener() {
+
+        @Override
+        public void onDeleteRequested(Uri contactUri) {
+            ContactDeletionInteraction.start(ContactEditorActivity.this, contactUri, true);
+        }
+
         @Override
         public void onReverted() {
             finish();

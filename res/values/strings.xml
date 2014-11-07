@@ -15,9 +15,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Title for the activity that opens the People app.  This is the name
+    <!-- Application name used in Settings/Apps. Default label for activities
+         that don't specify a label. -->
+    <string name="applicationLabel">Contacts</string>
+
+    <!-- Title for the activity that launches Contacts.  This is the name
          used in the Launcher icon. -->
-    <string name="people">People</string>
+    <string name="launcherActivityLabel">Contacts</string>
 
     <!-- Directory partition name -->
     <string name="contactsList">Contacts</string>
@@ -46,6 +50,9 @@
     <!-- Activity title when the user is selecting a contact.  [CHAR LIMIT=128] -->
     <string name="contactPickerActivityTitle">Choose a contact</string>
 
+    <!-- Entry that prompts user to select a newly created contact.  [CHAR LIMIT=30] -->
+    <string name="header_entry_contact_list_adapter_header_title">Create new contact</string>
+
     <!-- Title for the activity that shows only starred contacts -->
     <string name="starredList">Starred</string>
 
@@ -58,10 +65,6 @@
 
     <!-- The title bar when viewing the contact details activity -->
     <string name="viewContactTitle">Contact details</string>
-
-    <!-- The description presented to the user in the Intent choose when there are multiple activities that allow
-         viewing a contact. This string represents the built in way to view the contact. -->
-    <string name="viewContactDesription">View contact</string>
 
     <!-- The description presented to the user in the Intent choose when there are multiple activities that allow
          editing a contact. This string represents the built in way to edit the contact. -->
@@ -96,6 +99,11 @@
 
     <!-- Menu item used to remove a star from a contact, making the contact no longer show up at the top of favorites -->
     <string name="menu_removeStar">Remove from favorites</string>
+
+    <!-- Description of what happens when you click on the unstar MenuItem. [CHAR LIMIT=NONE] -->
+    <string name="description_action_menu_remove_star">Removed from favorites</string>
+    <!-- Description of what happens when you click on the star MenuItem. [CHAR LIMIT=NONE] -->
+    <string name="description_action_menu_add_star">Added to favorites</string>
 
     <!-- Menu item used to edit a specific contact -->
     <string name="menu_editContact">Edit</string>
@@ -172,8 +180,8 @@
     <!-- Confirmation dialog contents after users selects to delete a Writable contact. -->
     <string name="deleteConfirmation">This contact will be deleted.</string>
 
-    <!-- Menu item to indicate you want to stop editing a contact and NOT save the changes you've made [CHAR LIMIT=12] -->
-    <string name="menu_discard">Discard</string>
+    <!-- Menu item to indicate you want to stop editing a contact and NOT save the changes you've made [CHAR LIMIT=30] -->
+    <string name="menu_discard">Discard changes</string>
 
     <!-- Message displayed in a toast when you try to view the details of a contact that
          for some reason doesn't exist anymore. [CHAR LIMIT=NONE]-->
@@ -258,12 +266,6 @@
     <!-- Displayed at the top of the contacts showing the zero as total number of contacts visible when "Only contacts with phones" is selected [CHAR LIMIT=64]-->
     <string name="listTotalPhoneContactsZero">No contacts with phone numbers</string>
 
-    <!-- Displayed at the top of the contacts showing the total number of contacts visible when "Only contacts with phones" not selected -->
-    <plurals name="listTotalAllContacts">
-        <item quantity="one">1 contact</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> contacts</item>
-    </plurals>
-
     <!-- Displayed at the top of the contacts showing the total number of contacts found when "Only contacts with phones" not selected [CHAR LIMIT=30] -->
     <plurals name="listFoundAllContacts">
         <item quantity="one">1 found</item>
@@ -279,21 +281,11 @@
         <item quantity="other"><xliff:g id="count">%d</xliff:g> found</item>
     </plurals>
 
-    <!-- The content description for the "all contacts" tab.
+    <!-- The title of "all contacts" tab. [CHAR LIMIT=14] -->
+    <string name="all_contacts_tab_label">All contacts</string>
 
-         Note: AccessibilityServices use this attribute to announce what the view represents.
-         This is especially valuable for views without textual representation like ImageView.
-
-         [CHAR LIMIT=NONE] -->
-    <string name="contactsAllLabel">All contacts</string>
-
-    <!-- The content description text for the groups tab.
-
-         Note: AccessibilityServices use this attribute to announce what the view represents.
-         This is especially valuable for views without textual representation like ImageView.
-
-         [CHAR LIMIT=NONE] -->
-    <string name="contactsGroupsLabel">Groups</string>
+    <!-- The title of "favorites" tab. [CHAR LIMIT=14] -->
+    <string name="favorites_tab_label">Favorites</string>
 
     <!-- Action string for calling back a number in the call log -->
     <string name="callBack">Call back</string>
@@ -329,6 +321,14 @@
     <!-- Shown as a toast when the user taps on a QuickContact icon, and no application
          was found that could perform the selected action. [CHAR LIMIT=NONE] -->
     <string name="quickcontact_missing_app">No app was found to handle this action.</string>
+    <!-- Content description for the transparent views around the visible section of QuickContacts.
+         Clicking this view causes Quick Contacts to close. [CHAR LIMIT=NONE] -->
+    <string name="quickcontact_transparent_view_description">Click to return to previous screen</string>
+
+    <!-- When a contact has no data, we prompt the user to add a phone number for the contact. [CHAR LIMIT=40] -->
+    <string name="quickcontact_add_phone_number">Add phone number</string>
+    <!-- When a contact has no data, we prompt the user to add an email for the contact. [CHAR LIMIT=40] -->
+    <string name="quickcontact_add_email">Add email</string>
 
     <!-- Shown as a toast when the user attempts an action (add contact, edit
          contact, etc) and no application was found that could perform that
@@ -337,6 +337,9 @@
 
     <!-- The menu item to share the currently viewed contact [CHAR LIMIT=30] -->
     <string name="menu_share">Share</string>
+
+    <!-- The menu item to add the the currently viewed contact to your contacts [CHAR LIMIT=30] -->
+    <string name="menu_add_contact">Add to contacts</string>
 
     <!-- Dialog title when picking the application to share a contact with. -->
     <string name="share_via">Share contact via</string>
@@ -373,29 +376,8 @@
     <!-- Text used to explain that a contact cannot be edited from the People application since the data is read only [CHAR LIMIT=40] -->
     <string name="contact_read_only">Not editable from this app.</string>
 
-    <!-- Text describing that a contact has no information available other than name and photo. [CHAR LIMIT=60] -->
-    <string name="no_contact_details">No additional information for this contact.</string>
-
     <!-- Text used to explain that a group cannot be edited since the data is read only [CHAR LIMIT=40] -->
     <string name="group_read_only">Not editable on this device.</string>
-
-    <!-- Label of the "sort list by" display option -->
-    <string name="display_options_sort_list_by">Sort list by</string>
-
-    <!-- An allowable value for the "sort list by" contact display option  -->
-    <string name="display_options_sort_by_given_name">Given name</string>
-
-    <!-- An allowable value for the "sort list by" contact display option  -->
-    <string name="display_options_sort_by_family_name">Family name</string>
-
-    <!-- Label of the "view names as" display option [CHAR LIMIT=64]-->
-    <string name="display_options_view_names_as">View contact names</string>
-
-    <!-- An allowable value for the "view names as" contact display option  -->
-    <string name="display_options_view_given_name_first">Given name first</string>
-
-    <!-- An allowable value for the "view names as" contact display option  -->
-    <string name="display_options_view_family_name_first">Family name first</string>
 
     <!-- An option in the 'Contact photo' dialog, if there is no photo yet [CHAR LIMIT=50] -->
     <string name="take_photo">Take photo</string>
@@ -404,10 +386,10 @@
     <string name="take_new_photo">Take new photo</string>
 
     <!-- An option in the 'Contact photo' dialog, if there is no photo yet [CHAR LIMIT=50] -->
-    <string name="pick_photo">Choose photo from Gallery</string>
+    <string name="pick_photo">Choose photo</string>
 
     <!-- An option in the 'Contact photo' dialog, if there is already a photo [CHAR LIMIT=50] -->
-    <string name="pick_new_photo">Select new photo from Gallery</string>
+    <string name="pick_new_photo">Select new photo</string>
 
     <!-- Text shown in the contacts app while the background process updates contacts after a locale change [CHAR LIMIT=300] -->
     <string name="locale_change_in_progress">Contact list is being updated to reflect the change of language.</string>
@@ -493,9 +475,6 @@
 
     <!-- The description of the directory where the contact was found [CHAR LIMIT=100]-->
     <string name="contact_directory_description">Directory <xliff:g id="type" example="Corporate Directory">%1$s</xliff:g></string>
-
-    <!-- Toast shown when creating a personal copy of a contact [CHAR LIMIT=100] -->
-    <string name="toast_making_personal_copy">Creating a personal copy\u2026</string>
 
     <!-- Contact list filter indicating that the list shows groups chosen by the user [CHAR LIMIT=64] -->
     <string name="list_filter_custom">Custom</string>
@@ -629,12 +608,12 @@
     <string name="toast_displaying_all_contacts">Displaying all contacts</string>
 
     <!-- Message in the standard "no account" prompt that encourages the user to add a Google account before continuing to use the People app [CHAR LIMIT=NONE] -->
-    <string name="no_account_prompt">People works better with a Google Account.\n\n\u2022 Access from any web browser.\n\u2022 Back up your contacts securely.</string>
+    <string name="no_account_prompt">Contacts works better with a Google Account.\n\n\u2022 Access from any web browser.\n\u2022 Back up your contacts securely.</string>
 
     <!-- Message in the standard "no account" prompt that encourages the user to add any account (non Google-specific) before continuing to use the People app [CHAR LIMIT=NONE] -->
     <string name="generic_no_account_prompt">Keep your contacts safe even if you lose your phone: synchronize with an online service.</string>
 
-    <!-- Title of the screen that encourages the user to add any account (non Google-specific) for a better People app experience [CHAR LIMIT=20] -->
+    <!-- Title of the screen that encourages the user to add any account (non Google-specific) for a better Contacts app experience [CHAR LIMIT=20] -->
     <string name="generic_no_account_prompt_title">Add an account</string>
 
     <!-- Message in the contact editor prompt that notifies the user that the newly created contact will not be saved to any account, and prompts addition of an account [CHAR LIMIT=NONE] -->
@@ -645,6 +624,16 @@
 
     <!-- Message in the contact editor prompt that asks the user which account they want to save the newly created contact to. [CHAR LIMIT=NONE] -->
     <string name="contact_editor_prompt_multiple_accounts">You can synchronize your new contact with one of the following accounts. Which do you want to use?</string>
+
+    <!-- Title of the ContactEditorActivity when creating a new contact. The char
+         limit is short and cannot be increased, since this needs to be displayed in a single line
+         at a pre-determined text size. [CHAR LIMIT=20] -->
+    <string name="contact_editor_title_new_contact">Add new contact</string>
+
+    <!-- Title of the ContactEditorActivity when editing a contact that already exists. The char
+         limit is short and cannot be increased, since this needs to be displayed in a single line
+         at a pre-determined text size. [CHAR LIMIT=20] -->
+    <string name="contact_editor_title_existing_contact">Edit contact</string>
 
     <!-- Button label to indicate that the user wants to save the newly created contact locally (instead of backing it up online) [CHAR LIMIT=20] -->
     <string name="keep_local">Keep local</string>
@@ -658,6 +647,81 @@
     <!-- Menu item shown only when the special debug mode is enabled, which is used to send all contacts database files via email.  [CHAR LIMI=NONE] -->
     <string name="menu_export_database">Export database files</string>
 
-    <!-- Description when picture in the contact detail view is selected. [CHAR LIMIT=NONE] -->
-    <string name="contact_detail_picture_description">Picture. Select to change</string>
+    <!-- Content description for the button that adds a new contact
+         [CHAR LIMIT=NONE] -->
+    <string name="action_menu_add_new_contact_button">add new contact</string>
+    <!-- Button Label to see more on an ExpandingEntryCardView [CHAR LIMIT=40] -->
+    <string name="expanding_entry_card_view_see_more">See more</string>
+    <!-- Button Label to see less on an ExpandingEntryCardView [CHAR LIMIT=40] -->
+    <string name="expanding_entry_card_view_see_less">See less</string>
+    <!-- Button Label to see all on an ExpandingEntryCardView [CHAR LIMIT=40] -->
+    <string name="expanding_entry_card_view_see_all">See all</string>
+
+    <!-- Title of recent card. [CHAR LIMIT=60] -->
+    <string name="recent_card_title">Recent</string>
+
+    <!-- Title of recent card. [CHAR LIMIT=40] -->
+    <string name="about_card_title">About</string>
+
+    <!-- Title of sms action entry. [CHAR LIMIT=60] -->
+    <string name="send_message">Send message</string>
+
+    <!-- Toast that appears when you are copying a directory contact into your personal contacts -->
+    <string name="toast_making_personal_copy">Creating a personal copy...</string>
+    <!-- Timestamp string for interactions from yesterday. [CHAR LIMIT=40] -->
+    <string name="yesterday">Yesterday</string>
+    <string name="tomorrow">Tomorrow</string>
+    <!-- Timestamp string for interactions from today. [CHAR LIMIT=40] -->
+    <string name="today">Today</string>
+    <!-- Text for an event starting on the current day with a start and end time.
+         For ex, "Today at 5:00pm-6:00pm" [CHAR LIMIT=NONE] -->
+    <string name="today_at_time_fmt">"Today at <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <!-- Text for an event starting on the next day with a start and end time.
+         For ex, "Tomorrow at 5:00pm-6:00pm" [CHAR LIMIT=NONE] -->
+    <string name="tomorrow_at_time_fmt">"Tomorrow at <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <!-- Format string for a date and time description.  For ex:
+         "April 19, 2012, 3:00pm - 4:00pm" [CHAR LIMIT=NONE] -->
+    <string name="date_time_fmt">"<xliff:g id="date">%s</xliff:g>, <xliff:g id="time_interval">%s</xliff:g>"</string>
+    <!-- Title for untitled calendar interactions [CHAR LIMIT=40] -->
+    <string name="untitled_event">(Untitled event)</string>
+
+    <!-- Name of the button in the date/time picker to accept the date/time change [CHAR LIMIT=15] -->
+    <string name="date_time_set">Set</string>
+
+    <!-- Header for the IM entry [CHAR LIMIT=40] -->
+    <string name="header_im_entry">IM</string>
+    <!-- Header for the Organization entry [CHAR LIMIT=40] -->
+    <string name="header_organization_entry">Organization</string>
+    <!-- Header for the Nickname entry [CHAR LIMIT=40] -->
+    <string name="header_nickname_entry">Nickname</string>
+    <!-- Header for the Note entry [CHAR LIMIT=40] -->
+    <string name="header_note_entry">Note</string>
+    <!-- Header for the Website entry [CHAR LIMIT=40] -->
+    <string name="header_website_entry">Website</string>
+    <!-- Header for the Event entry [CHAR LIMIT=40] -->
+    <string name="header_event_entry">Event</string>
+    <!-- Header for the Relation entry [CHAR LIMIT=40] -->
+    <string name="header_relation_entry">Relation</string>
+
+    <!-- Content description for directions secondary button [CHAR LIMIT=NONE] -->
+    <string name="content_description_directions">directions to location</string>
+
+    <!-- Content description for recent sms interaction [CHAR LIMIT=NONE] -->
+    <string name="content_description_recent_sms">recent sms. <xliff:g id="message_details">%s</xliff:g>. click to respond</string>
+
+    <!-- Header for the Relation entry [CHAR LIMIT=NONE] -->
+    <string name="content_description_recent_call_type_incoming">incoming</string>
+    <!-- Header for the Relation entry [CHAR LIMIT=NONE] -->
+    <string name="content_description_recent_call_type_outgoing">outgoing</string>
+    <!-- Header for the Relation entry [CHAR LIMIT=NONE] -->
+    <string name="content_description_recent_call_type_missed">missed</string>
+
+    <!-- Content description for recent sms interaction [CHAR LIMIT=NONE] -->
+    <string name="content_description_recent_call">recent call. <xliff:g id="call_details">%s</xliff:g>. click to call back</string>
+
+    <!-- Prefix for messages that you sent [CHAR LIMIT=40] -->
+    <string name="message_from_you_prefix">You: <xliff:g id="sms_body">%s</xliff:g></string>
+
+    <!-- File Authority for the photo picker -->
+    <string name="photo_file_provider_authority" translatable="false">com.android.contacts.files</string>
 </resources>

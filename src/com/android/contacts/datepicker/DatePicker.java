@@ -169,6 +169,8 @@ public class DatePicker extends FrameLayout {
                 updateDaySpinner();
             }
         });
+        mYearPicker.setMinValue(DEFAULT_START_YEAR);
+        mYearPicker.setMaxValue(DEFAULT_END_YEAR);
 
         mYearToggle = (CheckBox) findViewById(R.id.yearToggle);
         mYearToggle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -180,19 +182,6 @@ public class DatePicker extends FrameLayout {
                 updateSpinners();
             }
         });
-
-        // attributes
-        TypedArray a = context.obtainStyledAttributes(attrs,
-                com.android.internal.R.styleable.DatePicker);
-
-        int mStartYear =
-                a.getInt(com.android.internal.R.styleable.DatePicker_startYear, DEFAULT_START_YEAR);
-        int mEndYear =
-                a.getInt(com.android.internal.R.styleable.DatePicker_endYear, DEFAULT_END_YEAR);
-        mYearPicker.setMinValue(mStartYear);
-        mYearPicker.setMaxValue(mEndYear);
-
-        a.recycle();
 
         // initialize to current date
         Calendar cal = Calendar.getInstance();
@@ -219,7 +208,7 @@ public class DatePicker extends FrameLayout {
         // We use numeric spinners for year and day, but textual months. Ask icu4c what
         // order the user's locale uses for that combination. http://b/7207103.
         String skeleton = mHasYear ? "yyyyMMMdd" : "MMMdd";
-        String pattern = ICU.getBestDateTimePattern(skeleton, Locale.getDefault().toString());
+        String pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), skeleton);
         char[] order = ICU.getDateFormatOrder(pattern);
 
         /* Remove the 3 pickers from their parent and then add them back in the

@@ -16,13 +16,13 @@
 
 package com.android.contacts.activities;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.ContactCounts;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.Groups;
@@ -35,17 +35,17 @@ import android.widget.TextView;
 import com.android.contacts.ContactsApplication;
 import com.android.contacts.R;
 import com.android.contacts.common.ContactPhotoManager;
+import com.android.contacts.common.testing.InjectedServices;
 import com.android.contacts.common.test.mocks.ContactsMockContext;
 import com.android.contacts.common.test.mocks.MockContentProvider;
 import com.android.contacts.common.test.mocks.MockContentProvider.Query;
-import com.android.contacts.detail.ContactDetailFragment;
 import com.android.contacts.interactions.TestLoaderManager;
 import com.android.contacts.list.ContactBrowseListFragment;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
 import com.android.contacts.common.model.account.BaseAccountType;
-import com.android.contacts.common.test.InjectedServices;
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.test.mocks.MockAccountTypeManager;
 import com.android.contacts.common.test.mocks.MockContactPhotoManager;
 import com.android.contacts.common.test.mocks.MockSharedPreferences;
@@ -88,6 +88,10 @@ public class PeopleActivityTest
     public void setUp() {
         mContext = new ContactsMockContext(getInstrumentation().getTargetContext());
         mContactsProvider = mContext.getContactsProvider();
+        // The ContactsApplication performs this getType query to warm up the provider - see
+        // ContactsApplication#DelayedInitialization.doInBackground
+        mContactsProvider.expectTypeQuery(ContentUris.withAppendedId(Contacts.CONTENT_URI, 1),
+                Contacts.CONTENT_ITEM_TYPE);
         mSettingsProvider = mContext.getSettingsProvider();
         InjectedServices services = new InjectedServices();
         services.setContentResolver(mContext.getContentResolver());
@@ -116,66 +120,6 @@ public class PeopleActivityTest
         super.tearDown();
     }
 
-    public void testSingleAccountNoGroups() {
-
-        if (true) { // Need this to avoid "unreachable statement"
-            return; // Disabled for now.
-        }
-
-        // This two-pane UI test only makes sense if we run with two panes.
-        // Let's ignore this in the single pane case
-        if (!PhoneCapabilityTester.isUsingTwoPanes(mContext)) return;
-
-        expectSettingsQueriesAndReturnDefault();
-        expectProviderStatusQueryAndReturnNormal();
-        expectGroupsQueryAndReturnEmpty();
-        expectContactListQuery(100);
-        expectContactLookupQuery("lu1", 1, "lu1", 1);
-        expectContactEntityQuery("lu1", 1);
-
-        setActivityIntent(new Intent(Intent.ACTION_DEFAULT));
-
-        PeopleActivity activity = getActivity();
-
-        getInstrumentation().waitForIdleSync();
-
-        ContactBrowseListFragment listFragment = activity.getListFragment();
-        ContactDetailFragment detailFragment = activity.getDetailFragment();
-
-        Loader<?> filterLoader =
-                activity.getLoaderManager().getLoader(R.id.contact_list_filter_loader);
-        Loader<?> listLoader =
-                listFragment.getLoaderManager().getLoader(0);
-
-        // TODO: wait for detail loader
-        // TODO: wait for lookup key loading
-        TestLoaderManager.waitForLoaders(filterLoader, listLoader);
-
-        getInstrumentation().waitForIdleSync();
-
-        mContext.verify();
-
-        TextView nameText = (TextView) detailFragment.getView().findViewById(R.id.name);
-        assertEquals("Contact 1", nameText.getText());
-    }
-
-    private void expectSettingsQueriesAndReturnDefault() {
-        mSettingsProvider
-                .expectQuery(Settings.System.CONTENT_URI)
-                .withProjection(Settings.System.VALUE)
-                .withSelection(Settings.System.NAME + "=?",
-                        ContactsContract.Preferences.DISPLAY_ORDER)
-                .returnRow(ContactsContract.Preferences.DISPLAY_ORDER_PRIMARY)
-                .anyNumberOfTimes();
-        mSettingsProvider
-                .expectQuery(Settings.System.CONTENT_URI)
-                .withProjection(Settings.System.VALUE)
-                .withSelection(Settings.System.NAME + "=?",
-                        ContactsContract.Preferences.SORT_ORDER)
-                .returnRow(ContactsContract.Preferences.SORT_ORDER_PRIMARY)
-                .anyNumberOfTimes();
-    }
-
     private void expectProviderStatusQueryAndReturnNormal() {
         mContactsProvider
                 .expectQuery(ProviderStatus.CONTENT_URI)
@@ -195,7 +139,7 @@ public class PeopleActivityTest
 
     private void expectContactListQuery(int count) {
         Uri uri = Contacts.CONTENT_URI.buildUpon()
-                .appendQueryParameter(ContactCounts.ADDRESS_BOOK_INDEX_EXTRAS, "true")
+                .appendQueryParameter(Contacts.EXTRA_ADDRESS_BOOK_INDEX, "true")
                 .appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY,
                         String.valueOf(Directory.DEFAULT))
                 .build();

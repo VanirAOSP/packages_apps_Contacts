@@ -37,6 +37,7 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.list.DirectoryListLoader;
 import com.android.contacts.common.model.account.SimAccountType;
+import com.android.contacts.common.preference.ContactsPreferences;
 
 public class JoinContactListAdapter extends ContactListAdapter {
 
@@ -110,7 +111,7 @@ public class JoinContactListAdapter extends ContactListAdapter {
         loader.setUri(allContactsUri);
         loader.setSelection(Contacts._ID + "!=?");
         loader.setSelectionArgs(new String[]{ String.valueOf(mTargetContactId) });
-        if (getSortOrder() == ContactsContract.Preferences.SORT_ORDER_PRIMARY) {
+        if (getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY) {
             loader.setSortOrder(Contacts.SORT_KEY_PRIMARY);
         } else {
             loader.setSortOrder(Contacts.SORT_KEY_ALTERNATIVE);
@@ -174,8 +175,8 @@ public class JoinContactListAdapter extends ContactListAdapter {
     }
 
     @Override
-    protected View newView(Context context, int partition, Cursor cursor, int position,
-            ViewGroup parent) {
+    protected ContactListItemView newView(
+            Context context, int partition, Cursor cursor, int position, ViewGroup parent) {
         switch (partition) {
             case PARTITION_SUGGESTIONS:
             case PARTITION_ALL_CONTACTS:
@@ -190,19 +191,20 @@ public class JoinContactListAdapter extends ContactListAdapter {
 
     @Override
     protected void bindView(View itemView, int partition, Cursor cursor, int position) {
+        super.bindView(itemView, partition, cursor, position);
         switch (partition) {
             case PARTITION_SUGGESTIONS: {
                 final ContactListItemView view = (ContactListItemView) itemView;
                 view.setSectionHeader(null);
                 bindPhoto(view, partition, cursor);
-                bindName(view, cursor);
+                bindNameAndViewId(view, cursor);
                 break;
             }
             case PARTITION_ALL_CONTACTS: {
                 final ContactListItemView view = (ContactListItemView) itemView;
                 bindSectionHeaderAndDivider(view, position, cursor);
                 bindPhoto(view, partition, cursor);
-                bindName(view, cursor);
+                bindNameAndViewId(view, cursor);
                 break;
             }
         }

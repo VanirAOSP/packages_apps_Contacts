@@ -26,18 +26,20 @@ import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import com.android.contacts.R;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
-import com.android.contacts.R;
 import com.android.contacts.common.list.ContactTileAdapter;
-import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.ContactTileAdapter.DisplayType;
+import com.android.contacts.common.list.ContactTileView;
+import com.android.contacts.common.util.ContactListViewUtils;
+import com.android.contacts.common.util.SchedulingUtils;
 
 /**
  * Fragment containing a list of starred contacts followed by a list of frequently contacted.
@@ -91,7 +93,19 @@ public class ContactTileListFragment extends Fragment {
 
         mListView.setItemsCanFocus(true);
         mListView.setAdapter(mAdapter);
+        ContactListViewUtils.applyCardPaddingToView(getResources(), mListView, listLayout);
+
         return listLayout;
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (getActivity() != null && getView() != null && !hidden) {
+            // If the padding was last applied when in a hidden state, it may have been applied
+            // incorrectly. Therefore we need to reapply it.
+            ContactListViewUtils.applyCardPaddingToView(getResources(), mListView, getView());
+        }
     }
 
     @Override
@@ -151,8 +165,6 @@ public class ContactTileListFragment extends Fragment {
                   return ContactTileLoaderFactory.createStarredLoader(getActivity());
               case STREQUENT:
                   return ContactTileLoaderFactory.createStrequentLoader(getActivity());
-              case STREQUENT_PHONE_ONLY:
-                  return ContactTileLoaderFactory.createStrequentPhoneOnlyLoader(getActivity());
               case FREQUENT_ONLY:
                   return ContactTileLoaderFactory.createFrequentLoader(getActivity());
               default:
@@ -163,6 +175,10 @@ public class ContactTileListFragment extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+            if (data == null || data.isClosed()) {
+                Log.e(TAG, "Failed to load contacts");
+                return;
+            }
             mAdapter.setContactCursor(data);
             mEmptyView.setText(getEmptyStateText());
             mListView.setEmptyView(mEmptyView);
@@ -189,7 +205,6 @@ public class ContactTileListFragment extends Fragment {
         String emptyText;
         switch (mDisplayType) {
             case STREQUENT:
-            case STREQUENT_PHONE_ONLY:
             case STARRED_ONLY:
                 emptyText = getString(R.string.listTotalAllContactsZeroStarred);
                 break;

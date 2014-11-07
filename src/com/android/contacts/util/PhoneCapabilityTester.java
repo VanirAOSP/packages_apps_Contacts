@@ -27,7 +27,7 @@ import android.provider.MediaStore;
 import android.provider.Telephony;
 import android.telephony.TelephonyManager;
 
-import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.R;
 
 import java.util.List;
@@ -84,7 +84,7 @@ public final class PhoneCapabilityTester {
         if (smsPackage != null) {
             final PackageManager packageManager = context.getPackageManager();
             final Intent intent = new Intent(Intent.ACTION_SENDTO,
-                    Uri.fromParts(CallUtil.SCHEME_SMSTO, "", null));
+                    Uri.fromParts(ContactsUtils.SCHEME_SMSTO, "", null));
             final List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
             for (ResolveInfo resolveInfo : resolveInfos) {
                 if (smsPackage.equals(resolveInfo.activityInfo.packageName)) {
@@ -101,20 +101,5 @@ public final class PhoneCapabilityTester {
     public static boolean isCameraIntentRegistered(Context context) {
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         return isIntentRegistered(context, intent);
-    }
-
-    /**
-     * True if we are using two-pane layouts ("tablet mode"), false if we are using single views
-     * ("phone mode")
-     */
-    public static boolean isUsingTwoPanes(Context context) {
-        return context.getResources().getBoolean(R.bool.config_use_two_panes);
-    }
-
-    /**
-     * True if the favorites tab should be shown in two-pane mode.  False, otherwise.
-     */
-    public static boolean isUsingTwoPanesInFavorites(Context context) {
-        return context.getResources().getBoolean(R.bool.config_use_two_panes_in_favorites);
     }
 }

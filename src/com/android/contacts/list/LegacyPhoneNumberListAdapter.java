@@ -77,17 +77,20 @@ public class LegacyPhoneNumberListAdapter extends ContactEntryListAdapter {
     }
 
     @Override
-    protected View newView(Context context, int partition, Cursor cursor, int position,
-            ViewGroup parent) {
-        final ContactListItemView view = new ContactListItemView(context, null);
+    protected ContactListItemView newView(
+            Context context, int partition, Cursor cursor, int position, ViewGroup parent) {
+        final ContactListItemView view =
+                super.newView(context, partition, cursor, position, parent);
         view.setUnknownNameText(mUnknownNameText);
         return view;
     }
 
     @Override
     protected void bindView(View itemView, int partition, Cursor cursor, int position) {
+        super.bindView(itemView, partition, cursor, position);
         ContactListItemView view = (ContactListItemView)itemView;
         bindName(view, cursor);
+        bindViewId(view, cursor, PHONE_ID_COLUMN_INDEX);
         bindPhoneNumber(view, cursor);
     }
 
@@ -106,6 +109,6 @@ public class LegacyPhoneNumberListAdapter extends ContactEntryListAdapter {
             label = Phone.getTypeLabel(getContext().getResources(), type, customLabel);
         }
         view.setLabel(label);
-        view.showPhoneNumber(cursor, PHONE_NUMBER_COLUMN_INDEX);
+        view.setPhoneNumber(cursor.getString(PHONE_NUMBER_COLUMN_INDEX), /* countryIso */ null);
     }
 }

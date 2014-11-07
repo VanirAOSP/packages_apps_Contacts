@@ -16,7 +16,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="people" msgid="1048457247435785074">"Persoane"</string>
+    <string name="applicationLabel" msgid="3906689777043645443">"Agendă"</string>
+    <string name="launcherActivityLabel" msgid="6497230399032392417">"Agendă"</string>
     <string name="contactsList" msgid="8661624236494819731">"Agendă"</string>
     <string name="shortcutContact" msgid="749243779392912958">"Persoană din Agendă"</string>
     <string name="shortcutDialContact" msgid="746622101599186779">"Apel direct"</string>
@@ -25,11 +26,11 @@
     <string name="callShortcutActivityTitle" msgid="6065749861423648991">"Alegeţi un număr pentru apelare"</string>
     <string name="messageShortcutActivityTitle" msgid="3084542316620335911">"Alegeţi un număr pentru trimiterea mesajului"</string>
     <string name="contactPickerActivityTitle" msgid="4301062192337417640">"Alegeţi o persoană de contact"</string>
+    <string name="header_entry_contact_list_adapter_header_title" msgid="2436981165830115659">"Creați intrare nouă în Agendă"</string>
     <string name="starredList" msgid="4817256136413959463">"Cu stea"</string>
     <string name="frequentList" msgid="7154768136473953056">"Frecvent"</string>
     <string name="strequentList" msgid="5640192862059373511">"Favorite"</string>
     <string name="viewContactTitle" msgid="7989394521836644384">"Detalii ale persoanei din agendă"</string>
-    <string name="viewContactDesription" msgid="214186610887547860">"Vizualizaţi persoana din agendă"</string>
     <string name="editContactDescription" msgid="2947202828256214947">"Modificaţi informaţiile despre persoana din agendă"</string>
     <string name="insertContactDescription" msgid="4709878105452681987">"Creaţi persoana din agendă"</string>
     <string name="editGroupDescription" msgid="6321161304201540561">"Editaţi grupul"</string>
@@ -40,6 +41,8 @@
     <string name="menu_viewContact" msgid="2795575601596468581">"Vizualizaţi persoana din agendă"</string>
     <string name="menu_addStar" msgid="2908478235715404876">"Adăugaţi la lista de favorite"</string>
     <string name="menu_removeStar" msgid="5844227078364227030">"Eliminaţi din lista de favorite"</string>
+    <string name="description_action_menu_remove_star" msgid="4699640108012265178">"S-a eliminat din preferințe"</string>
+    <string name="description_action_menu_add_star" msgid="3327186327234177456">"Adăugat la preferințe"</string>
     <string name="menu_editContact" msgid="9042415603857662633">"Editaţi"</string>
     <string name="menu_deleteContact" msgid="6788644058868189393">"Ștergeţi"</string>
     <string name="menu_create_contact_shortcut" msgid="1217971915748509640">"Plasaţi în ecranul de pornire"</string>
@@ -65,7 +68,7 @@
     <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"Informaţiile despre această persoană din agendă provin din mai multe conturi. Informaţiile provenite din conturile numai în citire nu vor fi şterse din lista dvs., ci doar ascunse."</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"Ștergerea acestei persoane din agendă va elimina informaţii din mai multe conturi."</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"Această persoană va fi ştearsă din agendă."</string>
-    <string name="menu_discard" msgid="6456087569315685632">"Renunţaţi"</string>
+    <string name="menu_discard" msgid="6854657936970228164">"Renunțați la modificări"</string>
     <string name="invalidContactMessage" msgid="8215051456181842274">"Persoana nu există în agendă."</string>
     <string name="createContactShortcutSuccessful" msgid="7874133287558150877">"Widgetul Agendă a fost adăugat la ecranul de pornire."</string>
     <string name="pickerNewContactHeader" msgid="7750705279843568147">"Creaţi o persoană nouă în agendă"</string>
@@ -95,10 +98,6 @@
     <item quantity="other" msgid="3299954047880968205">"<xliff:g id="COUNT">%d</xliff:g> (de) persoane din agendă cu numere de telefon"</item>
   </plurals>
     <string name="listTotalPhoneContactsZero" msgid="6968813857632984319">"Nicio persoană din agendă cu numere de telefon"</string>
-  <plurals name="listTotalAllContacts">
-    <item quantity="one" msgid="3405747744700823280">"1 persoană din Agendă"</item>
-    <item quantity="other" msgid="3578469907265375314">"<xliff:g id="COUNT">%d</xliff:g> (de) persoane din Agendă"</item>
-  </plurals>
   <plurals name="listFoundAllContacts">
     <item quantity="one" msgid="5517063038754171134">"A fost găsită 1 persoană din agendă"</item>
     <item quantity="other" msgid="3852668542926965042">"Au fost găsite <xliff:g id="COUNT">%d</xliff:g> (de) persoane din agendă"</item>
@@ -108,8 +107,8 @@
     <item quantity="one" msgid="4826918429708286628">"A fost găsită 1 persoană din agendă"</item>
     <item quantity="other" msgid="7988132539476575389">"Au fost găsite <xliff:g id="COUNT">%d</xliff:g> (de) persoane din agendă"</item>
   </plurals>
-    <string name="contactsAllLabel" msgid="6479708629170672169">"Toată Agenda"</string>
-    <string name="contactsGroupsLabel" msgid="2841971472518003524">"Grupuri"</string>
+    <string name="all_contacts_tab_label" msgid="6250372293594147703">"Toată agenda"</string>
+    <string name="favorites_tab_label" msgid="1524869648904016414">"Preferate"</string>
     <string name="callBack" msgid="5498224409038809224">"Apelaţi din nou"</string>
     <string name="callAgain" msgid="3197312117049874778">"Apelaţi din nou"</string>
     <string name="returnCall" msgid="8171961914203617813">"Apelaţi înapoi"</string>
@@ -119,8 +118,12 @@
     <string name="exporting_contact_list_progress" msgid="560522409559101193">"<xliff:g id="CURRENT_NUMBER">%s</xliff:g> din <xliff:g id="TOTAL_NUMBER">%s</xliff:g> (de) persoane din agendă"</string>
     <string name="search_settings_description" msgid="2675223022992445813">"Numele persoanelor din agenda dvs."</string>
     <string name="quickcontact_missing_app" msgid="358168575340921552">"Nu s-a găsit o aplicaţie care să gestioneze această acţiune."</string>
+    <string name="quickcontact_transparent_view_description" msgid="987959416759562455">"Dați clic pentru a reveni la ecranul anterior"</string>
+    <string name="quickcontact_add_phone_number" msgid="731665835910658965">"Adăugați un număr de telefon"</string>
+    <string name="quickcontact_add_email" msgid="739298028384348482">"Adăugaţi o adresă de e-mail"</string>
     <string name="missing_app" msgid="1466111003546611387">"Nu s-a găsit o aplicație care să îndeplinească această acțiune."</string>
     <string name="menu_share" msgid="943789700636542260">"Distribuiţi"</string>
+    <string name="menu_add_contact" msgid="3198704337220892684">"Adăugați în Agendă"</string>
     <string name="share_via" msgid="563121028023030093">"Distribuiţi persoana din agendă prin"</string>
     <string name="dialog_new_group_account" msgid="2318032089273496830">"Creaţi un grup în contul"</string>
     <string name="audio_chat" msgid="2535716629358298691">"Chat vocal"</string>
@@ -134,18 +137,11 @@
     <skip />
     <string name="use_photo_as_primary" msgid="8807110122951157246">"Utilizaţi această fotografie"</string>
     <string name="contact_read_only" msgid="7421346527289472273">"Nu se poate edita din această aplicaţie"</string>
-    <string name="no_contact_details" msgid="6636856378019344497">"Nu există informaţii suplimentare pentru acest contact."</string>
     <string name="group_read_only" msgid="1061762906115697637">"Nu poate fi editat pe acest dispozitiv."</string>
-    <string name="display_options_sort_list_by" msgid="6080091755852211076">"Sortaţi lista după"</string>
-    <string name="display_options_sort_by_given_name" msgid="184916793466387067">"Prenume"</string>
-    <string name="display_options_sort_by_family_name" msgid="7857986975275712622">"Numele de familie"</string>
-    <string name="display_options_view_names_as" msgid="4386932036180428374">"Afișați numele persoanei de contact"</string>
-    <string name="display_options_view_given_name_first" msgid="6968288511197363292">"Întâi prenumele"</string>
-    <string name="display_options_view_family_name_first" msgid="1447288164951453714">"Întâi numele de familie"</string>
     <string name="take_photo" msgid="7496128293167402354">"Fotografiaţi"</string>
     <string name="take_new_photo" msgid="7341354729436576304">"Creaţi o fotografie nouă"</string>
-    <string name="pick_photo" msgid="3746334626214970837">"Alegeţi o fotografie din Galerie"</string>
-    <string name="pick_new_photo" msgid="7962368009197147617">"Selectaţi o fotografie nouă din Galerie"</string>
+    <string name="pick_photo" msgid="2129509985223564942">"Alegeți o fotografie"</string>
+    <string name="pick_new_photo" msgid="9122450996263688237">"Selectați o fotografie nouă"</string>
     <string name="locale_change_in_progress" msgid="7583992153091537467">"Se actualizează lista de persoane din agendă pentru a reflecta schimbarea limbii."</string>
     <string name="upgrade_in_progress" msgid="474511436863451061">"Se actualizează lista de persoane din agendă."</string>
     <string name="upgrade_out_of_memory" msgid="1209994418877625940">"Agenda este în proces de trecere la o versiune superioară. \n\nAcest proces necesită aproximativ <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MO din spaţiul de stocare intern.\n\nAlegeţi una dintre următoarele opţiuni:"</string>
@@ -172,7 +168,6 @@
     <string name="menu_copyContact" msgid="1573960845106822639">"Copiaţi în Agendă"</string>
     <string name="add_to_my_contacts" msgid="1068274916793627723">"Adăugaţi în Agendă"</string>
     <string name="contact_directory_description" msgid="683398073603909119">"Director <xliff:g id="TYPE">%1$s</xliff:g>"</string>
-    <string name="toast_making_personal_copy" msgid="288549957278065542">"Se creează o copie personală..."</string>
     <string name="list_filter_custom" msgid="8910173055702057002">"Personalizată"</string>
     <string name="activity_title_settings" msgid="5464130076132770781">"Setări"</string>
     <string name="menu_settings" msgid="377929915873428211">"Setări"</string>
@@ -218,15 +213,46 @@
     <string name="local_profile_title" msgid="2021416826991393684">"Profilul meu local"</string>
     <string name="external_profile_title" msgid="8034998767621359438">"Profilul meu <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g>"</string>
     <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"Se afişează toată agenda"</string>
-    <string name="no_account_prompt" msgid="7061052512446855192">"Aplicaţia Persoane funcţionează mai bine cu un Cont Google.\n\n• Accesaţi aplicaţia din orice browser web.\n• Creaţi în siguranţă copii de rezervă pentru agendă."</string>
+    <string name="no_account_prompt" msgid="6424883302325061025">"Agenda funcționează mai bine cu un Cont Google.\n\n• O puteți accesa din orice browser web.\n• Creați în siguranță backup pentru persoanele de contact."</string>
     <string name="generic_no_account_prompt" msgid="7218827704367325460">"Păstraţi agenda dvs. în condiţii de siguranţă, chiar dacă pierdeţi telefonul, prin sincronizarea acesteia cu un serviciu online."</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"Adăugaţi un cont"</string>
     <string name="contact_editor_prompt_zero_accounts" msgid="1785345895691886499">"Pentru noul contact nu se va crea o copie de rezervă. Adăugați un cont care creează online copii de rezervă pentru contacte?"</string>
     <string name="contact_editor_prompt_one_account" msgid="8669032699767375976">"Noul dvs. contact va fi sincronizat cu <xliff:g id="ACCOUNT_NAME">%1$s</xliff:g>."</string>
     <string name="contact_editor_prompt_multiple_accounts" msgid="611828200100438242">"Puteţi să sincronizaţi noul dvs. contact cu unul dintre următoarele conturi. Pe care doriţi să îl utilizaţi?"</string>
+    <string name="contact_editor_title_new_contact" msgid="7192223018128934940">"Adăugați contact nou"</string>
+    <string name="contact_editor_title_existing_contact" msgid="4898475703683187798">"Editați intrarea"</string>
     <string name="keep_local" msgid="1258761699192993322">"Păstraţi local"</string>
     <string name="add_account" msgid="8201790677994503186">"Adăugaţi un cont"</string>
     <string name="add_new_account" msgid="5748627740680940264">"Adăugaţi un cont nou"</string>
     <string name="menu_export_database" msgid="2659719297530170820">"Exportaţi fişierele bazei de date"</string>
-    <string name="contact_detail_picture_description" msgid="6083230522651287030">"Fotografie. Selectați pentru a schimba."</string>
+    <string name="action_menu_add_new_contact_button" msgid="3180222523336380017">"adăugați o persoană de contact nouă"</string>
+    <string name="expanding_entry_card_view_see_more" msgid="3779194067124758079">"Mai multe detalii"</string>
+    <string name="expanding_entry_card_view_see_less" msgid="5344160551629714168">"Mai puține detalii"</string>
+    <string name="expanding_entry_card_view_see_all" msgid="3845258737661412627">"Vedeți tot"</string>
+    <string name="recent_card_title" msgid="8982782042698001695">"Recente"</string>
+    <string name="about_card_title" msgid="2920942314212825637">"Despre"</string>
+    <string name="send_message" msgid="8938418965550543196">"Trimiteți mesajul"</string>
+    <string name="toast_making_personal_copy" msgid="6137651078366797938">"Se creează o copie personală..."</string>
+    <string name="yesterday" msgid="6840858548955018569">"Ieri"</string>
+    <string name="tomorrow" msgid="6241969467795308581">"Mâine"</string>
+    <string name="today" msgid="8041090779381781781">"Astăzi"</string>
+    <string name="today_at_time_fmt" msgid="605665249491030460">"Astăzi, la <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="tomorrow_at_time_fmt" msgid="4856497969617819421">"Mâine, la <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="date_time_fmt" msgid="5053178726906863812">"<xliff:g id="DATE">%s</xliff:g>, <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="untitled_event" msgid="3484859385405939366">"(Eveniment fără titlu)"</string>
+    <string name="date_time_set" msgid="4761419824439606690">"Setați"</string>
+    <string name="header_im_entry" msgid="3581720979640225615">"IM"</string>
+    <string name="header_organization_entry" msgid="8515394955666265406">"Organizaţie"</string>
+    <string name="header_nickname_entry" msgid="6743561883967451485">"Pseudonim"</string>
+    <string name="header_note_entry" msgid="4320190426480612344">"Notă"</string>
+    <string name="header_website_entry" msgid="1411467850000824745">"Site web"</string>
+    <string name="header_event_entry" msgid="6738250422744401460">"Eveniment"</string>
+    <string name="header_relation_entry" msgid="1520292958088146460">"Relaţie"</string>
+    <string name="content_description_directions" msgid="2686791825798189335">"indicații de orientare către locație"</string>
+    <string name="content_description_recent_sms" msgid="6268563442222149676">"SMS recent. <xliff:g id="MESSAGE_DETAILS">%s</xliff:g>. Dați clic pentru a răspunde"</string>
+    <string name="content_description_recent_call_type_incoming" msgid="5210739096863511410">"primit"</string>
+    <string name="content_description_recent_call_type_outgoing" msgid="5156553338985232744">"efectuat"</string>
+    <string name="content_description_recent_call_type_missed" msgid="7371810920196048204">"pierdut"</string>
+    <string name="content_description_recent_call" msgid="6204048362763219585">"Apel recent. <xliff:g id="CALL_DETAILS">%s</xliff:g>. Dați clic pentru a apela"</string>
+    <string name="message_from_you_prefix" msgid="7180706529908434482">"Dvs.: <xliff:g id="SMS_BODY">%s</xliff:g>"</string>
 </resources>

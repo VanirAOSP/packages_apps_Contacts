@@ -15,38 +15,42 @@
 -->
 <resources>
 
-    <color name="quickcontact_list_divider">#ffcdcdcd</color>
-    <color name="quickcontact_list_background">#ffe2e2e2</color>
-    <color name="quickcontact_tab_indicator">#ffc6c6c6</color>
-    <color name="quickcontact_track_background">#fff5f5f5</color>
-    <color name="quickcontact_activity_background">#fff5f5f5</color>
     <color name="quickcontact_name_detail_background">#66000000</color>
-
-    <!-- Color of the background of the contact detail and editor pages -->
-    <color name="background_primary">#f5f5f5</color>
+    <color name="quickcontact_entry_sub_header_text_color">#737373</color>
+    <color name="quickcontact_entry_header_text_color">#202020</color>
 
     <color name="background_social_updates">#ffeeeeee</color>
 
-    <!-- Color used for the letter in the A-Z section header -->
-    <color name="section_header_text_color">#363636</color>
-
-    <!-- Color of the text in the updates tab in the tab carousel on the contact detail page -->
-    <color name="detail_update_tab_text_color">#777777</color>
-
-    <!-- Color of the text of the tab carousel in the contact details  -->
-    <color name="detail_tab_carousel_tab_label_color">#EEEEEE</color>
-
-    <!-- Color of the background of the action bar -->
-    <color name="action_bar_background">#e6e6e6</color>
-
-    <!-- Color of the background of the action bar when highlighted (ie. pressed, focused) -->
+    <!-- TODO: remove these colors once we delete the group code (b/16522929) -->
+    <color name="action_bar_background">#0288d1</color>
     <color name="action_bar_background_highlight">#cecece</color>
-
-    <!-- Color of the text for buttons in the action bar  -->
     <color name="action_bar_button_text_color">#FFFFFF</color>
 
-    <!--  Color of the vertical stripe that goes on the left of a block quote inside a stream item -->
-    <color name="stream_item_stripe_color">#CCCCCC</color>
+    <color name="actionbar_background_color">@color/primary_color</color>
+    <color name="actionbar_background_color_dark">@color/primary_color_dark</color>
+
+    <color name="primary_color_dark">#0277bd</color>
+    <color name="primary_color">#0288d1</color>
+
+    <!-- Color of the selected tab underline -->
+    <color name="contacts_accent_color">#FFFFFF</color>
+
+    <color name="floating_action_button_icon_color">@color/contacts_accent_color</color>
+
+    <!-- Color of the separator between entries in an ExpandingEntryCardView -->
+    <color name="expanding_entry_card_item_separator_color">#e4e4e4</color>
+
+    <!-- Color of the text on an ExpandingEntryCard button -->
+    <color name="expanding_entry_card_button_text_color">@android:color/black</color>
+
+    <!-- Background color for an ExpandingEntryCard -->
+    <color name="expanding_entry_card_background_color">#ffffff</color>
+
+    <!-- Color of the margin for cards -->
+    <color name="card_margin_color">#f4f4f4</color>
+
+    <color name="call_arrow_green">#2aad6f</color>
+    <color name="call_arrow_red">#ff2e58</color>
 
     <!-- New Colors for Theme Chooser to be compatible -->
     <color name="account_container">#eeeeee</color>
@@ -57,4 +61,7 @@
     <color name="photo_container">#4cffffff</color>
     <color name="social_widget_bg">#00000000</color>
     <color name="white_text">#ffffffff</color>
+
+    <!-- Background color of pinned header items. -->
+    <color name="list_item_pinned_header_color">@color/background_primary</color>
 </resources>

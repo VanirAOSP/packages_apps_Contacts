@@ -16,7 +16,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="people" msgid="1048457247435785074">"บุคคล"</string>
+    <string name="applicationLabel" msgid="3906689777043645443">"รายชื่อติดต่อ"</string>
+    <string name="launcherActivityLabel" msgid="6497230399032392417">"รายชื่อติดต่อ"</string>
     <string name="contactsList" msgid="8661624236494819731">"รายชื่อในสมุดโทรศัพท์"</string>
     <string name="shortcutContact" msgid="749243779392912958">"สมุดโทรศัพท์"</string>
     <string name="shortcutDialContact" msgid="746622101599186779">"โทรโดยตรง"</string>
@@ -25,21 +26,23 @@
     <string name="callShortcutActivityTitle" msgid="6065749861423648991">"เลือกหมายเลขที่จะโทร"</string>
     <string name="messageShortcutActivityTitle" msgid="3084542316620335911">"เลือกหมายเลขที่จะส่งข้อความ"</string>
     <string name="contactPickerActivityTitle" msgid="4301062192337417640">"เลือกรายชื่อติดต่อ"</string>
+    <string name="header_entry_contact_list_adapter_header_title" msgid="2436981165830115659">"สร้างรายชื่อติดต่อใหม่"</string>
     <string name="starredList" msgid="4817256136413959463">"ที่ติดดาว"</string>
     <string name="frequentList" msgid="7154768136473953056">"บ่อยครั้ง"</string>
     <string name="strequentList" msgid="5640192862059373511">"รายการโปรด"</string>
     <string name="viewContactTitle" msgid="7989394521836644384">"รายละเอียดของรายชื่อ"</string>
-    <string name="viewContactDesription" msgid="214186610887547860">"ดูรายชื่อในสมุดโทรศัพท์"</string>
     <string name="editContactDescription" msgid="2947202828256214947">"แก้ไขรายชื่อในสมุดโทรศัพท์"</string>
     <string name="insertContactDescription" msgid="4709878105452681987">"สร้างรายชื่อ"</string>
     <string name="editGroupDescription" msgid="6321161304201540561">"แก้ไขกลุ่ม"</string>
     <string name="insertGroupDescription" msgid="5658512271662210139">"สร้างกลุ่ม"</string>
     <string name="contactDetailAbout" msgid="5430408883907061400">"เกี่ยวกับ"</string>
     <string name="contactDetailUpdates" msgid="3780588624763446941">"อัปเดต"</string>
-    <string name="searchHint" msgid="8482945356247760701">"ค้นหาที่อยู่ติดต่อ"</string>
+    <string name="searchHint" msgid="8482945356247760701">"ค้นหารายชื่อติดต่อ"</string>
     <string name="menu_viewContact" msgid="2795575601596468581">"ดูสมุดโทรศัพท์"</string>
     <string name="menu_addStar" msgid="2908478235715404876">"เพิ่มในรายการโปรด"</string>
     <string name="menu_removeStar" msgid="5844227078364227030">"ลบจากรายการโปรด"</string>
+    <string name="description_action_menu_remove_star" msgid="4699640108012265178">"นำออกจากรายการโปรดแล้ว"</string>
+    <string name="description_action_menu_add_star" msgid="3327186327234177456">"เพิ่มลงในรายการโปรดแล้ว"</string>
     <string name="menu_editContact" msgid="9042415603857662633">"แก้ไข"</string>
     <string name="menu_deleteContact" msgid="6788644058868189393">"ลบ"</string>
     <string name="menu_create_contact_shortcut" msgid="1217971915748509640">"วางบนหน้าจอหลัก"</string>
@@ -65,7 +68,7 @@
     <string name="readOnlyContactDeleteConfirmation" msgid="2137170726670196909">"สมุดโทรศัพท์นี้มีข้อมูลจากหลายบัญชี ข้อมูลจากบัญชีแบบอ่านอย่างเดียวจะถูกซ่อนในรายการรายชื่อของคุณโดยไม่ถูกลบออก"</string>
     <string name="multipleContactDeleteConfirmation" msgid="938900978442960800">"การลบสมุดโทรศัพท์นี้จะลบข้อมูลจากบัญชีแบบหลายรายการ"</string>
     <string name="deleteConfirmation" msgid="811706994761610640">"รายชื่อนี้จะถูกลบ"</string>
-    <string name="menu_discard" msgid="6456087569315685632">"ยกเลิก"</string>
+    <string name="menu_discard" msgid="6854657936970228164">"ยกเลิกการเปลี่ยนแปลง"</string>
     <string name="invalidContactMessage" msgid="8215051456181842274">"ไม่มีรายชื่อติดต่อนี้"</string>
     <string name="createContactShortcutSuccessful" msgid="7874133287558150877">"เพิ่มวิดเจ็ตสมุดโทรศัพท์ในหน้าจอหลักแล้ว"</string>
     <string name="pickerNewContactHeader" msgid="7750705279843568147">"สร้างรายชื่อในสมุดโทรศัพท์ใหม่"</string>
@@ -95,10 +98,6 @@
     <item quantity="other" msgid="3299954047880968205">"<xliff:g id="COUNT">%d</xliff:g> รายชื่อติดต่อที่มีหมายเลขโทรศัพท์"</item>
   </plurals>
     <string name="listTotalPhoneContactsZero" msgid="6968813857632984319">"ไม่มีรายชื่อติดต่อที่มีหมายเลขโทรศัพท์"</string>
-  <plurals name="listTotalAllContacts">
-    <item quantity="one" msgid="3405747744700823280">"1 รายชื่อติดต่อ"</item>
-    <item quantity="other" msgid="3578469907265375314">"<xliff:g id="COUNT">%d</xliff:g> รายชื่อติดต่อ"</item>
-  </plurals>
   <plurals name="listFoundAllContacts">
     <item quantity="one" msgid="5517063038754171134">"พบ 1 รายการ"</item>
     <item quantity="other" msgid="3852668542926965042">"พบ <xliff:g id="COUNT">%d</xliff:g> รายการ"</item>
@@ -108,8 +107,8 @@
     <item quantity="one" msgid="4826918429708286628">"พบ 1 รายการ"</item>
     <item quantity="other" msgid="7988132539476575389">"พบ <xliff:g id="COUNT">%d</xliff:g> รายการ"</item>
   </plurals>
-    <string name="contactsAllLabel" msgid="6479708629170672169">"ที่อยู่ติดต่อทั้งหมด"</string>
-    <string name="contactsGroupsLabel" msgid="2841971472518003524">"กลุ่ม"</string>
+    <string name="all_contacts_tab_label" msgid="6250372293594147703">"รายชื่อทั้งหมด"</string>
+    <string name="favorites_tab_label" msgid="1524869648904016414">"รายการโปรด"</string>
     <string name="callBack" msgid="5498224409038809224">"ติดต่อกลับ"</string>
     <string name="callAgain" msgid="3197312117049874778">"โทรอีกครั้ง"</string>
     <string name="returnCall" msgid="8171961914203617813">"โทรกลับ"</string>
@@ -119,8 +118,12 @@
     <string name="exporting_contact_list_progress" msgid="560522409559101193">"รายชื่อในสมุดโทรศัพท์ <xliff:g id="CURRENT_NUMBER">%s</xliff:g> จาก <xliff:g id="TOTAL_NUMBER">%s</xliff:g> รายการ"</string>
     <string name="search_settings_description" msgid="2675223022992445813">"ชื่อของรายชื่อในสมุดโทรศัพท์ของคุณ"</string>
     <string name="quickcontact_missing_app" msgid="358168575340921552">"ไม่พบแอปพลิเคชันสำหรับการทำงานนี้"</string>
+    <string name="quickcontact_transparent_view_description" msgid="987959416759562455">"คลิกเพื่อกลับไปยังหน้าจอก่อนหน้า"</string>
+    <string name="quickcontact_add_phone_number" msgid="731665835910658965">"เพิ่มหมายเลขโทรศัพท์"</string>
+    <string name="quickcontact_add_email" msgid="739298028384348482">"เพิ่มอีเมล"</string>
     <string name="missing_app" msgid="1466111003546611387">"ไม่พบแอปสำหรับการทำงานนี้"</string>
     <string name="menu_share" msgid="943789700636542260">"ใช้ร่วมกัน"</string>
+    <string name="menu_add_contact" msgid="3198704337220892684">"เพิ่มในสมุดติดต่อ"</string>
     <string name="share_via" msgid="563121028023030093">"ใช้สมุดโทรศัพท์ร่วมกันทาง"</string>
     <string name="dialog_new_group_account" msgid="2318032089273496830">"สร้างกลุ่มภายในบัญชี"</string>
     <string name="audio_chat" msgid="2535716629358298691">"แชทด้วยเสียง"</string>
@@ -134,20 +137,13 @@
     <skip />
     <string name="use_photo_as_primary" msgid="8807110122951157246">"ใช้ภาพนี้"</string>
     <string name="contact_read_only" msgid="7421346527289472273">"ไม่สามารถแก้ไขได้จากแอปพลิเคชันนี้"</string>
-    <string name="no_contact_details" msgid="6636856378019344497">"ไม่มีข้อมูลเพิ่มเติมสำหรับรายชื่อติดต่อนี้"</string>
     <string name="group_read_only" msgid="1061762906115697637">"ไม่สามารถแก้ไขได้ในอุปกรณ์นี้"</string>
-    <string name="display_options_sort_list_by" msgid="6080091755852211076">"เรียงรายการตาม"</string>
-    <string name="display_options_sort_by_given_name" msgid="184916793466387067">"ชื่อ"</string>
-    <string name="display_options_sort_by_family_name" msgid="7857986975275712622">"นามสกุล"</string>
-    <string name="display_options_view_names_as" msgid="4386932036180428374">"ดูชื่อที่อยู่ติดต่อ"</string>
-    <string name="display_options_view_given_name_first" msgid="6968288511197363292">"ขึ้นต้นด้วยชื่อ"</string>
-    <string name="display_options_view_family_name_first" msgid="1447288164951453714">"ขึ้นต้นด้วยนามสกุล"</string>
     <string name="take_photo" msgid="7496128293167402354">"ถ่ายภาพ"</string>
     <string name="take_new_photo" msgid="7341354729436576304">"ถ่ายภาพใหม่"</string>
-    <string name="pick_photo" msgid="3746334626214970837">"เลือกรูปภาพจากแกลเลอรี"</string>
-    <string name="pick_new_photo" msgid="7962368009197147617">"เลือกภาพใหม่จากแกลเลอรี"</string>
-    <string name="locale_change_in_progress" msgid="7583992153091537467">"กำลังอัปเดตรายการที่อยู่ติดต่อตามการเปลี่ยนภาษา"</string>
-    <string name="upgrade_in_progress" msgid="474511436863451061">"กำลังอัปเดตรายการที่อยู่ติดต่อ"</string>
+    <string name="pick_photo" msgid="2129509985223564942">"เลือกรูปภาพ"</string>
+    <string name="pick_new_photo" msgid="9122450996263688237">"เลือกรูปภาพใหม่"</string>
+    <string name="locale_change_in_progress" msgid="7583992153091537467">"กำลังอัปเดตรายการรายชื่อติดต่อตามการเปลี่ยนภาษา"</string>
+    <string name="upgrade_in_progress" msgid="474511436863451061">"กำลังอัปเดตรายการรายชื่อติดต่อ"</string>
     <string name="upgrade_out_of_memory" msgid="1209994418877625940">"กำลังดำเนินการอัปเกรดสมุดโทรศัพท์\n\nกระบวนการอัปเกรดจำเป็นต้องใช้พื้นที่ประมาณ <xliff:g id="SIZE_IN_MEGABYTES">%s</xliff:g> MB ของที่จัดเก็บข้อมูลภายใน\n\nเลือกหนึ่งในตัวเลือกต่อไปนี้:"</string>
     <string name="upgrade_out_of_memory_uninstall" msgid="1721798828992091432">"ถอนการติดตั้งแอปพลิเคชันบางอย่าง"</string>
     <string name="upgrade_out_of_memory_retry" msgid="8431289830472724609">"ลองอัปเกรดซ้ำ"</string>
@@ -172,7 +168,6 @@
     <string name="menu_copyContact" msgid="1573960845106822639">"คัดลอกไปยังสมุดโทรศัพท์ของฉัน"</string>
     <string name="add_to_my_contacts" msgid="1068274916793627723">"เพิ่มในสมุดโทรศัพท์ของฉัน"</string>
     <string name="contact_directory_description" msgid="683398073603909119">"ไดเรกทอรี <xliff:g id="TYPE">%1$s</xliff:g>"</string>
-    <string name="toast_making_personal_copy" msgid="288549957278065542">"กำลังสร้างสำเนาส่วนบุคคล..."</string>
     <string name="list_filter_custom" msgid="8910173055702057002">"กำหนดเอง"</string>
     <string name="activity_title_settings" msgid="5464130076132770781">"การตั้งค่า"</string>
     <string name="menu_settings" msgid="377929915873428211">"การตั้งค่า"</string>
@@ -187,7 +182,7 @@
     <string name="date_year_toggle" msgid="7356532842767854606">"ระบุปี"</string>
     <string name="social_widget_label" msgid="6378905543028924592">"รายชื่อติดต่อ"</string>
     <string name="social_widget_loading" msgid="5327336597364074608">"กำลังโหลด..."</string>
-    <string name="contacts_unavailable_create_contact" msgid="7014525713871959208">"สร้างที่อยู่ติดต่อใหม่"</string>
+    <string name="contacts_unavailable_create_contact" msgid="7014525713871959208">"สร้างรายชื่อติดต่อใหม่"</string>
     <string name="contacts_unavailable_add_account" msgid="7911101713860139754">"ลงชื่อเข้าใช้บัญชี"</string>
     <string name="contacts_unavailable_import_contacts" msgid="4957393255392437529">"นำเข้าสมุดโทรศัพท์"</string>
     <string name="create_group_dialog_title" msgid="6874527142828424475">"สร้างกลุ่มใหม่"</string>
@@ -217,16 +212,47 @@
     <string name="group_name_hint" msgid="238359485263401293">"ชื่อกลุ่ม"</string>
     <string name="local_profile_title" msgid="2021416826991393684">"โปรไฟล์ในอุปกรณ์ของฉัน"</string>
     <string name="external_profile_title" msgid="8034998767621359438">"โปรไฟล์ <xliff:g id="EXTERNAL_SOURCE">%1$s</xliff:g> ของฉัน"</string>
-    <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"แสดงที่อยู่ติดต่อทั้งหมด"</string>
-    <string name="no_account_prompt" msgid="7061052512446855192">"People ทำงานได้ดีกว่าหากมีบัญชี Google\n\n•เข้าถึงจากทุกเว็บเบราว์เซอร์\n•สำรองข้อมูลสมุดโทรศัพท์ของคุณอย่างปลอดภัย"</string>
-    <string name="generic_no_account_prompt" msgid="7218827704367325460">"เก็บที่อยู่ติดต่อของคุณไว้อย่างปลอดภัยด้วยการซิงค์กับบริการออนไลน์แม้ว่าคุณจะทำโทรศัพท์หาย"</string>
+    <string name="toast_displaying_all_contacts" msgid="2737388783898593875">"แสดงรายชื่อติดต่อทั้งหมด"</string>
+    <string name="no_account_prompt" msgid="6424883302325061025">"คุณจะใช้งานรายชื่อติดต่อได้ดีขึ้นโดยผ่านบัญชี Google\n\n• เข้าถึงได้จากเว็บเบราว์เซอร์ทุกชนิด\n• สำรองข้อมูลรายชื่อติดต่อของคุณอย่างปลอดภัย"</string>
+    <string name="generic_no_account_prompt" msgid="7218827704367325460">"เก็บรายชื่อติดต่อของคุณไว้อย่างปลอดภัยด้วยการซิงค์กับบริการออนไลน์แม้ว่าคุณจะทำโทรศัพท์หาย"</string>
     <string name="generic_no_account_prompt_title" msgid="753783911899054860">"เพิ่มบัญชี"</string>
     <string name="contact_editor_prompt_zero_accounts" msgid="1785345895691886499">"ผู้ติดต่อใหม่ของคุณจะไม่ได้รับการสำรองข้อมูล เพิ่มบัญชีที่สำรองข้อมูลผู้ติดต่อออนไลน์หรือไม่"</string>
     <string name="contact_editor_prompt_one_account" msgid="8669032699767375976">"ผู้ติดต่อใหม่ของคุณจะซิงค์กับ <xliff:g id="ACCOUNT_NAME">%1$s</xliff:g>"</string>
     <string name="contact_editor_prompt_multiple_accounts" msgid="611828200100438242">"คุณสามารถซิงค์ผู้ติดต่อใหม่กับบัญชีใด บัญชีหนึ่งต่อไปนี้ได้ คุณต้องการใช้บัญชีใด"</string>
+    <string name="contact_editor_title_new_contact" msgid="7192223018128934940">"เพิ่มรายชื่อติดต่อ"</string>
+    <string name="contact_editor_title_existing_contact" msgid="4898475703683187798">"แก้ไขรายชื่อติดต่อ"</string>
     <string name="keep_local" msgid="1258761699192993322">"จัดเก็บในตัวเครื่อง"</string>
     <string name="add_account" msgid="8201790677994503186">"เพิ่มบัญชี"</string>
     <string name="add_new_account" msgid="5748627740680940264">"เพิ่มบัญชีใหม่"</string>
     <string name="menu_export_database" msgid="2659719297530170820">"ส่งออกไฟล์ฐานข้อมูล"</string>
-    <string name="contact_detail_picture_description" msgid="6083230522651287030">"ภาพ เลือกเพื่อเปลี่ยน"</string>
+    <string name="action_menu_add_new_contact_button" msgid="3180222523336380017">"เพิ่มรายชื่อติดต่อใหม่"</string>
+    <string name="expanding_entry_card_view_see_more" msgid="3779194067124758079">"ดูเพิ่มเติม"</string>
+    <string name="expanding_entry_card_view_see_less" msgid="5344160551629714168">"ดูน้อยลง"</string>
+    <string name="expanding_entry_card_view_see_all" msgid="3845258737661412627">"ดูทั้งหมด"</string>
+    <string name="recent_card_title" msgid="8982782042698001695">"ล่าสุด"</string>
+    <string name="about_card_title" msgid="2920942314212825637">"เกี่ยวกับ"</string>
+    <string name="send_message" msgid="8938418965550543196">"ส่งข้อความ"</string>
+    <string name="toast_making_personal_copy" msgid="6137651078366797938">"กำลังสร้างสำเนาส่วนตัว..."</string>
+    <string name="yesterday" msgid="6840858548955018569">"เมื่อวานนี้"</string>
+    <string name="tomorrow" msgid="6241969467795308581">"พรุ่งนี้"</string>
+    <string name="today" msgid="8041090779381781781">"วันนี้"</string>
+    <string name="today_at_time_fmt" msgid="605665249491030460">"วันนี้เวลา <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="tomorrow_at_time_fmt" msgid="4856497969617819421">"พรุ่งนี้เวลา <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="date_time_fmt" msgid="5053178726906863812">"<xliff:g id="DATE">%s</xliff:g> <xliff:g id="TIME_INTERVAL">%s</xliff:g>"</string>
+    <string name="untitled_event" msgid="3484859385405939366">"(กิจกรรมไม่มีชื่อ)"</string>
+    <string name="date_time_set" msgid="4761419824439606690">"ตั้งค่า"</string>
+    <string name="header_im_entry" msgid="3581720979640225615">"IM"</string>
+    <string name="header_organization_entry" msgid="8515394955666265406">"องค์กร"</string>
+    <string name="header_nickname_entry" msgid="6743561883967451485">"ชื่อเล่น"</string>
+    <string name="header_note_entry" msgid="4320190426480612344">"โน้ต"</string>
+    <string name="header_website_entry" msgid="1411467850000824745">"เว็บไซต์"</string>
+    <string name="header_event_entry" msgid="6738250422744401460">"กิจกรรม"</string>
+    <string name="header_relation_entry" msgid="1520292958088146460">"ความสัมพันธ์"</string>
+    <string name="content_description_directions" msgid="2686791825798189335">"เส้นทางไปยังสถานที่"</string>
+    <string name="content_description_recent_sms" msgid="6268563442222149676">"SMS ล่าสุด <xliff:g id="MESSAGE_DETAILS">%s</xliff:g> คลิกเพื่อตอบกลับ"</string>
+    <string name="content_description_recent_call_type_incoming" msgid="5210739096863511410">"สายโทรเข้า"</string>
+    <string name="content_description_recent_call_type_outgoing" msgid="5156553338985232744">"สายโทรออก"</string>
+    <string name="content_description_recent_call_type_missed" msgid="7371810920196048204">"ไม่ได้รับ"</string>
+    <string name="content_description_recent_call" msgid="6204048362763219585">"การโทรล่าสุด <xliff:g id="CALL_DETAILS">%s</xliff:g> คลิกเพื่อโทรกลับ"</string>
+    <string name="message_from_you_prefix" msgid="7180706529908434482">"คุณ: <xliff:g id="SMS_BODY">%s</xliff:g>"</string>
 </resources>

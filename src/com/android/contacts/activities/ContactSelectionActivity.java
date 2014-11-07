@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents.Insert;
+import android.provider.ContactsContract.Intents.UI;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +51,7 @@ import com.android.contacts.list.ContactsIntentResolver;
 import com.android.contacts.list.ContactsRequest;
 import com.android.contacts.common.list.DirectoryListLoader;
 import com.android.contacts.list.EmailAddressPickerFragment;
+import com.android.contacts.list.JoinContactListFragment;
 import com.android.contacts.list.LegacyPhoneNumberPickerFragment;
 import com.android.contacts.list.OnContactPickerActionListener;
 import com.android.contacts.list.OnEmailAddressPickerActionListener;
@@ -73,22 +75,18 @@ public class ContactSelectionActivity extends ContactsActivity
     private static final int SUBACTIVITY_ADD_TO_EXISTING_CONTACT = 0;
 
     private static final String KEY_ACTION_CODE = "actionCode";
+    private static final String KEY_SEARCH_MODE = "searchMode";
     private static final int DEFAULT_DIRECTORY_RESULT_LIMIT = 20;
-
-    // Delay to allow the UI to settle before making search view visible
-    private static final int FOCUS_DELAY = 200;
 
     private ContactsIntentResolver mIntentResolver;
     protected ContactEntryListFragment<?> mListFragment;
 
     private int mActionCode = -1;
+    private boolean mIsSearchMode;
 
     private ContactsRequest mRequest;
     private SearchView mSearchView;
-    /**
-     * Can be null. If null, the "Create New Contact" button should be on the menu.
-     */
-    private View mCreateNewContactButton;
+    private View mSearchViewContainer;
 
     public ContactSelectionActivity() {
         mIntentResolver = new ContactsIntentResolver(this);
@@ -108,6 +106,7 @@ public class ContactSelectionActivity extends ContactsActivity
 
         if (savedState != null) {
             mActionCode = savedState.getInt(KEY_ACTION_CODE);
+            mIsSearchMode = savedState.getBoolean(KEY_SEARCH_MODE);
         }
 
         // Extract relevant information from the intent
@@ -136,31 +135,19 @@ public class ContactSelectionActivity extends ContactsActivity
         }
 
         prepareSearchViewAndActionBar();
-
-        mCreateNewContactButton = findViewById(R.id.new_contact);
-        if (mCreateNewContactButton != null) {
-            if (shouldShowCreateNewContactButton()) {
-                mCreateNewContactButton.setVisibility(View.VISIBLE);
-                mCreateNewContactButton.setOnClickListener(this);
-            } else {
-                mCreateNewContactButton.setVisibility(View.GONE);
-            }
-        }
-    }
-
-    private boolean shouldShowCreateNewContactButton() {
-        return (mActionCode == ContactsRequest.ACTION_INSERT_OR_EDIT_CONTACT
-                || (mActionCode == ContactsRequest.ACTION_PICK_OR_CREATE_CONTACT
-                        && !mRequest.isSearchMode()));
     }
 
     private void prepareSearchViewAndActionBar() {
+        final ActionBar actionBar = getActionBar();
+        mSearchViewContainer = LayoutInflater.from(actionBar.getThemedContext())
+                .inflate(R.layout.custom_action_bar, null);
+        mSearchView = (SearchView) mSearchViewContainer.findViewById(R.id.search_view);
+
         // Postal address pickers (and legacy pickers) don't support search, so just show
         // "HomeAsUp" button and title.
         if (mRequest.getActionCode() == ContactsRequest.ACTION_PICK_POSTAL ||
                 mRequest.isLegacyCompatibilityMode()) {
-            findViewById(R.id.search_view).setVisibility(View.GONE);
-            final ActionBar actionBar = getActionBar();
+            mSearchView.setVisibility(View.GONE);
             if (actionBar != null) {
                 actionBar.setDisplayShowHomeEnabled(true);
                 actionBar.setDisplayHomeAsUpEnabled(true);
@@ -169,64 +156,39 @@ public class ContactSelectionActivity extends ContactsActivity
             return;
         }
 
-        // If ActionBar is available, show SearchView on it. If not, show SearchView inside the
-        // Activity's layout.
-        final ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            final View searchViewOnLayout = findViewById(R.id.search_view);
-            if (searchViewOnLayout != null) {
-                searchViewOnLayout.setVisibility(View.GONE);
-            }
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-            final View searchViewContainer = LayoutInflater.from(actionBar.getThemedContext())
-                    .inflate(R.layout.custom_action_bar, null);
-            mSearchView = (SearchView) searchViewContainer.findViewById(R.id.search_view);
+        // In order to make the SearchView look like "shown via search menu", we need to
+        // manually setup its state. See also DialtactsActivity.java and ActionBarAdapter.java.
+        mSearchView.setIconifiedByDefault(true);
+        mSearchView.setQueryHint(getString(R.string.hint_findContacts));
+        mSearchView.setIconified(false);
+        mSearchView.setFocusable(true);
 
-            // In order to make the SearchView look like "shown via search menu", we need to
-            // manually setup its state. See also DialtactsActivity.java and ActionBarAdapter.java.
-            mSearchView.setIconifiedByDefault(true);
-            mSearchView.setQueryHint(getString(R.string.hint_findContacts));
-            mSearchView.setIconified(false);
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setOnCloseListener(this);
+        mSearchView.setOnQueryTextFocusChangeListener(this);
 
-            mSearchView.setOnQueryTextListener(this);
-            mSearchView.setOnCloseListener(this);
-            mSearchView.setOnQueryTextFocusChangeListener(this);
+        actionBar.setCustomView(mSearchViewContainer,
+                new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        actionBar.setDisplayShowCustomEnabled(true);
 
-            actionBar.setCustomView(searchViewContainer,
-                    new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            actionBar.setDisplayShowCustomEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        } else {
-            mSearchView = (SearchView) findViewById(R.id.search_view);
-            mSearchView.setQueryHint(getString(R.string.hint_findContacts));
-            mSearchView.setOnQueryTextListener(this);
-
-            // This is a hack to prevent the search view from grabbing focus
-            // at this point.  If search view were visible, it would always grabs focus
-            // because it is the first focusable widget in the window.
-            mSearchView.setVisibility(View.INVISIBLE);
-            mSearchView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mSearchView.setVisibility(View.VISIBLE);
-                }
-            }, FOCUS_DELAY);
-        }
-
-        // Clear focus and suppress keyboard show-up.
-        mSearchView.clearFocus();
+        configureSearchMode();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // If we want "Create New Contact" button but there's no such a button in the layout,
-        // try showing a menu for it.
-        if (shouldShowCreateNewContactButton() && mCreateNewContactButton == null) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.contact_picker_options, menu);
+    private void configureSearchMode() {
+        final ActionBar actionBar = getActionBar();
+        if (mIsSearchMode) {
+            actionBar.setDisplayShowTitleEnabled(false);
+            mSearchViewContainer.setVisibility(View.VISIBLE);
+            mSearchView.requestFocus();
+        } else {
+            actionBar.setDisplayShowTitleEnabled(true);
+            mSearchViewContainer.setVisibility(View.GONE);
+            mSearchView.setQuery(null, true);
         }
-        return true;
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -235,12 +197,12 @@ public class ContactSelectionActivity extends ContactsActivity
             case android.R.id.home:
                 // Go back to previous screen, intending "cancel"
                 setResult(RESULT_CANCELED);
-                finish();
+                onBackPressed();
                 return true;
-            case R.id.create_new_contact: {
-                startCreateNewContactActivity();
+            case R.id.menu_search:
+                mIsSearchMode = !mIsSearchMode;
+                configureSearchMode();
                 return true;
-            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -249,6 +211,7 @@ public class ContactSelectionActivity extends ContactsActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_ACTION_CODE, mActionCode);
+        outState.putBoolean(KEY_SEARCH_MODE, mIsSearchMode);
     }
 
     private void configureActivityTitle() {
@@ -303,6 +266,11 @@ public class ContactSelectionActivity extends ContactsActivity
                 setTitle(R.string.contactPickerActivityTitle);
                 break;
             }
+
+            case ContactsRequest.ACTION_PICK_JOIN: {
+                setTitle(R.string.titleJoinContactDataWith);
+                break;
+            }
         }
     }
 
@@ -315,6 +283,7 @@ public class ContactSelectionActivity extends ContactsActivity
                 ContactPickerFragment fragment = new ContactPickerFragment();
                 fragment.setEditMode(true);
                 fragment.setDirectorySearchMode(DirectoryListLoader.SEARCH_MODE_NONE);
+                fragment.setCreateContactEnabled(!mRequest.isSearchMode());
                 mListFragment = fragment;
                 break;
             }
@@ -329,6 +298,7 @@ public class ContactSelectionActivity extends ContactsActivity
 
             case ContactsRequest.ACTION_PICK_OR_CREATE_CONTACT: {
                 ContactPickerFragment fragment = new ContactPickerFragment();
+                fragment.setCreateContactEnabled(!mRequest.isSearchMode());
                 mListFragment = fragment;
                 break;
             }
@@ -369,7 +339,15 @@ public class ContactSelectionActivity extends ContactsActivity
 
             case ContactsRequest.ACTION_PICK_POSTAL: {
                 PostalAddressPickerFragment fragment = new PostalAddressPickerFragment();
+
                 mListFragment = fragment;
+                break;
+            }
+
+            case ContactsRequest.ACTION_PICK_JOIN: {
+                JoinContactListFragment joinFragment = new JoinContactListFragment();
+                joinFragment.setTargetContactId(getTargetContactId());
+                mListFragment = joinFragment;
                 break;
             }
 
@@ -409,6 +387,9 @@ public class ContactSelectionActivity extends ContactsActivity
         } else if (mListFragment instanceof EmailAddressPickerFragment) {
             ((EmailAddressPickerFragment) mListFragment).setOnEmailAddressPickerActionListener(
                     new EmailAddressPickerActionListener());
+        } else if (mListFragment instanceof JoinContactListFragment) {
+            ((JoinContactListFragment) mListFragment).setOnContactPickerActionListener(
+                    new JoinContactActionListener());
         } else {
             throw new IllegalStateException("Unsupported list fragment type: " + mListFragment);
         }
@@ -508,12 +489,38 @@ public class ContactSelectionActivity extends ContactsActivity
         }
 
         @Override
+        public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
+            Log.w(TAG, "Unsupported call.");
+        }
+
+        @Override
         public void onShortcutIntentCreated(Intent intent) {
             returnPickerResult(intent);
         }
 
         public void onHomeInActionBarSelected() {
             ContactSelectionActivity.this.onBackPressed();
+        }
+    }
+
+    private final class JoinContactActionListener implements OnContactPickerActionListener {
+        @Override
+        public void onPickContactAction(Uri contactUri) {
+            Intent intent = new Intent(null, contactUri);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+
+        @Override
+        public void onShortcutIntentCreated(Intent intent) {
+        }
+
+        @Override
+        public void onCreateNewContactAction() {
+        }
+
+        @Override
+        public void onEditContactAction(Uri contactLookupUri) {
         }
     }
 
@@ -596,11 +603,24 @@ public class ContactSelectionActivity extends ContactsActivity
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.new_contact: {
+            case R.id.floating_action_button: {
                 startCreateNewContactActivity();
                 break;
             }
         }
+    }
+
+    private long getTargetContactId() {
+        Intent intent = getIntent();
+        final long targetContactId = intent.getLongExtra(UI.TARGET_CONTACT_ID_EXTRA_KEY, -1);
+        if (targetContactId == -1) {
+            Log.e(TAG, "Intent " + intent.getAction() + " is missing required extra: "
+                    + UI.TARGET_CONTACT_ID_EXTRA_KEY);
+            setResult(RESULT_CANCELED);
+            finish();
+            return -1;
+        }
+        return targetContactId;
     }
 
     private void startCreateNewContactActivity() {
@@ -629,6 +649,28 @@ public class ContactSelectionActivity extends ContactsActivity
                 }
                 finish();
             }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        final MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.menu_search);
+        searchItem.setVisible(!mIsSearchMode);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mIsSearchMode) {
+            mIsSearchMode = false;
+            configureSearchMode();
+        } else {
+            super.onBackPressed();
         }
     }
 }
