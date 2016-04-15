@@ -312,6 +312,7 @@ public class QuickContactActivity extends ContactsActivity implements
 
     private Target mContactBitmapTarget;
     private BlockContactHelper mBlockContactHelper;
+
     private Object mLock = new Object();
     /**
      * {@link #LEADING_MIMETYPES} is used to sort MIME-types.
@@ -2985,10 +2986,15 @@ public class QuickContactActivity extends ContactsActivity implements
 
             // set block or un-block menu titles accordingly
             final MenuItem blockMenuItem = menu.findItem(R.id.menu_block_contact);
-            if (mBlockContactHelper.isContactBlacklisted()) {
-                blockMenuItem.setTitle(R.string.menu_unblock_contact);
+            if (mBlockContactHelper.canBlockContact(this)) {
+                blockMenuItem.setVisible(true);
+                if (mBlockContactHelper.isContactBlacklisted()) {
+                    blockMenuItem.setTitle(R.string.menu_unblock_contact);
+                } else {
+                    blockMenuItem.setTitle(R.string.menu_block_contact);
+                }
             } else {
-                blockMenuItem.setTitle(R.string.menu_block_contact);
+                blockMenuItem.setVisible(false);
             }
 
             return true;
