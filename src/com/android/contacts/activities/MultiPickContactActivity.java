@@ -412,7 +412,7 @@ public class MultiPickContactActivity extends ListActivity implements
             mOKButton.setEnabled(true);
         }
 
-        return getString(android.R.string.ok) + " (" + mChoiceSet.size() + ")";
+        return getString(R.string.btn_ok) + "(" + mChoiceSet.size() + ")";
     }
 
     private void backupChoiceSet() {
@@ -639,7 +639,7 @@ public class MultiPickContactActivity extends ListActivity implements
             mProgressDialog.setMessage(message);
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-                    getString(android.R.string.cancel), (OnClickListener) thread);
+                    getString(R.string.btn_cancel), (OnClickListener) thread);
             mProgressDialog.setOnCancelListener((OnCancelListener) thread);
             mProgressDialog.setOnKeyListener(keyListener);
             mProgressDialog.setProgress(0);

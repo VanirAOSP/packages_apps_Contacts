@@ -538,7 +538,7 @@ public class MergeContactActivity extends ListActivity {
                     finish();
                 }
             });
-            builder.setNegativeButton(android.R.string.cancel, null);
+            builder.setNegativeButton(R.string.cancel, null);
             builder.show();
         }
     }
