@@ -178,7 +178,7 @@
         <item name="android:background">@drawable/ab_dropdown_navigation_item_background</item>
     </style>
 
-    <style name="ContactsActionBarTheme" parent="@android:style/Theme.Holo.Light">
+    <style name="ContactsActionBarTheme" parent="@android:style/Theme.Material.Light">
         <item name="android:textColorHint">@color/contacts_action_bar_text_color_hint</item>
         <item name="android:textColor">@color/contacts_action_bar_text_color</item>
         <item name="android:popupMenuStyle">@android:style/Widget.Holo.Light.PopupMenu</item>
